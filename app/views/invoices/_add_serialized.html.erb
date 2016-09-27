@@ -1,0 +1,24 @@
+<%= form_tag(add_serialized_line_item_path, method: :get, remote: true) do %>
+<table class="table table-bordered table-hover">
+	<thead>
+	    <tr>
+	        <th> SKU </th>
+	        <th> Description </th>
+	        <th> Serial Number </th>
+	        <th> Quantity </th>
+	        <th> Price </th>
+	    </tr>
+	</thead>
+	<tbody>
+	    <tr>
+	        <td> <%= @sellable.sku %> </td>
+	        <td> <%= @sellable.description %> </td>
+	        <td> <%= text_field_tag "serial_number", nil, placeholder: "", class: "form-control", maxlength: 20, size: 20  %> </td>
+	        <td> 1 </td>
+	        <td> <%= number_to_currency(@sellable.retail_price) %> </td>
+	    </tr>
+	</tbody>
+</table>
+
+<button class="btn btn-success" type="submit"><i class="fa fa-plus"></i> Add Line</button>
+<% end %>

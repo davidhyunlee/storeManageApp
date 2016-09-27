@@ -1,0 +1,16 @@
+<% if @sellable.nil? %>
+	<% if @sku == "" %>
+		$(".add-area").empty().append("<b>You must enter a SKU.</b>")
+	<% else %>
+		$(".add-area").empty().append("Product with SKU of <b><%= @sku %></b> does not exist in the product database.")
+	<% end %>
+<% elsif @sellable.serialized? %>
+	$(".sku-search").val("");
+	$(".add-area").empty().append("<%= j render partial: 'invoices/add_serialized' %>");
+<% else %>
+	$(".sku-search").val("");
+	$(".add-area").empty().append("<%= j render partial: 'invoices/add_sellable' %>");
+<% end %>
+
+
+

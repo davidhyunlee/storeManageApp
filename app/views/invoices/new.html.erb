@@ -1,0 +1,153 @@
+<h3 class="page-title"> Creating Invoice for <%= @customer.first_name %>
+  <small>new</small>
+</h3>
+
+
+<div class="portlet light bordered">
+    <div class="portlet-title">
+		<div class="row">
+			<div class="col-md-6">
+				<%= form_tag('/sellables/search', method: :get, remote: true) do %>
+					<div class="input-group">
+					    <%= text_field_tag "sku", nil, placeholder: "Enter SKU", class: "form-control sku-search" %>
+					    <span class="input-group-btn">
+					        <button class="btn blue" type="submit">Go!</button>
+					    </span>	    			
+					</div>
+				<% end %>
+			</div>
+			<div class="col-md-6">
+				<div class="input-group">
+	                <span class="input-group-btn">
+	                    <button class="btn red" type="button" data-toggle="modal" href="#draggable">
+	                    	<i class="fa fa-list"></i>
+	                    </button>
+	                </span>
+	                <input type="text" class="form-control" placeholder="Search...">
+	                <span class="input-group-btn">
+	                    <button class="btn blue" type="button">
+	                    	<i class="fa fa-search"></i>
+	                    </button>
+	                </span>
+	            </div>
+			</div>
+		</div>
+    </div>
+    <div class="portlet-body add-area">
+
+    </div>
+</div>
+
+<!-- LINE ITEM AREA -->
+<%= form_for [@customer, @invoice] do |f| %>
+	<table class="table table-condensed table-bordered table-hover">
+	    <thead>
+	        <tr>
+	            <th> SKU </th>
+	            <th> Description </th>
+	            <th> Serial Number </th>
+	            <th> Quantity </th>
+	            <th> Price </th>
+	        </tr>
+	    </thead>
+	    <tbody class="line_item_area">
+
+
+	    </tbody>
+	</table>
+	<%= f.submit "Finalize Invoice", class: "btn btn-primary" %>
+<% end %>
+
+
+
+
+
+
+
+<div class="modal fade" id="error" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Error</h4>
+            </div>
+            <div class="modal-body"> Product with that serial number cannot be found. </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger red" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+
+
+<div class="modal fade draggable-modal" id="draggable" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Find Product</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                <button type="button" class="btn green">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if !@customer %>
+	<%= form_tag('/invoices/new', method: :get) do %>
+		<div class="form-group">
+			<%= text_field_tag "cq", nil, placeholder: "Search by number.." %>
+		</div>
+			<%= submit_tag "submit" %>
+	<% end %>
+<% end %>
+
+
+<% if @customer %>
+
+	<%= @customer.first_name %>
+
+<% end %>
+
+
+
+
+
+
+<%#= render 'form' %>
+
+<%#= link_to 'Back', invoices_path %>

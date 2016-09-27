@@ -4,7 +4,7 @@ class SerializedItem < ApplicationRecord
   belongs_to :sellable
 
   def sold
-  	self.quantity = 4
+  	self.quantity = 0
   	self.save
   end
 
@@ -12,7 +12,17 @@ class SerializedItem < ApplicationRecord
   	if self.quantity == 1
   		return true
   	else
-  		return false
+      return false
   	end
+  end
+
+  def make_available
+    self.quantity = 1
+    self.save
+  end
+
+  def lock
+    self.locked = true
+    self.save
   end
 end

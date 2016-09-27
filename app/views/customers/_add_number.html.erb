@@ -2,14 +2,14 @@
           <div class="col-md-8">
             <div class="form-group">
               <label for="customer_mobile_numbers_attributes_<%= child_index %>_number">Mobile Number</label>
-              <input class="form-control" type="text" name="customer[mobile_numbers_attributes][<%= child_index %>][number]" id="customer_mobile_numbers_attributes_1461623711_number" />
+              <input class="form-control" type="text" name="customer[numbers_attributes][<%= child_index %>][number]" id="customer_mobile_numbers_attributes_1461623711_number" />
               <%= link_to "Add More Numbers", add_number_path, remote: true, cache: false, class: 'add_number_link' %>
             </div>          
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="customer_mobile_numbers_attributes_<%= child_index %>_carrier_id">Carrier</label>
-              <%= collection_select(:carrier, :id, Carrier.all, :id, :name, {}, {class: "form-control", name: "customer[mobile_numbers_attributes][#{child_index}][carrier_id]"}) %>
+              <%= collection_select(:carrier, :id, Carrier.all, :id, :name, {}, {class: "form-control", name: "customer[numbers_attributes][#{child_index}][carrier_id]"}) %>
             </div>            
           </div>
         </div>

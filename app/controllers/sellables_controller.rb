@@ -61,6 +61,14 @@ class SellablesController < ApplicationController
     end
   end
 
+  def search
+    @sellable = Sellable.find_by(sku: params[:sku])
+    @sku = params[:sku]
+    respond_to do |format|
+      format.js
+    end      
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sellable
