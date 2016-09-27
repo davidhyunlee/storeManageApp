@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sellables</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sellables.each do |sellable| %>
+      <tr>
+        <td><%= link_to 'Show', sellable %></td>
+        <td><%= link_to 'Edit', edit_sellable_path(sellable) %></td>
+        <td><%= link_to 'Destroy', sellable, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sellable', new_sellable_path %>

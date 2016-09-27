@@ -1,0 +1,2 @@
+$('.add_number_link').remove();
+$('#mobile_numbers').append("<%= j render partial: 'customers/add_number', locals: { child_index: Time.now.to_i } %>");

@@ -1,7 +1,9 @@
 class PagesController < ApplicationController
-  def index
-  end
+	before_filter :authorize
 
-  def dashboard
-  end
+	def dashboard
+	end
+
+	def select_store
+	end
 end

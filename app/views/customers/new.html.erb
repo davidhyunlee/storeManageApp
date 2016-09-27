@@ -1,0 +1,137 @@
+<h3 class="page-title"> Create New Customer
+  <small>new</small>
+</h3>
+
+<% if @customer.errors.any? %>
+<div class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+    <p><strong>Alert:</strong> <%= pluralize(@customer.errors.count, "error") %> prohibited this payment from being saved.</p>
+    <ul>
+    <% @customer.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="row">
+  <%= form_for @customer, html: { class: '' } do |f| %>
+  <div class="col-md-6">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-speech"></i>
+            <span class="caption-subject bold uppercase">Personal Information</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-7">
+          <div class="form-group">
+            <%= f.label :first_name, "First Name" %>
+            <%= f.text_field :first_name, class: "form-control" %>          
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="form-group">
+            <%= f.label :middle_name %>
+            <%= f.text_field :middle_name, class: "form-control" %>          
+          </div>          
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, class: "form-control" %>          
+      </div>
+
+      <div id="mobile_numbers">
+        <%= render partial: 'customers/add_number', locals: { child_index: Time.now.to_i } %>
+      </div>          
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-envelope"></i>
+          </span>
+        <%= f.text_field :email, class: "form-control" %>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :dob, "Date of Birth" %>
+        <%= f.date_field :dob, class: "form-control" %>
+      </div>
+
+    </div>
+    <%= f.submit "Create Customer", class: "btn green-meadow" %>
+    <%= f.submit "Reset", type: "reset", class: "btn btn-default" %>
+  </div>
+  <div class="col-md-6">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-speech"></i>
+            <span class="caption-subject bold uppercase">Address Information</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :address, "Address" %>
+        <%= f.text_field :address, class: "form-control", placeholder: "12345 Main St." %>          
+      </div>
+      <div class="form-group">
+        <%= f.label :address_2, "Address Line 2" %>
+        <%= f.text_field :address_2, class: "form-control", placeholder: "Unit 101" %>          
+      </div>
+
+      <div class="row">
+        <div class="col-md-9">
+          <div class="form-group">
+            <%= f.label :city, "City" %>
+            <%= f.text_field :city, class: "form-control", placeholder: "Los Angeles" %>          
+          </div>          
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <%= f.label :state, "State" %>
+            <%= f.text_field :state, class: "form-control", placeholder: "CA" %>          
+          </div>          
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :zip, "ZIP" %>
+        <%= f.text_field :zip, class: "form-control", placeholder: "90210" %>          
+      </div>
+    </div>
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-speech"></i>
+            <span class="caption-subject bold uppercase">Other Information</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label :pin, "PIN Code" %>
+            <%= f.text_field :city, class: "form-control" %>          
+          </div>          
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label :last4, "Last 4 Social" %>
+            <%= f.text_field :state, class: "form-control" %>          
+          </div>          
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :notes %>
+        <%= f.text_area :notes, class: "form-control", rows: 10 %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+
+<%#= render 'form' %>

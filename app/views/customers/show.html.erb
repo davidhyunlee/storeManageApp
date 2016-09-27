@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-md-6">
+    <h3 class="page-title"> 
+      <%= "#{@customer.first_name} #{@customer.middle_name} #{@customer.last_name}" %>
+      <small>customer profile</small>
+    </h3>
+  </div>
+  <div class="col-md-6">
+    <%= link_to "Make Payment", new_customer_payment_path(@customer), class: "btn btn-primary", style: "margin-top: 20px; margin-left: 5px; float: right;" %>
+    <%= link_to "Create Invoice", new_customer_invoice_path(@customer), class: "btn btn-primary", style: "margin-top: 20px; margin-left: 5px; float: right;" %>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="profile-sidebar">
+      <div class="portlet light  bordered">
+        <p class="bold">Address:</p>
+        <% @customer.numbers.each do |number| %>
+          <%= link_to number_to_phone(number.number, area_code: true), "", class: "tooltips btn btn-default", data: { container: "body", placement: "right", :"original-title" => "#{number.carrier.name}" } %> 
+        <% end %>
+      </div>
+    </div>
+
+    <div class="profile-content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="portlet light bordered">
+            <div class="portlet-title tabbable-line">
+              <div class="caption caption-md">
+                <i class="icon-globe theme-font hide"></i>
+                <span class="caption-subject font-blue-madison bold uppercase">Profile Account</span>
+              </div>
+              <ul class="nav nav-tabs">
+                <li class="active">
+                  <a href="#tab_1_1" data-toggle="tab">Profile</a>
+                </li>
+                <li>
+                  <a href="#tab_1_2" data-toggle="tab">Profile</a>
+                </li>
+                <li>
+                  <a href="#tab_1_3" data-toggle="tab">Profile</a>
+                </li>
+              </ul>
+            </div>
+            <div class="portlet-body">
+              <div class="tab-content">
+                <!-- CONTENT -->
+
+                <div class="tab-pane active" id="tab_1_1">
+                  TAB 1
+                </div>
+
+                <div class="tab-pane " id="tab_1_2">
+                  TAB 2
+                </div>
+
+                <div class="tab-pane " id="tab_1_3">
+                  TAB 3
+                </div>
+
+                <div class="tab-pane " id="tab_1_4">
+                  TAB 4
+                </div>
+
+                <div class="tab-pane " id="tab_1_5">
+                  TAB 5
+                </div>
+
+                <!-- CONTENT END -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_customer_path(@customer) %> |
+<%= link_to 'Back', customers_path %>
