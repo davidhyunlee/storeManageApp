@@ -124,14 +124,10 @@
                             </a>
                             <ul class="sub-menu">
                                 <li class="nav-item  ">
-                                    <a href="/customers/new" class="nav-link ">
+                                    <%= link_to sellables_path, class: "nav-link", data: { no_turbolink: true } do %>
                                         <span class="title">List Products</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item  ">
-                                    <a href="/customers/new" class="nav-link ">
-                                        <span class="title">List Products</span>
-                                    </a>
+                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "sellables" && params[:action] == "index" %>
+                                    <% end %>
                                 </li>
                                 <li class="nav-item <%= "active open" if params[:controller] == "sellables" && params[:action] == "new" %>">
                                     <%= link_to new_sellable_path, class: "nav-link", data: { no_turbolink: true } do %>
@@ -163,8 +159,25 @@
                             </a>
                             <ul class="sub-menu">
                                 <li class="nav-item  ">
-                                    <%= link_to new_invoice_path, class: "nav-link", data: { no_turbolink: true } do %>
-                                        <span class="title">Create Invoice</span>
+                                    <%= link_to invoices_path, class: "nav-link", data: { no_turbolink: true } do %>
+                                        <span class="title">List Invoices</span>
+                                    <% end %>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="heading">
+                            <h3 class="uppercase">ADMINISTRATOR</h3>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-file"></i>
+                                <span class="title">Settings</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <%= link_to invoices_path, class: "nav-link", data: { no_turbolink: true } do %>
+                                        <span class="title">General Settings</span>
                                     <% end %>
                                 </li>
                             </ul>
