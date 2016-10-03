@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'inventory/receive'
+  get 'inventory/search' => 'inventory#search'
+  get 'inventory/add_serialized_to_queue', as: :add_serialized_to_queue
+
   get 'sellables/search'
   get 'invoices/add_serialized_line_item', as: :add_serialized_line_item
 

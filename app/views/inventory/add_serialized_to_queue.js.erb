@@ -1,0 +1,14 @@
+<% if @serialized_line_item.nil? %>
+	$("#error").modal('show');
+
+<% else %>
+$(".queue_area").append("<%= j render partial: 'inventory/add_serialized_to_queue' %>");
+
+<% elsif !@serialized_line_item.locked %>
+		$(".line_item_area").append("<%= j render partial: 'inventory/add_serialized_to_queue' %>");
+		<% @serialized_line_item.lock %>
+		$(".add-area").empty();
+<% elsif @serialized_line_item.locked %>
+	alert("The serial number you entered is now locked. Reason: Has already been scanned or sold.");
+	$(".add-area").empty();
+<% end %>

@@ -1,8 +1,7 @@
 
         <!-- BEGIN LOGO -->
         <div class="logo">
-            <img src="#" alt="Vinnie Cellular" />
-            <p>VINNIE CELLULAR</p>
+            <h1 style="color: white;">VINNIE CELLULAR</h1>
         </div>
         <!-- END LOGO -->
         <!-- BEGIN LOGIN -->
@@ -23,12 +22,12 @@
                     <label class="control-label visible-ie8 visible-ie9">Password</label>
                     <%= password_field_tag :password, nil, placeholder: "Password", class: "form-control form-control-solid placeholder-no-fix", autocomplete: "off" %>
                 </div>
+                <div class="form-group">
+                    <label class="control-label visible-ie8 visible-ie9">Store</label>
+                    <%= select_tag "store_id", options_from_collection_for_select(@stores, "id", "alias"), prompt: "Choose a Store", class: "form-control" %>
+                </div>
                 <div class="form-actions">
                     <%= submit_tag "Login", class: "btn green uppercase" %>
-                    <label class="rememberme check mt-checkbox mt-checkbox-outline">
-                        <input type="checkbox" name="remember" value="1" />Remember
-                        <span></span>
-                    </label>
                     <!--
                     <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
                     -->

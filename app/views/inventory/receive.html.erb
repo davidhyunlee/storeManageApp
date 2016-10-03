@@ -1,0 +1,80 @@
+<h1 class="page-title"> Receive Inventory
+    <small><%= "for #{current_store.alias}" %></small>
+</h1>
+
+<div class="portlet light bordered">
+    <div class="portlet-title">
+		<div class="row">
+			<div class="col-md-6">
+				<%= form_tag('/inventory/search', method: :get, remote: true) do %>
+					<div class="input-group">
+					    <%= text_field_tag "sku", nil, placeholder: "Enter SKU", class: "form-control sku-search" %>
+					    <span class="input-group-btn">
+					        <button class="btn blue" type="submit">Go!</button>
+					    </span>	    			
+					</div>
+				<% end %>
+			</div>
+			<div class="col-md-6">
+				<div class="input-group">
+	                <span class="input-group-btn">
+	                    <button class="btn red" type="button" data-toggle="modal" href="#draggable">
+	                    	<i class="fa fa-list"></i>
+	                    </button>
+	                </span>
+	                <input type="text" class="form-control" placeholder="Search...">
+	                <span class="input-group-btn">
+	                    <button class="btn blue" type="button">
+	                    	<i class="fa fa-search"></i>
+	                    </button>
+	                </span>
+	            </div>
+			</div>
+		</div>
+    </div>
+    <div class="portlet-body add-area">
+
+    </div>
+</div>
+
+<div class="portlet light portlet-fit bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-bubble font-dark"></i>
+            <span class="caption-subject font-dark bold uppercase">Items to Receive</span>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <div class="table-scrollable">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th> # </th>
+                        <th> SKU </th>
+                        <th> Description </th>
+                        <th> Quantity </th>
+                        <th> Cost </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> 1 </td>
+                        <td> 123456 </td>
+                        <td> iPhone 7 </td>
+                        <td> 5 </td>
+                        <td> $23.23 </td>
+                    </tr>
+                    <tr>
+                        <td>  </td>
+                        <td> <b>ESN #</b> </td>
+                        <td> <input type="textarea" class="form-control"/> </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<%=  %>

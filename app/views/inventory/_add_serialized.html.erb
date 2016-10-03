@@ -1,0 +1,22 @@
+<%= form_tag(add_serialized_line_item_path, method: :get, remote: true) do %>
+<table class="table table-bordered table-hover">
+	<thead>
+	    <tr>
+	        <th> SKU </th>
+	        <th> Description </th>
+	        <th> Quantity </th>
+	        <th> Cost </th>
+	    </tr>
+	</thead>
+	<tbody>
+	    <tr>
+	        <td> <%= @sellable.sku %> </td>
+	        <td> <%= @sellable.description %> </td>
+	        <td> <%= text_field_tag "quantity", nil, placeholder: "", class: "form-control", maxlength: 20, size: 4  %> </td>
+	        <td> <%= text_field_tag "cost", nil, placeholder: "", class: "form-control", maxlength: 10, size: 4  %> </td>
+	    </tr>
+	</tbody>
+</table>
+
+<button class="btn btn-success" type="submit"><i class="fa fa-plus"></i> Prepare For Receive</button>
+<% end %>
