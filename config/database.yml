@@ -83,3 +83,4 @@ production:
   database: storeManageApp_production
   username: storeManageApp
   password: <%= ENV['STOREMANAGEAPP_DATABASE_PASSWORD'] %>
+  url: <%= ENV['POSTGRESQL_URL'] %>
