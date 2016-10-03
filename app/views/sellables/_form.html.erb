@@ -1,261 +1,153 @@
+
 <div class="row">
-                            <div class="col-md-12">
-                                <form class="form-horizontal form-row-seperated" action="#">
-                                    <div class="portlet">
-                                        <div class="portlet-title">
-                                            <div class="caption">
-                                                <i class="fa fa-shopping-cart new-sellable-title"></i>Test Product </div>
-                                            <div class="actions btn-set">
-                                                <button type="button" name="back" class="btn btn-secondary-outline">
-                                                    <i class="fa fa-angle-left"></i> Back</button>
-                                                <button class="btn btn-secondary-outline">
-                                                    <i class="fa fa-reply"></i> Reset</button>
-                                                <button class="btn btn-success">
-                                                    <i class="fa fa-check"></i> Save</button>
-                                                <button class="btn btn-success">
-                                                    <i class="fa fa-check-circle"></i> Save &amp; Continue Edit</button>
-                                                <div class="btn-group">
-                                                    <a class="btn btn-success dropdown-toggle" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
-                                                        <i class="fa fa-share"></i> More
-                                                        <i class="fa fa-angle-down"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu pull-right">
-                                                        <li>
-                                                            <a href="javascript:;"> Duplicate </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:;"> Delete </a>
-                                                        </li>
-                                                        <li class="dropdown-divider"> </li>
-                                                        <li>
-                                                            <a href="javascript:;"> Print </a>
-                                                        </li>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="portlet-body">
-                                            <div class="tabbable-bordered">
-                                                <ul class="nav nav-tabs">
-                                                    <li class="active">
-                                                        <a href="#tab_general" data-toggle="tab" aria-expanded="true"> General </a>
-                                                    </li>
-                                                    <li class="">
-                                                        <a href="#tab_images" data-toggle="tab" aria-expanded="false"> Images </a>
-                                                    </li>
-                                                </ul>
-                                                <div class="tab-content">
-                                                    <div class="tab-pane active" id="tab_general">
-                                                      <!-- BEGIN FORM-->
-                                                      <%= form_for(sellable, :html => { :class => "" }) do |f| %>
-                                                        <% if sellable.errors.any? %>
-                                                          <div id="error_explanation">
-                                                            <h2><%= pluralize(sellable.errors.count, "error") %> prohibited this sellable from being saved:</h2>
+    <div class="col-md-12">
+        <!-- BEGIN FORM-->
+        <%= form_for(sellable, :html => { :class => "form-horizontal form-row-separated" }) do |f| %>
+          <% if sellable.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(sellable.errors.count, "error") %> prohibited this sellable from being saved:</h2>
 
-                                                            <ul>
-                                                            <% sellable.errors.full_messages.each do |message| %>
-                                                              <li><%= message %></li>
-                                                            <% end %>
-                                                            </ul>
-                                                          </div>
-                                                        <% end %>
-                                                        <div class="form-body">
-                                                            <div class="form-group">
-                                                                <%= f.label :description, "Description:", class: "col-md-2 control-label" do %>
-                                                                    Description: <span class="required"> * </span>
-                                                                <% end %>
-                                                                <div class="col-md-10">
-                                                                    <%= f.text_field :description, class: "form-control" %>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <%= f.label :category, "Category:", class: "col-md-2 control-label" do %>
-                                                                    Category: <span class="required"> * </span>
-                                                                <% end %>
-                                                                <div class="col-md-10">
-                                                                    <%= f.collection_select :category, Category.all, :id, :name, {prompt: "Select a category"}, {class: "form-control"} %>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <%= f.label :carrier, "Carrier:", class: "col-md-2 control-label" do %>
-                                                                    Carrier: <span class="required"> * </span>
-                                                                <% end %>
-                                                                <div class="col-md-10">
-                                                                    <%= f.collection_select :carrier, Carrier.all, :id, :name, {prompt: "Select a carrier"}, {class: "form-control"} %>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <%= f.label :sku, "SKU:", class: "col-md-2 control-label" do %>
-                                                                    SKU: <span class="required"> * </span>
-                                                                <% end %>
-                                                                <div class="col-md-10">
-                                                                    <%= f.text_field :sku, class: "form-control" %>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <%= f.label :taxable, "Taxable:", class: "col-md-2 control-label" do %>
-                                                                    Taxable: <span class="required"> * </span>
-                                                                <% end %>
-                                                                <div class="col-md-10">
-                                                                    <%= f.check_box :taxable, class: "form-control" %>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <%= f.label :serialized, "Serialized:", class: "col-md-2 control-label" do %>
-                                                                    Serialized: <span class="required"> * </span>
-                                                                <% end %>
-                                                                <div class="col-md-10">
-                                                                    <%= f.check_box :serialized, class: "form-control" %>
-                                                                </div>
-                                                            </div>
-
-
-
-
-
-
-                                                            <div class="form-group">
-                                                                <%= f.label :msrp, "MSRP:", class: "col-md-2 control-label" do %>
-                                                                    MSRP: <span class="required"> * </span>
-                                                                <% end %>
-                                                                <div class="col-md-10">
-                                                                    <%= f.text_field :msrp, class: "form-control" %>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <%= f.label :taxable_price, "Taxable Price:", class: "col-md-2 control-label" do %>
-                                                                    Taxable Price: <span class="required"> * </span>
-                                                                <% end %>
-                                                                <div class="col-md-10">
-                                                                    <%= f.text_field :taxable_price, class: "form-control" %>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <%= f.label :retail_price, "Retail Price:", class: "col-md-2 control-label" do %>
-                                                                    Retail Price: <span class="required"> * </span>
-                                                                <% end %>
-                                                                <div class="col-md-10">
-                                                                    <%= f.text_field :retail_price, class: "form-control" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tab-pane" id="tab_images">
-                                                        <div class="alert alert-success margin-bottom-10">
-                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-                                                            <i class="fa fa-warning fa-lg"></i> Image type and information need to be specified. </div>
-                                                        <div id="tab_images_uploader_container" class="text-align-reverse margin-bottom-10" style="position: relative;">
-                                                            <a id="tab_images_uploader_pickfiles" href="javascript:;" class="btn btn-success" style="position: relative; z-index: 1;">
-                                                                <i class="fa fa-plus"></i> Select Files </a>
-                                                            <a id="tab_images_uploader_uploadfiles" href="javascript:;" class="btn btn-primary">
-                                                                <i class="fa fa-share"></i> Upload Files </a>
-                                                        <div id="html5_1atufi1vj14gai2t19akb5jb233_container" class="moxie-shim moxie-shim-html5" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px; overflow: hidden; z-index: 0;"><input id="html5_1atufi1vj14gai2t19akb5jb233" type="file" style="font-size: 999px; opacity: 0; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;" multiple="" accept="image/jpeg,image/gif,image/png,application/zip"></div></div>
-                                                        <div class="row">
-                                                            <div id="tab_images_uploader_filelist" class="col-md-6 col-sm-12"></div>
-                                                        </div>
-                                                        <table class="table table-bordered table-hover">
-                                                            <thead>
-                                                                <tr role="row" class="heading">
-                                                                    <th width="8%"> Image </th>
-                                                                    <th width="25%"> Label </th>
-                                                                    <th width="8%"> Sort Order </th>
-                                                                    <th width="10%"> Base Image </th>
-                                                                    <th width="10%"> Small Image </th>
-                                                                    <th width="10%"> Thumbnail </th>
-                                                                    <th width="10%"> </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        <a href="../assets/pages/media/works/img1.jpg" class="fancybox-button" data-rel="fancybox-button">
-                                                                            <img class="img-responsive" src="../assets/pages/media/works/img1.jpg" alt=""> </a>
-                                                                    </td>
-                                                                    <td>
-                                                                        <input type="text" class="form-control" name="product[images][1][label]" value="Thumbnail image"> </td>
-                                                                    <td>
-                                                                        <input type="text" class="form-control" name="product[images][1][sort_order]" value="1"> </td>
-                                                                    <td>
-                                                                        <label>
-                                                                            <input type="radio" name="product[images][1][image_type]" value="1"> </label>
-                                                                    </td>
-                                                                    <td>
-                                                                        <label>
-                                                                            <input type="radio" name="product[images][1][image_type]" value="2"> </label>
-                                                                    </td>
-                                                                    <td>
-                                                                        <label>
-                                                                            <input type="radio" name="product[images][1][image_type]" value="3" checked=""> </label>
-                                                                    </td>
-                                                                    <td>
-                                                                        <a href="javascript:;" class="btn btn-default btn-sm">
-                                                                            <i class="fa fa-times"></i> Remove </a>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <a href="../assets/pages/media/works/img2.jpg" class="fancybox-button" data-rel="fancybox-button">
-                                                                            <img class="img-responsive" src="../assets/pages/media/works/img2.jpg" alt=""> </a>
-                                                                    </td>
-                                                                    <td>
-                                                                        <input type="text" class="form-control" name="product[images][2][label]" value="Product image #1"> </td>
-                                                                    <td>
-                                                                        <input type="text" class="form-control" name="product[images][2][sort_order]" value="1"> </td>
-                                                                    <td>
-                                                                        <label>
-                                                                            <input type="radio" name="product[images][2][image_type]" value="1"> </label>
-                                                                    </td>
-                                                                    <td>
-                                                                        <label>
-                                                                            <input type="radio" name="product[images][2][image_type]" value="2" checked=""> </label>
-                                                                    </td>
-                                                                    <td>
-                                                                        <label>
-                                                                            <input type="radio" name="product[images][2][image_type]" value="3"> </label>
-                                                                    </td>
-                                                                    <td>
-                                                                        <a href="javascript:;" class="btn btn-default btn-sm">
-                                                                            <i class="fa fa-times"></i> Remove </a>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <a href="../assets/pages/media/works/img3.jpg" class="fancybox-button" data-rel="fancybox-button">
-                                                                            <img class="img-responsive" src="../assets/pages/media/works/img3.jpg" alt=""> </a>
-                                                                    </td>
-                                                                    <td>
-                                                                        <input type="text" class="form-control" name="product[images][3][label]" value="Product image #2"> </td>
-                                                                    <td>
-                                                                        <input type="text" class="form-control" name="product[images][3][sort_order]" value="1"> </td>
-                                                                    <td>
-                                                                        <label>
-                                                                            <input type="radio" name="product[images][3][image_type]" value="1" checked=""> </label>
-                                                                    </td>
-                                                                    <td>
-                                                                        <label>
-                                                                            <input type="radio" name="product[images][3][image_type]" value="2"> </label>
-                                                                    </td>
-                                                                    <td>
-                                                                        <label>
-                                                                            <input type="radio" name="product[images][3][image_type]" value="3"> </label>
-                                                                    </td>
-                                                                    <td>
-                                                                        <a href="javascript:;" class="btn btn-default btn-sm">
-                                                                            <i class="fa fa-times"></i> Remove </a>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+              <ul>
+              <% sellable.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+            <div class="portlet">
+                <div class="portlet-title">
+                    <div class="caption new-sellable-title">
+                        <i class="fa fa-shopping-cart"></i>Test Product </div>
+                    <div class="actions btn-set">
+                        <button type="button" name="back" class="btn btn-secondary-outline">
+                            <i class="fa fa-angle-left"></i> Back</button>
+                        <button class="btn btn-secondary-outline">
+                            <i class="fa fa-reply"></i> Reset</button>
+                        <button class="btn btn-success">
+                            <i class="fa fa-check"></i> Save</button>
+                        <button class="btn btn-success">
+                            <i class="fa fa-check-circle"></i> Save &amp; Continue Edit</button>
+                        <div class="btn-group">
+                            <a class="btn btn-success dropdown-toggle" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-share"></i> More
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <div class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="javascript:;"> Duplicate </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;"> Delete </a>
+                                </li>
+                                <li class="dropdown-divider"> </li>
+                                <li>
+                                    <a href="javascript:;"> Print </a>
+                                </li>
                             </div>
                         </div>
-
-                      <%= f.submit "Create New Item", class: "btn green" do %>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="tabbable-bordered">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab_general" data-toggle="tab" aria-expanded="true"> General </a>
+                            </li>
+                            <li class="">
+                                <a href="#tab_images" data-toggle="tab" aria-expanded="false"> Images </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_general">
+                                <div class="form-body">
+                                    <div class="form-group">
+                                        <%= f.label :description, "Description:", class: "col-md-2 control-label" do %>
+                                            Description: <span class="required"> * </span>
+                                        <% end %>
+                                        <div class="col-md-10">
+                                            <%= f.text_field :description, class: "form-control sellable-title" %>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <%= f.label :category_id, "Category:", class: "col-md-2 control-label" do %>
+                                            Category: <span class="required"> * </span>
+                                        <% end %>
+                                        <div class="col-md-10">
+                                            <%= f.collection_select :category_id, Category.all, :id, :name, {prompt: "Select a category"}, {class: "form-control"} %>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <%= f.label :carrier_id, "Carrier:", class: "col-md-2 control-label" do %>
+                                            Carrier: <span class="required"> * </span>
+                                        <% end %>
+                                        <div class="col-md-10">
+                                            <%= f.collection_select :carrier_id, Carrier.all, :id, :name, {prompt: "Select a carrier"}, {class: "form-control"} %>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <%= f.label :sku, "SKU:", class: "col-md-2 control-label" do %>
+                                            SKU: <span class="required"> * </span>
+                                        <% end %>
+                                        <div class="col-md-10">
+                                            <%= f.text_field :sku, class: "form-control" %>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <%= f.label :taxable, "Taxable:", class: "col-md-2 control-label" do %>
+                                            Taxable: <span class="required"> * </span>
+                                        <% end %>
+                                        <div class="col-md-10">
+                                            <%= f.check_box :taxable, class: "form-control" %>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <%= f.label :serialized, "Serialized:", class: "col-md-2 control-label" do %>
+                                            Serialized: <span class="required"> * </span>
+                                        <% end %>
+                                        <div class="col-md-10">
+                                            <%= f.check_box :serialized, class: "form-control" %>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <%= f.label :msrp, "MSRP:", class: "col-md-2 control-label" do %>
+                                            MSRP: <span class="required"> * </span>
+                                        <% end %>
+                                        <div class="col-md-10">
+                                            <%= f.text_field :msrp, class: "form-control" %>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <%= f.label :taxable_price, "Taxable Price:", class: "col-md-2 control-label" do %>
+                                            Taxable Price: <span class="required"> * </span>
+                                        <% end %>
+                                        <div class="col-md-10">
+                                            <%= f.text_field :taxable_price, class: "form-control" %>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <%= f.label :retail_price, "Retail Price:", class: "col-md-2 control-label" do %>
+                                            Retail Price: <span class="required"> * </span>
+                                        <% end %>
+                                        <div class="col-md-10">
+                                            <%= f.text_field :retail_price, class: "form-control" %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                  <%= f.submit "Create New Item", class: "btn green" do %>
                         <i class="fa fa-check"></i> Submit</button>
                       <% end %>
-<% end %>
+        <% end %>
+    </div>
+</div>
+
+<script type="text/javascript">
+  $(".sellable-title").keyup(function(event) {
+  var stt = $(this).val();
+  $(".new-sellable-title").text(stt);
+});
+</script>

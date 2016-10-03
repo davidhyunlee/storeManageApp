@@ -1,34 +1,52 @@
+
         <!-- BEGIN LOGO -->
         <div class="logo">
-            <a href="/">VINNIE CELLULAR</a>
+            <img src="#" alt="Vinnie Cellular" />
+            <p>VINNIE CELLULAR</p>
         </div>
         <!-- END LOGO -->
         <!-- BEGIN LOGIN -->
         <div class="content">
             <!-- BEGIN LOGIN FORM -->
-            <%= form_tag '/login' do %>
-                <div class="form-title">
-                    <span class="form-title">Welcome.</span>
-                    <span class="form-subtitle">Please login.</span>
-                </div>
+            <%= form_tag '/login', class: "login-form" do %>
+                <h3 class="form-title font-green">Sign In</h3>
                 <div class="alert alert-danger display-hide">
                     <button class="close" data-close="alert"></button>
-                    <span> Enter any e-mail and password. </span>
+                    <span> Enter an e-mail and password. </span>
                 </div>
                 <div class="form-group">
                     <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-                    <label class="control-label visible-ie8 visible-ie9">E-mail</label>
+                    <label class="control-label visible-ie8 visible-ie9">Username</label>
                     <%= text_field_tag :email, nil, class: "form-control form-control-solid placeholder-no-fix", placeholder: "E-mail", autocomplete: "off" %>
-                    </div>
+                </div>
                 <div class="form-group">
                     <label class="control-label visible-ie8 visible-ie9">Password</label>
-					<%= password_field_tag :password, nil, placeholder: "Password", class: "form-control form-control-solid placeholder-no-fix", autocomplete: "off" %>
+                    <%= password_field_tag :password, nil, placeholder: "Password", class: "form-control form-control-solid placeholder-no-fix", autocomplete: "off" %>
                 </div>
                 <div class="form-actions">
-                    <%= submit_tag "Login", class: "btn red btn-block uppercase" %>
+                    <%= submit_tag "Login", class: "btn green uppercase" %>
+                    <label class="rememberme check mt-checkbox mt-checkbox-outline">
+                        <input type="checkbox" name="remember" value="1" />Remember
+                        <span></span>
+                    </label>
+                    <!--
+                    <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
+                    -->
                 </div>
             <% end %>
             <!-- END LOGIN FORM -->
+
+            <!-- BEGIN FORGOT PASSWORD FORM
+            <form class="forget-form" action="index.html" method="post">
+                <h3 class="font-green">Forget Password ?</h3>
+                <p> Enter your e-mail address below to reset your password. </p>
+                <div class="form-group">
+                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email" /> </div>
+                <div class="form-actions">
+                    <button type="button" id="back-btn" class="btn green btn-outline">Back</button>
+                    <button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
+                </div>
+            </form>
+            END FORGOT PASSWORD FORM -->
         </div>
-        <div class="copyright hide"> Vinnie Cellular | Store Management System</div>
-        <!-- END LOGIN -->
+        <div class="copyright"> &copy; Copyright 2016<%= " - #{Time.now.year}" if Time.now.year > 2016 %>, <a href="#">Wireless Store Management System</a>, All Rights Reserved. </div>
