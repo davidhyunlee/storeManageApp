@@ -1,7 +1,10 @@
 class SerializedItem < ApplicationRecord
   belongs_to :store
-  belongs_to :received_item
   belongs_to :sellable
+  belongs_to :user
+
+  validates :sellable_id, :user_id, :cost, :quantity, :store_id, presence: true
+  validates :serial_number, uniqueness: true
 
   def sold
   	self.quantity = 0

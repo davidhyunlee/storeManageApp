@@ -119,7 +119,7 @@
                         <li class="nav-item  <%= "active open" if params[:controller] == "sellables" %>">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="fa fa-mobile"></i>
-                                <span class="title">Inventory</span>
+                                <span class="title">Products</span>
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
@@ -132,6 +132,27 @@
                                 <li class="nav-item <%= "active open" if params[:controller] == "sellables" && params[:action] == "new" %>">
                                     <%= link_to new_sellable_path, class: "nav-link", data: { no_turbolink: true } do %>
                                         <span class="title">New Product</span>
+                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "sellables" && params[:action] == "new" %>
+                                    <% end %>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item  <%= "active open" if params[:controller] == "inventory" %>">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-mobile"></i>
+                                <span class="title">Inventory</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <%= link_to sellables_path, class: "nav-link", data: { no_turbolink: true } do %>
+                                        <span class="title">Store Inventory</span>
+                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "inventory" && params[:action] == "index" %>
+                                    <% end %>
+                                </li>
+                                <li class="nav-item <%= "active open" if params[:controller] == "inventory" && params[:action] == "receive" %>">
+                                    <%= link_to inventory_receive_path, class: "nav-link", data: { no_turbolink: true } do %>
+                                        <span class="title">Receive Inventory</span>
                                         <%= "<span class='selected'></span>".html_safe if params[:controller] == "sellables" && params[:action] == "new" %>
                                     <% end %>
                                 </li>

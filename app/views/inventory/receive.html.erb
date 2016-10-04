@@ -3,7 +3,7 @@
 </h1>
 
 <div class="portlet light bordered">
-    <div class="portlet-title">
+    <div>
 		<div class="row">
 			<div class="col-md-6">
 				<%= form_tag('/inventory/search', method: :get, remote: true) do %>
@@ -37,6 +37,9 @@
     </div>
 </div>
 
+
+<% queue_index = 1 %>
+<!-- Receive Queue -->
 <div class="portlet light portlet-fit bordered">
     <div class="portlet-title">
         <div class="caption">
@@ -45,36 +48,23 @@
         </div>
     </div>
     <div class="portlet-body">
-        <div class="table-scrollable">
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th> # </th>
-                        <th> SKU </th>
-                        <th> Description </th>
-                        <th> Quantity </th>
-                        <th> Cost </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td> 1 </td>
-                        <td> 123456 </td>
-                        <td> iPhone 7 </td>
-                        <td> 5 </td>
-                        <td> $23.23 </td>
-                    </tr>
-                    <tr>
-                        <td>  </td>
-                        <td> <b>ESN #</b> </td>
-                        <td> <input type="textarea" class="form-control"/> </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <%= form_tag('/inventory/save', method: :post, remote: true) do %>
+            <div class="table-scrollable">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th> SKU </th>
+                            <th> Description </th>
+                            <th> Quantity </th>
+                            <th> Cost </th>
+                        </tr>
+                    </thead>
+                    <tbody class="queue-area">
+
+                    </tbody>
+                </table>
+            </div>
+            <button type="submit" class="btn green">Receive Inventory</button>
+        <% end %>
     </div>
 </div>
-
-<%=  %>

@@ -1,4 +1,4 @@
-<%= form_tag(add_serialized_line_item_path, method: :get, remote: true) do %>
+<%= form_tag('/inventory/add_serialized_to_queue', method: :get, remote: true) do %>
 <table class="table table-bordered table-hover">
 	<thead>
 	    <tr>
@@ -10,6 +10,7 @@
 	</thead>
 	<tbody>
 	    <tr>
+	    	<input type="hidden" name="sellable_id" value="<%= @sellable.id %>" />
 	        <td> <%= @sellable.sku %> </td>
 	        <td> <%= @sellable.description %> </td>
 	        <td> <%= text_field_tag "quantity", nil, placeholder: "", class: "form-control", maxlength: 20, size: 4  %> </td>
