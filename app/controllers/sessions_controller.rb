@@ -7,6 +7,9 @@ class SessionsController < ApplicationController
   end
 
   def create
+    if params[:store_id] == ""
+      redirect_to root_path and return
+    end
     user = User.find_by_email(params[:email])
     # If the user exists AND the password entered is correct.
     if user && user.authenticate(params[:password])

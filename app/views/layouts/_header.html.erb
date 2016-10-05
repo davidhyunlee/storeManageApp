@@ -5,9 +5,12 @@
         <!-- BEGIN LOGO -->
         <div class="page-logo">
             <a href="/">
-                <%= image_tag 'logo.png', alt: "Vinnie Cellular", class: "logo-default" %>
+                <%#= image_tag 'logo.png', alt: "Vinnie Cellular", class: "logo-default" %>
+                <h4 style="color: white;" class="logo-default">VINNIE CELLULAR</h4>
             </a>
-            <div class="menu-toggler sidebar-toggler"> </div>
+            <div class="menu-toggler sidebar-toggler">
+                <span> </span>
+            </div>
         </div>
         <!-- END LOGO -->
         <!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -20,8 +23,8 @@
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                 <li class="dropdown dropdown-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                        <img alt="" class="img-circle" src="../assets/layouts/layout/img/avatar3_small.jpg" />
-                        <span class="username username-hide-on-mobile"> <%= current_user.first_name.capitalize %> </span>
+                        
+                        <span class="username username-hide-on-mobile"> Logged in as: <%= current_user.first_name.capitalize %></span>
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
