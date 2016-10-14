@@ -1,15 +1,19 @@
-class SessionPolicy < ApplicationPolicy
+class SessionPolicy < Struct.new(:user, :session)
 	def new?
-		if @user
-			redirect_to dashboard_path
-		else
-			true
-		end
+		true
 	end
 
-  class Scope < Scope
-    def resolve
-      scope
-    end
-  end
+	def create?
+		true
+	end
+
+	def destroy?
+		true
+	end
+	
+  # class Scope < Scope
+  #   def resolve
+  #     scope
+  #   end
+  # end
 end

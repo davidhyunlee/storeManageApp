@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
 	def new
     # redirect_to dashboard_path if current_user
     @stores = Store.all
+    authorize :session, :new?
   end
 
   def create
@@ -11,6 +12,7 @@ class SessionsController < ApplicationController
       redirect_to root_path and return
     end
     user = User.find_by_email(params[:email])
+    authorize :session, :create?
     # If the user exists AND the password entered is correct.
     if user && user.authenticate(params[:password])
       # Save the user id inside the browser cookie. This is how we keep the user 
@@ -27,5 +29,6 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     redirect_to '/login'
+    authorize :session, :destroy?
   end
 end

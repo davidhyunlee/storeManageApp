@@ -15,6 +15,10 @@ class UserPolicy < ApplicationPolicy
 		@current_user.superuser?
 	end
 
+	def update?
+		@current_user.superuser?
+	end
+
 	def destroy?
 		return false if @current_user == @record
 		@current_user.superuser?

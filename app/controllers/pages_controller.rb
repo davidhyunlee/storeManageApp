@@ -1,10 +1,9 @@
 class PagesController < ApplicationController
-	before_filter :authenticate
-
 	def dashboard
-		authorize :pages, :dashboard?
+		authorize :page, :dashboard?
 	end
 
 	def select_store
+
 	end
 end
