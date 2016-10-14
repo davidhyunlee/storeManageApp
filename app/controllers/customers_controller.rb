@@ -6,6 +6,7 @@ class CustomersController < ApplicationController
   def index
     @page_title = "Customer Listing"
     @customers = Customer.all
+    authorize @customers
   end
 
   # GET /customers/1
@@ -19,6 +20,7 @@ class CustomersController < ApplicationController
     @page_title = "New Customer"
     @customer = Customer.new
     @customer.numbers.build
+    authorize @customer
   end
 
   # GET /customers/1/edit

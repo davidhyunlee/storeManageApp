@@ -181,6 +181,20 @@
                                         <span class="title">Add Carriers</span>
                                     <% end %>
                                 </li>
+                                <li class="nav-item  ">
+                                    <%= link_to root_path, class: "nav-link nav-toggle", data: { no_turbolink: true } do %>
+                                        <span class="title">Users</span>
+                                        <span class="arrow"></span>
+                                    <% end %>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item">
+                                            <%= link_to "List Users", users_path, class: "nav-link", data: { no_turbolink: true } %>
+                                        </li>
+                                        <li class="nav-item">
+                                            <%= link_to "Create New User", new_user_path, class: "nav-link", data: { no_turbolink: true } %>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                 </div>

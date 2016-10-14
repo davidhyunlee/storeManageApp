@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   layout "login", only: :new
 
 	def new
-    redirect_to dashboard_path if current_user
+    # redirect_to dashboard_path if current_user
     @stores = Store.all
   end
 
