@@ -161,6 +161,7 @@
                                 </li>
                             </ul>
                         </li>
+                        <% if current_user.superuser? %>
                         <li class="heading">
                             <h3 class="uppercase">ADMINISTRATOR</h3>
                         </li>
@@ -183,6 +184,7 @@
                                 </li>
                                 <li class="nav-item  ">
                                     <%= link_to root_path, class: "nav-link nav-toggle", data: { no_turbolink: true } do %>
+                                        <i class="fa fa-user"></i>
                                         <span class="title">Users</span>
                                         <span class="arrow"></span>
                                     <% end %>
@@ -195,8 +197,24 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li class="nav-item  ">
+                                    <%= link_to root_path, class: "nav-link nav-toggle", data: { no_turbolink: true } do %>
+                                        <i class="fa fa-building"></i>
+                                        <span class="title">Stores</span>
+                                        <span class="arrow"></span>
+                                    <% end %>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item">
+                                            <%= link_to "List Stores", stores_path, class: "nav-link", data: { no_turbolink: true } %>
+                                        </li>
+                                        <li class="nav-item">
+                                            <%= link_to "Create New Store", new_store_path, class: "nav-link", data: { no_turbolink: true } %>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
+                        <% end %>
                 </div>
                 <!-- END SIDEBAR -->
             </div>

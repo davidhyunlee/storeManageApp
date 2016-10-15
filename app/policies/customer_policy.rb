@@ -1,23 +1,23 @@
 class CustomerPolicy < ApplicationPolicy
 
 	def index?
-		@user.employee? || @user.manager? || @user.superuser?
+		@current_user.employee? || @current_user.manager? || @current_user.supercurrent_user?
 	end
 
 	def new?
-		@user.employee? || @user.manager? || @user.superuser?
+		@current_user.employee? || @current_user.manager? || @current_user.supercurrent_user?
 	end
 
 	def edit?
-		@user.employee? || @user.manager? || @user.superuser?
+		@current_user.employee? || @current_user.manager? || @current_user.supercurrent_user?
 	end
 
 	def update?
-		@user.employee? || @user.manager? || @user.superuser?
+		@current_user.employee? || @current_user.manager? || @current_user.supercurrent_user?
 	end
 
 	def delete?
-		@user.employee? || @user.manager? || @user.superuser?
+		@current_user.employee? || @current_user.manager? || @current_user.superuser?
 	end
 
   class Scope < Scope

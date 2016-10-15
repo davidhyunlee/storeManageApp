@@ -26,6 +26,7 @@ class ApplicationController < ActionController::Base
 
     def user_not_authorized
       flash[:warning] = "Access denied."
-      redirect_to (request.referrer || root_path)
+      redirect_to root_path if !current_user
+      redirect_to (request.referrer || dashboard_path) if current_user
     end
 end
