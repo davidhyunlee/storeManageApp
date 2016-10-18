@@ -10,20 +10,20 @@
             <thead>
                 <tr>
                     <th> ID </th>
-                    <th> Carrier Name </th>
+                    <th> Category Name </th>
                     <th> Actions </th>
                 </tr>
             </thead>
             <tbody>
-              <% @carriers.each do |carrier| %>
+              <% @categories.each do |category| %>
                 <tr>
-                    <td> <%= link_to carrier.id, carrier %> </td>
-                    <td> <%= link_to carrier.name, carrier %> </td>
+                    <td> <%= link_to category.id, category %> </td>
+                    <td> <%= link_to category.name, category %> </td>
                     <td>
                         <div class="btn-group">
-                            <%= link_to "Edit", edit_carrier_path(carrier), class: "btn btn-default" %>
-                            <% if policy(carrier).destroy? %>
-                            <%= link_to 'Delete', carrier_path(carrier), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                            <%= link_to "Edit", edit_category_path(category), class: "btn btn-default" %>
+                            <% if policy(category).destroy? %>
+                            <%= link_to 'Delete', category_path(category), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
                             <% end %>
                         </div>
                     </td>

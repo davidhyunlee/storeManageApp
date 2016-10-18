@@ -2,13 +2,15 @@ class SessionsController < ApplicationController
   layout "login", only: :new
 
 	def new
-    # redirect_to dashboard_path if current_user
+    redirect_to dashboard_path if current_user
     @stores = Store.all
     authorize :session, :new?
   end
 
   def create
     if params[:store_id] == ""
+      authorize :session, :create?
+      flash[:warning] = "You must select a store." 
       redirect_to root_path and return
     end
     user = User.find_by_email(params[:email])
@@ -22,12 +24,14 @@ class SessionsController < ApplicationController
       redirect_to '/dashboard'
     else
     # If user's login doesn't work, send them back to the login form.
+      flash[:warning] = "Authentication has failed. That username and password combination did not match."
       redirect_to '/login'
     end
   end
 
   def destroy
     session[:user_id] = nil
+    flash[:success] = "You have been successfully logged out of your session."
     redirect_to '/login'
     authorize :session, :destroy?
   end

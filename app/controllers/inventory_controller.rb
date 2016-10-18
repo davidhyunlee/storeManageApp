@@ -1,5 +1,4 @@
 class InventoryController < ApplicationController
-
   def receive
     @store = current_store.id
   end
