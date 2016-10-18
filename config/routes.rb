@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :invoices, shallow: true
   end
 
-  resources :products, :inventories, :invoices, :product_categories, :sellables, :stores, :users
+  resources :products, :inventories, :invoices, :product_categories, :sellables, :stores, :users, :carriers, :categories
 
   root 'sessions#new'
 

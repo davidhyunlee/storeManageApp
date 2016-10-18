@@ -1,0 +1,35 @@
+<h3 class="page-title"> Carrier List
+  <small></small>
+</h3>
+
+<p id="notice"><%= notice %></p>
+
+<div class="portlet-body">
+    <div class="table-scrollable">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th> ID </th>
+                    <th> Carrier Name </th>
+                    <th> Actions </th>
+                </tr>
+            </thead>
+            <tbody>
+              <% @carriers.each do |carrier| %>
+                <tr>
+                    <td> <%= link_to carrier.id, carrier %> </td>
+                    <td> <%= link_to carrier.name, carrier %> </td>
+                    <td>
+                        <div class="btn-group">
+                            <%= link_to "Edit", edit_carrier_path(carrier), class: "btn btn-default" %>
+                            <% if policy(carrier).destroy? %>
+                            <%= link_to 'Delete', carrier_path(carrier), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                            <% end %>
+                        </div>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

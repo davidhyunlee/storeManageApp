@@ -120,7 +120,7 @@
                         </li>
                         <li class="nav-item  <%= "active open" if params[:controller] == "inventory" %>">
                             <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="fa fa-mobile"></i>
+                                <i class="fa fa-th"></i>
                                 <span class="title">Inventory</span>
                                 <span class="arrow"></span>
                             </a>
@@ -167,19 +167,15 @@
                         </li>
                         <li class="nav-item  ">
                             <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="fa fa-file"></i>
+                                <i class="fa fa-cogs"></i>
                                 <span class="title">Settings</span>
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
                                 <li class="nav-item  ">
                                     <%= link_to root_path, class: "nav-link", data: { no_turbolink: true } do %>
+                                        <i class="fa fa-cog"></i>
                                         <span class="title">General Settings</span>
-                                    <% end %>
-                                </li>
-                                <li class="nav-item  ">
-                                    <%= link_to root_path, class: "nav-link", data: { no_turbolink: true } do %>
-                                        <span class="title">Add Carriers</span>
                                     <% end %>
                                 </li>
                                 <li class="nav-item  ">
@@ -209,6 +205,36 @@
                                         </li>
                                         <li class="nav-item">
                                             <%= link_to "Create New Store", new_store_path, class: "nav-link", data: { no_turbolink: true } %>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item  ">
+                                    <%= link_to root_path, class: "nav-link nav-toggle", data: { no_turbolink: true } do %>
+                                        <i class="fa fa-signal"></i>
+                                        <span class="title">Carriers</span>
+                                        <span class="arrow"></span>
+                                    <% end %>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item">
+                                            <%= link_to "List Carriers", carriers_path, class: "nav-link", data: { no_turbolink: true } %>
+                                        </li>
+                                        <li class="nav-item">
+                                            <%= link_to "Add New Carrier", new_carrier_path, class: "nav-link", data: { no_turbolink: true } %>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item  ">
+                                    <%= link_to root_path, class: "nav-link nav-toggle", data: { no_turbolink: true } do %>
+                                        <i class="fa fa-folder"></i>
+                                        <span class="title">Categories</span>
+                                        <span class="arrow"></span>
+                                    <% end %>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item">
+                                            <%= link_to "List Categories", categories_path, class: "nav-link", data: { no_turbolink: true } %>
+                                        </li>
+                                        <li class="nav-item">
+                                            <%= link_to "Add New Category", new_category_path, class: "nav-link", data: { no_turbolink: true } %>
                                         </li>
                                     </ul>
                                 </li>
