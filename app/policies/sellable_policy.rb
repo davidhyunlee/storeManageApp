@@ -1,5 +1,4 @@
-class CustomerPolicy < ApplicationPolicy
-
+class SellablePolicy < ApplicationPolicy
 	def index?
 		@current_user.employee? || @current_user.manager? || @current_user.superuser?
 	end
@@ -8,11 +7,11 @@ class CustomerPolicy < ApplicationPolicy
 		@current_user.employee? || @current_user.manager? || @current_user.superuser?
 	end
 
-	def create?	
+	def edit?
 		@current_user.employee? || @current_user.manager? || @current_user.superuser?
 	end
 
-	def edit?
+	def create?
 		@current_user.employee? || @current_user.manager? || @current_user.superuser?
 	end
 
@@ -20,11 +19,11 @@ class CustomerPolicy < ApplicationPolicy
 		@current_user.employee? || @current_user.manager? || @current_user.superuser?
 	end
 
-	def delete?
+	def show?
 		@current_user.employee? || @current_user.manager? || @current_user.superuser?
 	end
 
-	def add_number?
+	def destroy?
 		@current_user.employee? || @current_user.manager? || @current_user.superuser?
 	end
 

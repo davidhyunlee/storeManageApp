@@ -7,6 +7,10 @@ class CategoryPolicy < ApplicationPolicy
 		@current_user.superuser?
 	end
 
+	def create?
+		@current_user.superuser?
+	end
+
   class Scope < Scope
     def resolve
       scope

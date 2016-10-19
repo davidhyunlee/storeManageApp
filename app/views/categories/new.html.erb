@@ -1,5 +1,36 @@
-<h1>New Category</h1>
+<h3 class="page-title"> New Category
+  <small></small>
+</h3>
 
-<%= render 'form', category: @category %>
+<%= form_for @category do |f| %>
 
-<%= link_to 'Back', categories_path %>
+	<div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-speech"></i>
+            <span class="caption-subject bold uppercase">Category Information</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <%= f.label :name, "Category Name" %>
+            <%= f.text_field :name, class: "form-control" %>          
+          </div>
+        </div>
+	  </div>
+	  <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <%= f.label :description %>
+            <%= f.text_field :description, class: "form-control" %>          
+          </div>          
+        </div>
+      </div>    
+    </div>
+    <%= f.submit "Create Category", class: "btn green-meadow" %>
+    <%= f.submit "Reset", type: "reset", class: "btn btn-default" %>
+
+
+<% end %>
+

@@ -5,26 +5,31 @@ class SellablesController < ApplicationController
   # GET /sellables.json
   def index
     @sellables = Sellable.all
+    authorize @sellables
   end
 
   # GET /sellables/1
   # GET /sellables/1.json
   def show
+    authorize @sellable
   end
 
   # GET /sellables/new
   def new
     @sellable = Sellable.new
+    authorize @sellable
   end
 
   # GET /sellables/1/edit
   def edit
+    authorize @sellable
   end
 
   # POST /sellables
   # POST /sellables.json
   def create
     @sellable = Sellable.new(sellable_params)
+    authorize @sellable
 
     respond_to do |format|
       if @sellable.save
@@ -40,6 +45,7 @@ class SellablesController < ApplicationController
   # PATCH/PUT /sellables/1
   # PATCH/PUT /sellables/1.json
   def update
+    authorize @sellable
     respond_to do |format|
       if @sellable.update(sellable_params)
         format.html { redirect_to @sellable, notice: 'Sellable was successfully updated.' }
@@ -55,6 +61,8 @@ class SellablesController < ApplicationController
   # DELETE /sellables/1.json
   def destroy
     @sellable.destroy
+    authorize @sellable
+
     respond_to do |format|
       format.html { redirect_to sellables_url, notice: 'Sellable was successfully destroyed.' }
       format.json { head :no_content }
@@ -63,6 +71,8 @@ class SellablesController < ApplicationController
 
   def search
     @sellable = Sellable.find_by(sku: params[:sku])
+    authorize @sellable
+    
     @sku = params[:sku]
     respond_to do |format|
       format.js

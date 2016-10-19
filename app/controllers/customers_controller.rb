@@ -70,6 +70,7 @@ class CustomersController < ApplicationController
   end
 
   def add_number
+    authorize Customer
     respond_to do |format|
       format.js
     end
