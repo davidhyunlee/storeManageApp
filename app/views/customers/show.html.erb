@@ -1,82 +1,147 @@
-<div class="row">
-  <div class="col-md-6">
-    <h3 class="page-title"> 
-      <%= "#{@customer.first_name} #{@customer.middle_name} #{@customer.last_name}" %>
-      <small>customer profile</small>
-    </h3>
-  </div>
-  <div class="col-md-6">
-    <%= link_to "Make Payment", new_customer_payment_path(@customer), class: "btn btn-primary", style: "margin-top: 20px; margin-left: 5px; float: right;" %>
-    <%= link_to "Create Invoice", new_customer_invoice_path(@customer), class: "btn btn-primary", style: "margin-top: 20px; margin-left: 5px; float: right;" %>
-  </div>
-</div>
+<h3 class="page-title"> Customer Profile
+  <small></small>
+</h3>
 
 
 <div class="row">
-  <div class="col-md-12">
-    <div class="profile-sidebar">
-      <div class="portlet light  bordered">
-        <p class="bold">Address:</p>
-        <% @customer.numbers.each do |number| %>
-          <%= link_to number_to_phone(number.number, area_code: true), "", class: "tooltips btn btn-default", data: { container: "body", placement: "right", :"original-title" => "#{number.carrier.name}" } %> 
-        <% end %>
-      </div>
-    </div>
-
-    <div class="profile-content">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="portlet light bordered">
-            <div class="portlet-title tabbable-line">
-              <div class="caption caption-md">
-                <i class="icon-globe theme-font hide"></i>
-                <span class="caption-subject font-blue-madison bold uppercase">Profile Account</span>
-              </div>
-              <ul class="nav nav-tabs">
-                <li class="active">
-                  <a href="#tab_1_1" data-toggle="tab">Profile</a>
-                </li>
-                <li>
-                  <a href="#tab_1_2" data-toggle="tab">Profile</a>
-                </li>
-                <li>
-                  <a href="#tab_1_3" data-toggle="tab">Profile</a>
-                </li>
-              </ul>
+    <div class="col-md-12">
+        <!-- BEGIN PROFILE SIDEBAR -->
+        <div class="profile-sidebar">
+            <!-- PORTLET MAIN -->
+            <div class="portlet light profile-sidebar-portlet bordered">
+                <!-- SIDEBAR USER TITLE -->
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name"> <%= "#{@customer.first_name if @customer.first_name} #{@customer.middle_name if @customer.middle_name} #{@customer.last_name if @customer.last_name}" %> </div>
+                </div>
+                <!-- END SIDEBAR USER TITLE -->
+                <!-- SIDEBAR BUTTONS -->
+                <div class="profile-userbuttons">
+                    <%= link_to "MAKE PAYMENT", new_customer_payment_path(@customer), class: "btn green btn-sm" %>
+                    <%= link_to "MAKE SALE", new_customer_invoice_path(@customer), class: "btn green btn-sm" %>
+                </div>
+                <!-- END SIDEBAR BUTTONS -->
+                <!-- SIDEBAR MENU -->
+                <div class="profile-usermenu">
+                    <ul class="nav">
+                        <li>
+                            <a href="page_user_profile_1.html">
+                                <i class="icon-home"></i> Customer Profile </a>
+                        </li>
+                        <li class="active">
+                            <a href="page_user_profile_1_account.html">
+                                <i class="icon-settings"></i> Customer Numbers </a>
+                        </li>
+                        <li>
+                            <a href="page_user_profile_1_help.html">
+                                <i class="icon-info"></i> Help </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END MENU -->
             </div>
-            <div class="portlet-body">
-              <div class="tab-content">
-                <!-- CONTENT -->
-
-                <div class="tab-pane active" id="tab_1_1">
-                  TAB 1
+            <!-- END PORTLET MAIN -->
+            <!-- PORTLET MAIN -->
+            <div class="portlet light bordered">
+                <!-- STAT -->
+                <div class="row list-separated profile-stat">
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <div class="uppercase profile-stat-title"> 37 </div>
+                        <div class="uppercase profile-stat-text"> Visits </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <div class="uppercase profile-stat-title"> 51 </div>
+                        <div class="uppercase profile-stat-text"> Payments </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <div class="uppercase profile-stat-title"> 61 </div>
+                        <div class="uppercase profile-stat-text"> Invoices </div>
+                    </div>
                 </div>
-
-                <div class="tab-pane " id="tab_1_2">
-                  TAB 2
+                <!-- END STAT -->
+                <div>
+                    <div class="margin-top-20 profile-desc-link">
+                        <i class="fa fa-globe"></i>
+                        <a href="#"><%= @customer.age %> years old.</a>
+                    </div>
+                    <div class="margin-top-20 profile-desc-link">
+                        <i class="fa fa-twitter"></i>
+                        <a href="#"><%= @customer.days_until_birthday %> days until birthday!</a>
+                    </div>
+                    <div class="margin-top-20 profile-desc-link">
+                        <i class="fa fa-facebook"></i>
+                        <a href="#">Customer since <%= @customer.created_at.strftime('%b %e %Y') %></a>
+                    </div>
                 </div>
-
-                <div class="tab-pane " id="tab_1_3">
-                  TAB 3
-                </div>
-
-                <div class="tab-pane " id="tab_1_4">
-                  TAB 4
-                </div>
-
-                <div class="tab-pane " id="tab_1_5">
-                  TAB 5
-                </div>
-
-                <!-- CONTENT END -->
-              </div>
             </div>
-          </div>
+            <!-- END PORTLET MAIN -->
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+        <!-- END BEGIN PROFILE SIDEBAR -->
+        <!-- BEGIN PROFILE CONTENT -->
+        <div class="profile-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light bordered">
+                        <div class="portlet-title tabbable-line">
+                            <div class="caption caption-md">
+                                <i class="icon-globe theme-font hide"></i>
+                                <span class="caption-subject font-blue-madison bold uppercase">Details</span>
+                            </div>
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a href="#tab_1_1" data-toggle="tab">Customer Info</a>
+                                </li>
+                                <li>
+                                    <a href="#tab_1_2" data-toggle="tab">Activation Check</a>
+                                </li>
+                                <li>
+                                    <a href="#tab_1_3" data-toggle="tab">Customer Care</a>
+                                </li>
+                                <li>
+                                    <a href="#tab_1_4" data-toggle="tab">Notes</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="tab-content">
+                                <!-- PERSONAL INFO TAB -->
+                                <div class="tab-pane active" id="tab_1_1">
+                                    
+                                    <h3>Address</h3>
+                                        <ul class="list-unstyled">
+                                            <li><%= @customer.address %></li>
+                                            <li><%= @customer.address_2 %></li>
+                                            <li><%= @customer.city %> <%= @customer.state %> <%= @customer.zip %></li>
+                                        </ul>
 
-<%= link_to 'Edit', edit_customer_path(@customer) %> |
-<%= link_to 'Back', customers_path %>
+                                    <h3>Mobile Numbers</h3>
+                                        <ul class="list-unstyled">
+                                            <% @customer.numbers.each do |number| %>
+                                            <li><%= link_to number_to_phone(number.number, area_code: true), "", class: "tooltips btn btn-default", data: { container: "body", placement: "right", :"original-title" => "#{number.carrier.name}" } %></li>
+                                            <% end %>
+                                        </ul>
+                                </div>
+                                <!-- END PERSONAL INFO TAB -->
+                                <!-- CHANGE AVATAR TAB -->
+                                <div class="tab-pane" id="tab_1_2">
+                                    
+                                </div>
+                                <!-- END CHANGE AVATAR TAB -->
+                                <!-- CHANGE PASSWORD TAB -->
+                                <div class="tab-pane" id="tab_1_3">
+                                    
+                                </div>
+                                <!-- END CHANGE PASSWORD TAB -->
+                                <!-- PRIVACY SETTINGS TAB -->
+                                <div class="tab-pane" id="tab_1_4">
+                                    
+                                </div>
+                                <!-- END PRIVACY SETTINGS TAB -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PROFILE CONTENT -->
+    </div>
+</div>

@@ -4,47 +4,33 @@
 
 <p id="notice"><%= notice %></p>
 
-<!-- BEGIN CUSTOMERS INDEX PORTLET -->
 <div class="portlet box bordered light">
-    <div class="portlet-title">
-        <div class="caption">
-            <i class="fa fa-picture"></i>Customers</div>
-        <div class="tools">
-            <a href="javascript:;" class="collapse"> </a>
-        </div>
-    </div>
-    <div class="portlet-body">
-        <div class="table-scrollable">
-            <table class="table table-condensed table-hover">
-                <thead>
-                    <tr>
-                        <th> # </th>
-                        <th> Name </th>
-                        <th> Surname </th>
-                        <th> Number(s) </th>
-                        <th> E-mail </th>
-                    </tr>
-                </thead>
-                <tbody>
-                  <% @customers.each do |customer| %>
-                    <tr>
-                        <td> <%= link_to customer.id, customer_path(customer) %> </td>
-                        <td> <%= link_to "#{customer.first_name} #{customer.middle_name}", customer_path(customer) %> </td>
-                        <td> <%= customer.last_name %> </td>
-                        <td> 
-                            <% customer.numbers.each do |number| %> 
-                            <%= link_to number_to_phone(number.number, area_code: true), "", class: "tooltips", data: { container: "body", placement: "right", :"original-title" => "#{number.carrier.name}" } %> <br />
-                            <% end %>
-                        </td>
-                        <td> <%= customer.email %> </td>
-                    </tr>
-                  <% end %>
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th> # </th>
+                <th> First </th>
+                <th> Last </th>
+                <th> Middle </th>
+                <th> Number(s) </th>
+                <th> E-mail </th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @customers.each do |customer| %>
+            <tr>
+                <td> <%= link_to customer.id, customer_path(customer) %> </td>
+                <td> <%= link_to "#{customer.first_name}", customer_path(customer) %> </td>
+                <td> <%= link_to customer.last_name, customer_path(customer) %> </td>
+                <td> <%= link_to "#{customer.middle_name}", customer_path(customer) %> </td>
+                <td> 
+                    <% customer.numbers.each do |number| %> 
+                    <%= link_to number_to_phone(number.number, area_code: true), "", class: "tooltips", data: { container: "body", placement: "right", :"original-title" => "#{number.carrier.name}" } %> <br />
+                    <% end %>
+                </td>
+                <td> <%= mail_to customer.email %> </td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
 </div>
-<!-- END CUSTOMERS INDEX PORTLET -->
-
-
-<%= link_to 'New Customer', new_customer_path %>

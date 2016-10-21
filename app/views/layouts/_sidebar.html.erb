@@ -83,20 +83,6 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item  ">
-                            <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="fa fa-money"></i>
-                                <span class="title">Payments</span>
-                                <span class="arrow"></span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="nav-item  ">
-                                    <a href="#" class="nav-link ">
-                                        <span class="title">Recent Payments</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
                         <li class="nav-item  <%= "active open" if params[:controller] == "sellables" %>">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="fa fa-mobile"></i>
@@ -113,12 +99,6 @@
                                 <li class="nav-item <%= "active open" if params[:controller] == "sellables" && params[:action] == "new" %>">
                                     <%= link_to new_sellable_path, class: "nav-link", data: { no_turbolink: true } do %>
                                         <span class="title">New Product</span>
-                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "sellables" && params[:action] == "new" %>
-                                    <% end %>
-                                </li>
-                                <li class="nav-item <%= "active open" if params[:controller] == "sellables" && params[:action] == "new" %>">
-                                    <%= link_to root_path, class: "nav-link", data: { no_turbolink: true } do %>
-                                        <span class="title">Product Categories</span>
                                         <%= "<span class='selected'></span>".html_safe if params[:controller] == "sellables" && params[:action] == "new" %>
                                     <% end %>
                                 </li>

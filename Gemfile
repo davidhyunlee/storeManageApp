@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'pundit'
 gem 'aasm'
+gem "rails-settings-cached"
 
 
 # Use Capistrano for deployment
