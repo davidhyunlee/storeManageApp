@@ -1,25 +1,32 @@
+<h3 class="page-title"> Product List
+  <small>index of all sellable items.</small>
+</h3>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Sellables</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @sellables.each do |sellable| %>
-      <tr>
-        <td><%= link_to 'Show', sellable %></td>
-        <td><%= link_to 'Edit', edit_sellable_path(sellable) %></td>
-        <td><%= link_to 'Destroy', sellable, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Sellable', new_sellable_path %>
+<div class="portlet box bordered light">
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th> SKU </th>
+                <th> Description </th>
+                <th> Category </th>
+                <th> Carrier </th>
+                <th> MSRP </th>
+                <th> Retail Price </th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @sellables.each do |sellable| %>
+            <tr>
+                <td> <%= link_to sellable.id, sellable_path(sellable) %> </td>
+                <td> <%= link_to sellable.description, sellable_path(sellable) %> </td>
+                <td> <%= link_to sellable.category.name, sellable_path(sellable) %> </td>
+                <td> <%= link_to sellable.carrier.name, sellable_path(sellable) %> </td>
+                <td> <%= link_to number_to_currency(sellable.msrp), sellable_path(sellable) %> </td>
+                <td> <%= link_to number_to_currency(sellable.retail_price), sellable_path(sellable) %> </td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+</div>
