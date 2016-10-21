@@ -13,6 +13,7 @@ class CustomersController < ApplicationController
   # GET /customers/1.json
   def show
     @page_title = "Customer Profile: #{@customer.first_name} #{@customer.last_name}"
+    authorize @customer
   end
 
   # GET /customers/new
@@ -32,6 +33,7 @@ class CustomersController < ApplicationController
   # POST /customers.json
   def create
     @customer = Customer.new(customer_params)
+    authorize @customer
 
     respond_to do |format|
       if @customer.save
