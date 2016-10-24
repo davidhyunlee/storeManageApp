@@ -148,7 +148,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-3">Activation Date</div>
-                                            <div class="col-md-9"><%= number.act_date.strftime("%B %e, %Y (%m/%d/%y)") %></div>
+                                            <div class="col-md-9"><%= number.act_date.strftime("%B %e, %Y (%m/%d/%y)") if number.act_date %></div>
                                         </div>
                                     <% end %>
                                 </div>
