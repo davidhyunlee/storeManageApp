@@ -29,6 +29,7 @@ class CarriersController < ApplicationController
   # POST /carriers.json
   def create
     @carrier = Carrier.new(carrier_params)
+    authorize @carrier
 
     respond_to do |format|
       if @carrier.save

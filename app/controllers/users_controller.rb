@@ -11,11 +11,13 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    authorize @user
+
     if @user.save
       flash[:success] = "New user: #{@user.first_name} has been created."
       redirect_to users_path
     else
-      flash[:error] = "#{@user.errors.full_messages}"
+      flash[:warning] = "#{@user.errors.full_messages}"
       render :new
     end
   end

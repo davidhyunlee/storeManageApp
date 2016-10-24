@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :customers do
     resources :payments, shallow: true
     resources :invoices, shallow: true
+    resources :numbers, shallow: true
   end
 
   resources :products, :inventories, :invoices, :product_categories, :sellables, :stores, :users, :carriers, :categories

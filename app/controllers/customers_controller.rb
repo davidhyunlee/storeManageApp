@@ -26,6 +26,7 @@ class CustomersController < ApplicationController
 
   # GET /customers/1/edit
   def edit
+    authorize @customer
     @page_title = "Edit Customer Profile"
   end
 
@@ -50,12 +51,14 @@ class CustomersController < ApplicationController
   # PATCH/PUT /customers/1
   # PATCH/PUT /customers/1.json
   def update
+    authorize @customer
     respond_to do |format|
       if @customer.update(customer_params)
         format.html { redirect_to @customer, notice: 'Customer was successfully updated.' }
         format.json { render :show, status: :ok, location: @customer }
+        flash[:success] = "Customer was updated."
       else
-        format.html { render :show }
+        format.html { render :edit }
         format.json { render json: @customer.errors, status: :unprocessable_entity }
       end
     end
@@ -86,6 +89,6 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:first_name, :middle_name, :last_name, :address, :address_2, :city, :state, :zip, :email, :last4, :pin, :notes, :dob, numbers_attributes: [ :carrier_id, :number ])
+      params.require(:customer).permit(:first_name, :middle_name, :last_name, :address, :address_2, :city, :state, :zip, :email, :last4, :pin, :notes, :dob, numbers_attributes: [ :id, :carrier_id, :number, :phone_model, :imei, :iccid, :act_date ])
     end
 end
