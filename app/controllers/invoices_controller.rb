@@ -18,6 +18,7 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.new
     @customer = Customer.find(params[:customer_id])
     @sellables = Sellable.all
+    authorize @invoice
   end
 
   # GET /invoices/1/edit

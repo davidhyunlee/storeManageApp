@@ -12,6 +12,7 @@
                 <!-- SIDEBAR USER TITLE -->
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name"> <%= "#{@customer.first_name if @customer.first_name} #{@customer.middle_name if @customer.middle_name} #{@customer.last_name if @customer.last_name}" %> </div>
+                    <div><%= mail_to @customer.email %></div>
                 </div>
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->
@@ -100,20 +101,24 @@
                             <div class="tab-content">
                                 <!-- PERSONAL INFO TAB -->
                                 <div class="tab-pane active" id="tab_1_1">
-                                    
-                                    <h3>Address</h3>
-                                        <ul class="list-unstyled">
-                                            <li><%= @customer.address %></li>
-                                            <li><%= @customer.address_2 %></li>
-                                            <li><%= @customer.city %> <%= @customer.state %> <%= @customer.zip %></li>
-                                        </ul>
-
-                                    <h3>Mobile Numbers</h3>
-                                        <ul class="list-unstyled">
-                                            <% @customer.numbers.each do |number| %>
-                                            <li><%= link_to number_to_phone(number.number, area_code: true), "", class: "tooltips btn btn-default", data: { container: "body", placement: "right", :"original-title" => "#{number.carrier.name}" } %></li>
-                                            <% end %>
-                                        </ul>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h3>Address</h3>
+                                                <ul class="list-unstyled">
+                                                    <li><%= @customer.address %></li>
+                                                    <li><%= @customer.address_2 %></li>
+                                                    <li><%= @customer.city %>, <%= @customer.state %> <%= @customer.zip %></li>
+                                                </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h3>Mobile Numbers</h3>
+                                                <ul class="list-unstyled">
+                                                    <% @customer.numbers.each do |number| %>
+                                                    <li><%= number_to_phone(number.number, area_code: true) %> (<%= number.carrier.name %>)</li>
+                                                    <% end %>
+                                                </ul>                                                
+                                        </div>
+                                    </div>
 
                                     <h3>Notes</h3>
                                         <div class="notes">

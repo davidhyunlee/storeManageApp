@@ -89,7 +89,7 @@
                                     <a href="#tab_1_1" data-toggle="tab">Customer Info</a>
                                 </li>
                                 <li>
-                                    <a href="#tab_1_2" data-toggle="tab">Activation Check</a>
+                                    <a href="#tab_1_2" data-toggle="tab">Activation Type</a>
                                 </li>
                                 <li>
                                     <a href="#tab_1_3" data-toggle="tab">Customer Care</a>
@@ -116,17 +116,27 @@
                                         </ul>
                                 </div>
                                 <!-- END PERSONAL INFO TAB -->
-                                <!-- CHANGE AVATAR TAB -->
+                                <!-- ACTIVATION TYPE -->
                                 <div class="tab-pane" id="tab_1_2">
-                                    
+                                  <div class="form-body">
+                                    <div class="form-group">
+                                      <label class="control-label">Activation Type</label>
+                                      <input type="dropdown" placeholder="" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                      <label class="control-label">Credit Class</label>
+                                      <input type="text" placeholder="Credit Class" class="form-control">
+                                    </div>
+                                    <button type="submit">Update</button>
+                                  </div>
                                 </div>
-                                <!-- END CHANGE AVATAR TAB -->
+                                <!-- ACTIVATION TYPE -->
                                 <!-- CHANGE PASSWORD TAB -->
                                 <div class="tab-pane" id="tab_1_3">
                                     <%= form_for @customer, :html => {class: 'form-horizontal'} do |f| %>
 	                                    <%= f.fields_for :numbers do |ff| %>
-																				<div class="form-body">
-																						<h3 class="form-section"><%= number_to_phone(ff.object.number, area_code: true) %></h3>
+											  <div class="form-body">
+													<h3 class="form-section"><%= number_to_phone(ff.object.number, area_code: true) %></h3>
 	                                          <div class="form-group">
 	                                          		<%= ff.label :phone_model, "Phone Model", class: "col-md-3 control-label" %>
 	                                              <div class="col-md-8">
