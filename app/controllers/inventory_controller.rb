@@ -1,9 +1,11 @@
 class InventoryController < ApplicationController
   def receive
     @store = current_store.id
+    authorize :inventory, :receive?
   end
 
   def search
+    authorize :inventory, :search?
     @sellable = Sellable.find_by(sku: params[:sku])
     @sku = params[:sku]
     respond_to do |format|
@@ -12,6 +14,7 @@ class InventoryController < ApplicationController
   end
 
   def add_serialized_to_queue
+    authorize :inventory, :add_serialized_to_queue?
     @sellable = Sellable.find_by(id: params[:sellable_id])
     @qty = params[:quantity]
     @cost = params[:cost]
@@ -23,6 +26,7 @@ class InventoryController < ApplicationController
   end
 
   def save
+    authorize :inventory, :save?
     @serialized_items = params[:serialized_items]
     @simple_items = params[:simple_item]
     @current_store = current_store

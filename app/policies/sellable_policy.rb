@@ -27,6 +27,10 @@ class SellablePolicy < ApplicationPolicy
 		@current_user.employee? || @current_user.manager? || @current_user.superuser?
 	end
 
+	def search?
+		@current_user.employee? || @current_user.manager? || @current_user.superuser?
+	end
+
   class Scope < Scope
     def resolve
       scope

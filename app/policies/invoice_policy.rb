@@ -1,9 +1,33 @@
 class InvoicePolicy < ApplicationPolicy
-	def index
+	def index?
 		true
 	end
 
-	def new
+	def new?
+		true
+	end
+
+	def create?
+		true
+	end
+
+	def edit?
+		true
+	end
+
+	def update?
+		true
+	end
+
+	def show?
+		true
+	end
+
+	def destroy?
+		true
+	end
+
+	def add_serialized_line_item?
 		true
 	end
 

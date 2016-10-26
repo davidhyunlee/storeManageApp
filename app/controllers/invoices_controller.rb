@@ -11,6 +11,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/1
   # GET /invoices/1.json
   def show
+    authorize @invoice
   end
 
   # GET /invoices/new
@@ -23,6 +24,7 @@ class InvoicesController < ApplicationController
 
   # GET /invoices/1/edit
   def edit
+    authorize @invoice
   end
 
   # POST /invoices
@@ -34,6 +36,7 @@ class InvoicesController < ApplicationController
     @invoice.store_id = current_store.id
     @invoice.user_id = current_user.id
     @invoice.customer_id = @customer.id
+    authorize @invoice
 
     respond_to do |format|
       if @invoice.save
@@ -49,6 +52,8 @@ class InvoicesController < ApplicationController
   # PATCH/PUT /invoices/1
   # PATCH/PUT /invoices/1.json
   def update
+    authorize @invoice
+
     respond_to do |format|
       if @invoice.update(invoice_params)
         format.html { redirect_to @invoice, notice: 'Invoice was successfully updated.' }
@@ -64,6 +69,8 @@ class InvoicesController < ApplicationController
   # DELETE /invoices/1.json
   def destroy
     @invoice.destroy
+    authorize @invoice
+
     respond_to do |format|
       format.html { redirect_to invoices_url, notice: 'Invoice was successfully destroyed.' }
       format.json { head :no_content }
@@ -73,6 +80,17 @@ class InvoicesController < ApplicationController
   def add_serialized_line_item
     @serialized_line_item = SerializedItem.find_by(serial_number: params[:serial_number])
     @qty = params[:quantity]
+    authorize Invoice
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def add_simple_line_item
+    @simple_item = Sellable.find_by(sku: params[:sku])
+    @quantity = params[:quantity]
+    authorize Invoice
 
     respond_to do |format|
       format.js

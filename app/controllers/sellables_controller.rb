@@ -71,7 +71,7 @@ class SellablesController < ApplicationController
 
   def search
     @sellable = Sellable.find_by(sku: params[:sku])
-    authorize @sellable
+    authorize Sellable
     
     @sku = params[:sku]
     respond_to do |format|

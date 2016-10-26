@@ -1,0 +1,21 @@
+<% if @simple_item.nil? %>
+	$("#error").modal('show');
+<% elsif  %>
+
+
+
+
+
+
+<% if @serialized_line_item.nil? %>
+	$("#error").modal('show');
+<% elsif !@serialized_line_item.available? %>
+	alert("This product has been sold already or is not available.");
+<% elsif !@serialized_line_item.locked %>
+		$(".line_item_area").append("<%= j render partial: 'invoices/add_serialized_line_item' %>");
+		<% @serialized_line_item.lock %>
+		$(".add-area").empty();
+<% elsif @serialized_line_item.locked %>
+	alert("The serial number you entered is now locked. Reason: Has already been scanned or sold.");
+	$(".add-area").empty();
+<% end %>
