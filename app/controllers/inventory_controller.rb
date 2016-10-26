@@ -31,9 +31,28 @@ class InventoryController < ApplicationController
     @simple_items = params[:simple_item]
     @current_store = current_store
 
-    @serialized_items.each do |item|
-      SerializedItem.create(store_id: @current_store.id, serial_number: item["serial_number"], sellable_id: item["sellable_id"], quantity: item["quantity"], user_id: item["user_id"], cost: item["cost"])
+    # Testing for duplicate serial number entry.
+    if @serialized_items
+      @serialized_items.each do |item|
+        if SerializedItem.find_by(serial_number: item["serial_number"])
+          flash.keep[:warning] = "Product with serial number of #{item["serial_number"]} has been found in the database. Inventory receive aborted."
+          redirect_to action: "receive", flash: { success: "HEY" } and return
+          # render :receive
+        end
+      end
     end
+
+    # @serialized_items.each do |item|
+    #   SerializedItem.create(store_id: @current_store.id, serial_number: item["serial_number"], sellable_id: item["sellable_id"], quantity: item["quantity"], user_id: item["user_id"], cost: item["cost"])
+    # end
+
+    # if @simple_items
+    #   @simple_items.each do |item|
+    #     SimpleItem.where(sellable_id: item["sellable_id"], store_id: item["store_id"]).first_or_initialize do |item|
+    #       item.sellable_id = 
+    #     end
+    #   end
+    # end
 
   end
 

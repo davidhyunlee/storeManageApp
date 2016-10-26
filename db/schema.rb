@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020001449) do
+ActiveRecord::Schema.define(version: 20161020225128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,10 @@ ActiveRecord::Schema.define(version: 20161020001449) do
     t.string   "number",      null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "phone_model"
+    t.string   "imei"
+    t.string   "iccid"
+    t.date     "act_date"
     t.index ["carrier_id"], name: "index_numbers_on_carrier_id", using: :btree
     t.index ["customer_id"], name: "index_numbers_on_customer_id", using: :btree
   end
