@@ -1,5 +1,5 @@
-<h3 class="page-title"> Customers List
-  <small>new</small>
+<h3 class="page-title"> <%= @page_title %>
+  <small></small>
 </h3>
 
 <p id="notice"><%= notice %></p>
@@ -17,6 +17,23 @@
             </tr>
         </thead>
         <tbody>
+        <% if @numbers %>
+            <% @numbers.each do |number| %>
+            <tr>
+                <td> <%= link_to number.customer.id, customer_path(number.customer) %> </td>
+                <td> <%= link_to "#{number.customer.first_name}", customer_path(number.customer) %> </td>
+                <td> <%= link_to number.customer.last_name, customer_path(number.customer) %> </td>
+                <td> <%= link_to "#{number.customer.middle_name}", customer_path(number.customer) %> </td>
+                <td> 
+                    <% number.customer.numbers.each do |morenumbers| %> 
+                    <%= link_to number_to_phone(morenumbers.number, area_code: true), "", class: "tooltips", data: { container: "body", placement: "right", :"original-title" => "#{number.carrier.name}" } %> <br />
+                    <% end %>
+                </td>
+                <td> <%= mail_to number.customer.email %> </td>
+            </tr>
+            <% end %>
+        <% end %>
+        <% if @customers %>
           <% @customers.each do |customer| %>
             <tr>
                 <td> <%= link_to customer.id, customer_path(customer) %> </td>
@@ -31,6 +48,7 @@
                 <td> <%= mail_to customer.email %> </td>
             </tr>
           <% end %>
+        <% end %>
         </tbody>
     </table>
 </div>

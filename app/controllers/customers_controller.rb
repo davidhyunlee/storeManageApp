@@ -4,9 +4,23 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
   def index
-    @page_title = "Customer Listing"
-    @customers = Customer.all
-    authorize @customers
+    if params[:query]
+      if params[:query].length == 10 && params[:query].to_i != 0
+        @numbers = Number.where(number: params[:query])
+        @page_title = "Search Results for: #{params[:query]}"
+      elsif /^.+@.+$/.match(params[:query]).class == MatchData
+        @customers = Customer.where(email: params[:query])
+        @page_title = "Search Results for E-mail: #{params[:query]}"
+      elsif params[:query] == ""
+        @customers = Customer.all
+        @page_title = "Listing All Customers"
+      end
+    else
+      @customers = Customer.all
+      @page_title = "Customer Listing"
+    end
+
+    authorize Customer
   end
 
   # GET /customers/1

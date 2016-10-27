@@ -41,15 +41,7 @@
 
 
 <% queue_index = 1 %>
-<!-- Receive Queue -->
-<div class="portlet light portlet-fit bordered">
-    <div class="portlet-title">
-        <div class="caption">
-            <i class="icon-bubble font-dark"></i>
-            <span class="caption-subject font-dark bold uppercase">Items to Receive</span>
-        </div>
-    </div>
-    <div class="portlet-body">
+
         <%= form_tag('/inventory/save', method: :post) do %>
             <div class="table-scrollable">
                 <table class="table table-bordered table-hover">
@@ -68,5 +60,4 @@
             </div>
             <button type="submit" class="btn green">Receive Inventory</button>
         <% end %>
-    </div>
-</div>
+
