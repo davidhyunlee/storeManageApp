@@ -1,0 +1,11 @@
+<tr>
+    <td style="max-width: 100px;"> <b><%= @sellable.sku %></b> </td>
+    <td > <b><%= @sellable.description %></b> </td>
+    <td style="width: 100px;"> <b><%= @quantity %></b> </td>
+    <td style="width: 100px;"> <b><%= number_to_currency(@cost) %></b> </td>
+</tr>
+<input type="hidden" name="simple_items[][store_id]" value="<%= @store %>" />
+<input type="hidden" name="simple_items[][sellable_id]" value="<%= @sellable.id %>" />
+<input type="hidden" name="simple_items[][quantity]" value="<%= @quantity %>" />
+<input type="hidden" name="simple_items[][cost]" value="<%= @cost %>" />
+<input type="hidden" name="simple_items[][user_id]" value="<%= current_user.id %>" />

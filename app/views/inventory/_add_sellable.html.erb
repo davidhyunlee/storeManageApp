@@ -1,24 +1,22 @@
-				<table class="table table-bordered table-hover">
-					<thead>
-					    <tr>
-					        <th> SKU </th>
-					        <th> Description </th>
-					        <th> Quantity </th>
-					        <th> Price </th>
-					        <th> Price </th>
-					    </tr>
-					</thead>
-					<tbody>
-					    <tr>
-					        <td> 1 </td>
-					        <td> Mark </td>
-					        <td> <%= text_field_tag "quantity", nil, placeholder: "", class: "form-control", maxlength: 5, size: 7  %> </td>
-					        <td>
-					            <span class="label label-sm label-success"> Approved </span>
-					        </td>
-					        <td>
-								<button class="btn">Add Line</button>
-					        </td>
-					    </tr>
-					</tbody>
-				</table>
+<%= form_tag('/inventory/add_sellable_to_queue', method: :get, remote: true) do %>
+	<table class="table table-bordered table-hover">
+		<thead>
+		    <tr>
+		        <th> SKU </th>
+		        <th> Description </th>
+		        <th> Quantity </th>
+		        <th> Cost </th>
+		    </tr>
+		</thead>
+		<tbody>
+		    <tr>
+		        <td> <%= @sellable.sku %> </td>
+		        <td> <%= @sellable.description %> </td>
+		        <td> <%= text_field_tag "quantity", nil, placeholder: "", class: "form-control", maxlength: 5, size: 7  %> </td>
+		        <td> <%= text_field_tag "cost", nil, placeholder: "", class: "form-control", maxlength: 10, size: 4  %> </td>
+		    </tr>
+		</tbody>
+	</table>
+	<%= hidden_field_tag "sellable_id", @sellable.id %>
+	<button class="btn btn-success" type="submit"><i class="fa fa-plus"></i> Prepare For Receive</button>
+<% end %>

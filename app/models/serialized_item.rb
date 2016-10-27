@@ -4,7 +4,7 @@ class SerializedItem < ApplicationRecord
   belongs_to :user
 
   validates :sellable_id, :user_id, :cost, :quantity, :store_id, presence: true
-  validates :serial_number, uniqueness: true
+  validates :serial_number, uniqueness: true, presence: true
 
   def sold
   	self.quantity = 0

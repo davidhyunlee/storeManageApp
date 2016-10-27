@@ -111,6 +111,12 @@
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
+                                <li class="nav-item <%= "active open" if params[:controller] == "inventory" && params[:action] == "index" %>">
+                                    <%= link_to inventory_path, class: "nav-link", data: { no_turbolink: true } do %>
+                                        <span class="title">Store Inventory</span>
+                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "inventories" && params[:action] == "new" %>
+                                    <% end %>
+                                </li>
                                 <li class="nav-item <%= "active open" if params[:controller] == "inventory" && params[:action] == "receive" %>">
                                     <%= link_to inventory_receive_path, class: "nav-link", data: { no_turbolink: true } do %>
                                         <span class="title">Receive Inventory</span>

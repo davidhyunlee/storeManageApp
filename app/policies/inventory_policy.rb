@@ -7,11 +7,19 @@ class InventoryPolicy < Struct.new(:user, :inventory)
 		true
 	end
 
+	def add_sellable_to_queue?
+		true
+	end
+
 	def save?
 		true
 	end
 
 	def search?
+		true
+	end
+
+	def index?
 		true
 	end
 

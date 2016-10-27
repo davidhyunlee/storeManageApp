@@ -1,4 +1,10 @@
 class InventoryController < ApplicationController
+  def index
+    @simple_items = SimpleItem.where(store_id: current_store.id)
+    @serialized_items = SerializedItem.where(store_id: current_store.id)
+    authorize :inventory, :index?
+  end
+
   def receive
     @store = current_store.id
     authorize :inventory, :receive?
@@ -25,34 +31,70 @@ class InventoryController < ApplicationController
     end
   end
 
-  def save
-    authorize :inventory, :save?
-    @serialized_items = params[:serialized_items]
-    @simple_items = params[:simple_item]
-    @current_store = current_store
+  def add_sellable_to_queue
+    authorize :inventory, :add_sellable_to_queue?
+    @sellable = Sellable.find_by(id: params[:sellable_id])
+    @quantity = params[:quantity]
+    @cost = params[:cost]
+    @store = current_store.id
 
-    # Testing for duplicate serial number entry.
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def save
+    authorize :inventory, :save? 
+    @serialized_items = params[:serialized_items]
+    @simple_items = params[:simple_items]
+    @current_store = current_store
+    @created_serialized_items = []
+
+    # Testing for duplicate serial number or blank serial number entry.
     if @serialized_items
       @serialized_items.each do |item|
         if SerializedItem.find_by(serial_number: item["serial_number"])
-          flash.keep[:warning] = "Product with serial number of #{item["serial_number"]} has been found in the database. Inventory receive aborted."
-          redirect_to action: "receive", flash: { success: "HEY" } and return
-          # render :receive
+          if item["serial_number"] == "" 
+            flash[:warning] = "You have entered a blank serial number. Inventory receipt aborted."
+          else
+            flash[:warning] = "Product with serial number of #{item["serial_number"]} has been found in the database. Inventory receipt aborted."
+          end
+          render :receive and return
         end
       end
     end
 
-    # @serialized_items.each do |item|
-    #   SerializedItem.create(store_id: @current_store.id, serial_number: item["serial_number"], sellable_id: item["sellable_id"], quantity: item["quantity"], user_id: item["user_id"], cost: item["cost"])
-    # end
+    if @serialized_items
+      @serialized_items.each do |item|
+        serialized_item = SerializedItem.new(store_id: @current_store.id, serial_number: item["serial_number"], sellable_id: item["sellable_id"], quantity: item["quantity"], user_id: item["user_id"], cost: item["cost"])
+        if serialized_item.save
+          @created_serialized_items << item["serial_number"]
+        else
+          flash[:warning] = "#{serialized_item.errors}"
+          render :receive and return
+        end
+      end
+    end
 
-    # if @simple_items
-    #   @simple_items.each do |item|
-    #     SimpleItem.where(sellable_id: item["sellable_id"], store_id: item["store_id"]).first_or_initialize do |item|
-    #       item.sellable_id = 
-    #     end
-    #   end
-    # end
+    if @simple_items
+      @simple_items.each do |item|
+
+        if SimpleItem.where(sellable_id: item["sellable_id"], store_id: item["store_id"]).empty?
+          item_to_create = SimpleItem.new
+          item_to_create.sellable_id = item["sellable_id"]
+          item_to_create.store_id = item["store_id"]
+          item_to_create.quantity = item["quantity"]
+          item_to_create.save
+        else
+          item_to_update = SimpleItem.find_by(sellable_id: item["sellable_id"], store_id: item["store_id"])
+          item_to_update.quantity += item["quantity"].to_i
+          item_to_update.save
+        end
+
+      end
+    end
+
+    redirect_to dashboard_path, flash: {success: "Inventory has been successfully received."}
 
   end
 

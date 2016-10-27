@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'inventory/receive', as: :inventory_receive
   get 'inventory/search' => 'inventory#search'
   get 'inventory/add_serialized_to_queue', as: :add_serialized_to_queue
+  get 'inventory/add_sellable_to_queue', as: :add_sellable_to_queue
+  get 'inventory' => 'inventory#index'
 
   get 'sellables/search'
   get 'invoices/add_serialized_line_item', as: :add_serialized_line_item
