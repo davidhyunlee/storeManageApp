@@ -14,6 +14,9 @@ class CustomersController < ApplicationController
       elsif params[:query] == ""
         @customers = Customer.all
         @page_title = "Listing All Customers"
+      else
+        @customers = Customer.where(first_name: params[:query])
+        @page_title = "Searching by First Name: #{params[:query]}"
       end
     else
       @customers = Customer.all
