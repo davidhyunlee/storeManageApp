@@ -70,7 +70,7 @@ class InventoryController < ApplicationController
         if serialized_item.save
           @created_serialized_items << item["serial_number"]
         else
-          flash[:warning] = "#{serialized_item.errors}"
+          flash[:warning] = "#{serialized_item.errors.full_messages}"
           render :receive and return
         end
       end
@@ -87,6 +87,7 @@ class InventoryController < ApplicationController
           item_to_create.save
         else
           item_to_update = SimpleItem.find_by(sellable_id: item["sellable_id"], store_id: item["store_id"])
+          item_to_update.quantity = 0 if item_to_update.quantity == nil
           item_to_update.quantity += item["quantity"].to_i
           item_to_update.save
         end

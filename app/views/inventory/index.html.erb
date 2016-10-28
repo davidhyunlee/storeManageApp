@@ -34,6 +34,7 @@
                 <th> SKU </th>
                 <th> Description </th>
                 <th> Serial Number </th>
+                <th> Locked? </th>
                 <th> Quantity </th>
             </tr>
         </thead>
@@ -43,6 +44,7 @@
                 <td> <%= item.sellable.sku %> </td>
                 <td> <%= item.sellable.description %> </td>
                 <td> <%= item.serial_number %> </td>
+                <td> <%= "Yes" if item.locked %> <%= "No" unless item.locked %> </td>
                 <td> <%= item.quantity %> </td>
             </tr>
           <% end %>

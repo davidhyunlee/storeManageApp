@@ -14,17 +14,19 @@
                 <th> Carrier </th>
                 <th> MSRP </th>
                 <th> Retail Price </th>
+                <th> Serialized? </th>
             </tr>
         </thead>
         <tbody>
           <% @sellables.each do |sellable| %>
             <tr>
-                <td> <%= link_to sellable.id, sellable_path(sellable) %> </td>
+                <td> <%= link_to sellable.sku, sellable_path(sellable) %> </td>
                 <td> <%= link_to sellable.description, sellable_path(sellable) %> </td>
                 <td> <%= link_to sellable.category.name, sellable_path(sellable) %> </td>
                 <td> <%= link_to sellable.carrier.name, sellable_path(sellable) %> </td>
                 <td> <%= link_to number_to_currency(sellable.msrp), sellable_path(sellable) %> </td>
                 <td> <%= link_to number_to_currency(sellable.retail_price), sellable_path(sellable) %> </td>
+                <td> <%= "Yes" if sellable.serialized %> <%= "No" unless sellable.serialized %> </td>
             </tr>
           <% end %>
         </tbody>
