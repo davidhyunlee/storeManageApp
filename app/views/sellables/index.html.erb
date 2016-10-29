@@ -22,8 +22,8 @@
             <tr>
                 <td> <%= link_to sellable.sku, sellable_path(sellable) %> </td>
                 <td> <%= link_to sellable.description, sellable_path(sellable) %> </td>
-                <td> <%= link_to sellable.category.name, sellable_path(sellable) %> </td>
-                <td> <%= link_to sellable.carrier.name, sellable_path(sellable) %> </td>
+                <td> <%= link_to sellable.category.name, sellable_path(sellable) if sellable.category.name %> </td>
+                <td> <%= link_to sellable.carrier.name, sellable_path(sellable) if sellable.carrier.name %> </td>
                 <td> <%= link_to number_to_currency(sellable.msrp), sellable_path(sellable) %> </td>
                 <td> <%= link_to number_to_currency(sellable.retail_price), sellable_path(sellable) %> </td>
                 <td> <%= "Yes" if sellable.serialized %> <%= "No" unless sellable.serialized %> </td>
