@@ -14,7 +14,7 @@
             </tr>
         </thead>
         <tbody>
-          <% @simple_items.each do |item| %>
+          <% @store.simple_items.each do |item| %>
             <tr>
                 <td> <%= item.sellable.sku %> </td>
                 <td> <%= item.sellable.description %> </td>
@@ -39,7 +39,7 @@
             </tr>
         </thead>
         <tbody>
-          <% @serialized_items.each do |item| %>
+          <% @store.serialized_items.each do |item| %>
             <tr>
                 <td> <%= item.sellable.sku %> </td>
                 <td> <%= item.sellable.description %> </td>

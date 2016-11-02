@@ -1,5 +1,6 @@
 class InventoryController < ApplicationController
   def index
+    @store = current_store
     @simple_items = SimpleItem.where(store_id: current_store.id)
     @serialized_items = SerializedItem.where(store_id: current_store.id)
     authorize :inventory, :index?
