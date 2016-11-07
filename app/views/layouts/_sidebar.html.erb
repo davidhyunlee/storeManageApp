@@ -54,10 +54,10 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <%= link_to store_select_path, class: "nav-link", data: { no_turbolink: true } do %>
                                 <i class="fa fa-building"></i>
                                 <span class="title">Switch Store</span>
-                            </a>
+                            <% end %>
                         </li>
                         <li class="heading">
                             <h3 class="uppercase">Modules</h3>

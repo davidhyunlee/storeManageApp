@@ -3,6 +3,10 @@ class PagePolicy < Struct.new(:user, :page)
   	true if user
   end
 
+  def select_store?
+  	true if user
+  end
+
   # class Scope < Scope
   #   def resolve
   #     scope

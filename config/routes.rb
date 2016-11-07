@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   post '/users' => 'users#create'
 
   get '/dashboard' => 'pages#dashboard'
+  get '/store_select' => 'pages#select_store'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

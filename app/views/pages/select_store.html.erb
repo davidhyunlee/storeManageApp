@@ -1,0 +1,7 @@
+<h3 class="page-title"> Switch Store
+  <small></small>
+</h3>
+
+<% @stores.each do |store| %>
+<p><%= link_to "#{store.alias}", store_select_path(store.id) %></p>
+<% end %>

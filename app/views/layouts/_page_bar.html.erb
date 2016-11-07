@@ -2,7 +2,7 @@
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="/dashboard"><b><%= current_store.alias %></b></a>
+            <a href="/dashboard"><b><%= current_store.alias if current_store %></b></a>
             <i class="fa fa-circle"></i>
         </li>
         <li>

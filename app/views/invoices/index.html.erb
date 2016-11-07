@@ -1,6 +1,35 @@
-<p id="notice"><%= notice %></p>
+<h3 class="page-title"> Invoices for <%= current_store.alias if current_store %>
+  <small></small>
+</h3>
 
-<h1>Listing Invoices</h1>
+<div class="portlet box bordered light">
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th> Customer </th>
+                <th> Created By </th>
+                <th> Date & Time </th>
+                <th> Invoice Total </th>
+            </tr>
+        </thead>
+        <tbody>
+          <% current_store.invoices.each do |invoice| %>
+            <tr>
+              <td><%= invoice.customer.first_name %></td>
+              <td><%= invoice.user.first_name %></td>
+              <td><%= invoice.created_at.strftime("%D %r") %></td>
+              <td><%= invoice.total %></td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
 
 <table>
   <thead>
@@ -14,10 +43,10 @@
   </thead>
 
   <tbody>
-    <% @invoices.each do |invoice| %>
+    <% current_store.invoices.each do |invoice| %>
       <tr>
-        <td><%= invoice.customer %></td>
-        <td><%= invoice.user %></td>
+        <td><%= invoice.customer.first_name %></td>
+        <td><%= invoice.user.first_name %></td>
         <td><%= invoice.store %></td>
         <td><%= invoice.total %></td>
         <td><%= link_to 'Show', invoice %></td>
@@ -27,7 +56,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Invoice', new_invoice_path %>

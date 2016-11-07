@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020225128) do
+ActiveRecord::Schema.define(version: 20161102215027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,9 +67,11 @@ ActiveRecord::Schema.define(version: 20161020225128) do
     t.decimal  "sold_price"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "simple_item_id"
     t.index ["invoice_id"], name: "index_line_items_on_invoice_id", using: :btree
     t.index ["sellable_id"], name: "index_line_items_on_sellable_id", using: :btree
     t.index ["serialized_item_id"], name: "index_line_items_on_serialized_item_id", using: :btree
+    t.index ["simple_item_id"], name: "index_line_items_on_simple_item_id", using: :btree
   end
 
   create_table "numbers", force: :cascade do |t|
@@ -202,6 +204,7 @@ ActiveRecord::Schema.define(version: 20161020225128) do
   add_foreign_key "line_items", "invoices"
   add_foreign_key "line_items", "sellables"
   add_foreign_key "line_items", "serialized_items"
+  add_foreign_key "line_items", "simple_items"
   add_foreign_key "numbers", "carriers"
   add_foreign_key "numbers", "customers"
   add_foreign_key "payments", "carriers"
