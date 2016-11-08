@@ -30,23 +30,23 @@ class InvoicesController < ApplicationController
   # POST /invoices
   # POST /invoices.json
   def create
-    # render plain: params
-    @customer = Customer.find(params[:customer_id])
-    @invoice = @customer.invoices.new(invoice_params)
-    @invoice.store_id = current_store.id
-    @invoice.user_id = current_user.id
-    @invoice.customer_id = @customer.id
-    authorize @invoice
+    render plain: params.inspect
+    # @customer = Customer.find(params[:customer_id])
+    # @invoice = @customer.invoices.new(invoice_params)
+    # @invoice.store_id = current_store.id
+    # @invoice.user_id = current_user.id
+    # @invoice.customer_id = @customer.id
+    authorize Invoice
 
-    respond_to do |format|
-      if @invoice.save
-        format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
-        format.json { render :show, status: :created, location: @invoice }
-      else
-        format.html { redirect_to new_customer_invoice_path(@customer), notice: @invoice.errors }
-        format.json { render json: @invoice.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @invoice.save
+    #     format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
+    #     format.json { render :show, status: :created, location: @invoice }
+    #   else
+    #     format.html { redirect_to new_customer_invoice_path(@customer), notice: @invoice.errors }
+    #     format.json { render json: @invoice.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /invoices/1
@@ -105,6 +105,6 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:customer_id, :user_id, :store_id, :total, line_items_attributes: [ :invoice_id, :sellable_id, :serialized_item_id, :quantity, :sold_price ])
+      params.require(:invoice).permit(:customer_id, :user_id, :store_id, :total, line_items_attributes: [ :invoice_id, :sellable_id, :simple_item_id, :serialized_item_id, :quantity, :tax_price, :sold_price ])
     end
 end

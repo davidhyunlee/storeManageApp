@@ -45,9 +45,10 @@
 	        <tr>
 	            <th> SKU </th>
 	            <th> Description </th>
-	            <th> Serial Number </th>
 	            <th> Quantity </th>
 	            <th> Price </th>
+	            <th> Tax </th>
+	            <th> Total </th>
 	        </tr>
 	    </thead>
 	    <tbody class="line_item_area">
@@ -55,11 +56,28 @@
 
 	    </tbody>
 	</table>
+
+	<div class="row">
+		<div class="col-md-4 col-md-offset-8">
+			<table class="table table-condensed table-bordered table-hover">
+				<tr>
+					<td>Sub Total:</td>
+					<td>$<span id="subtotal">0</span></td>
+				</tr>
+				<tr>
+					<td>Sales Tax:</td>
+					<td>$<span id="salestax">0</span></td>
+				</tr>
+				<tr>
+					<td>Total:</td>
+					<td>$<span id="total">0</span></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
 	<%= f.submit "Finalize Invoice", class: "btn btn-primary" %>
 <% end %>
-
-
-
 
 
 
@@ -84,70 +102,29 @@
 
 
 
-<div class="modal fade draggable-modal" id="draggable" tabindex="-1" role="basic" aria-hidden="true">
-    <div class="modal-dialog">
+
+<!-- Find Product Modal Dialog Start -->
+<div class="modal fade draggable-modal modal-scroll bs-modal-lg" id="draggable" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title">Find Product</h4>
             </div>
             <div class="modal-body">
+							<%= form_tag('/inventory/inventory_list', method: :get, remote: true) do %>
+								<input type="text" name="query">
+								<button type="submit">Find</button>
+								<div class="inventory_modal_body">
+									
+								</div>
+							<% end %>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                <button type="button" class="btn green">Save changes</button>
             </div>
         </div>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<% if !@customer %>
-	<%= form_tag('/invoices/new', method: :get) do %>
-		<div class="form-group">
-			<%= text_field_tag "cq", nil, placeholder: "Search by number.." %>
-		</div>
-			<%= submit_tag "submit" %>
-	<% end %>
-<% end %>
-
-
-<% if @customer %>
-
-	<%= @customer.first_name %>
-
-<% end %>
-
-
-
-
-
-
-<%#= render 'form' %>
-
-<%#= link_to 'Back', invoices_path %>

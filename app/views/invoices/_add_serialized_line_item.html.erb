@@ -1,13 +1,15 @@
-	        <tr>
-	            <td> <%= @serialized_line_item.sellable.sku %> </td>
-	            <td> <%= @serialized_line_item.sellable.description %> </td>
-	            <td class="li-serial"><%= @serialized_line_item.serial_number %></td>
-	            <td> 1 </td>
-	            <td> <%= number_to_currency(@serialized_line_item.sellable.retail_price) %> </td>
-	        </tr>
+<tr>
+    <td> <%= @serialized_line_item.sellable.sku %> </td>
+    <td> <%= @serialized_line_item.sellable.description %><br /><small class="li-serial"><b>Serial:</b> <%= @serialized_line_item.serial_number %></small> </td>
+    <td> 1 </td>
+    <td> <%= number_to_currency(@serialized_line_item.sellable.retail_price) %> </td>
+    <td> <%= number_to_currency(@serialized_line_item.sellable.retail_price * Setting.sales_tax) %> </td>
+    <td> <%= number_to_currency(@serialized_line_item.sellable.retail_price + (@serialized_line_item.sellable.retail_price * Setting.sales_tax)) %> </td>
+</tr>
 
 <% child_index = Time.now.to_i %>
 <input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][quantity]" value="1" />
 <input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sold_price]" value="<%= @serialized_line_item.sellable.retail_price %>" />
 <input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sellable_id]" value="<%= @serialized_line_item.sellable.id %>" />
 <input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][serialized_item_id]" value="<%= @serialized_line_item.id %>" />
+<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][tax_amount]" value="<%= @serialized_line_item.id %>" />

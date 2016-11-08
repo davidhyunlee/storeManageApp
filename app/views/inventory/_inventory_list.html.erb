@@ -1,0 +1,56 @@
+<h3>Simple Items</h3>
+<div class="portlet box bordered light">
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th> SKU </th>
+                <th> Description </th>
+                <th> Quantity </th>
+                <th> Price </th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @simple_items.each do |item| %>
+            <tr>
+                <td class="sku"><a><%= item.sellable.sku %></a></td>
+                <td> <%= item.sellable.description %> </td>
+                <td> <%= item.quantity %> </td>
+                <td> <%= item.sellable.retail_price %> </td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+</div>
+
+<h3>Serialized Items</h3>
+<div class="portlet box bordered light">
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th> SKU </th>
+                <th> Description </th>
+                <th> Serial Number </th>
+                <th> Locked? </th>
+                <th> Quantity </th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @serialized_items.each do |item| %>
+            <tr>
+                <td class="sku"><a><%= item.sellable.sku %></a></td>
+                <td> <%= item.sellable.description %> </td>
+                <td> <%= item.serial_number %> </td>
+                <td> <%= "Yes" if item.locked %> <%= "No" unless item.locked %> </td>
+                <td> <%= item.quantity %> </td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+	$(".sku").click(function() {
+		$(".sku-search").empty().val( $(this).text() );
+		$("#draggable").modal('hide');
+	})
+</script>

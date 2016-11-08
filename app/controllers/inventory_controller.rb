@@ -15,6 +15,7 @@ class InventoryController < ApplicationController
     authorize :inventory, :search?
     @sellable = Sellable.find_by(sku: params[:sku])
     @sku = params[:sku]
+    
     respond_to do |format|
       format.js
     end 
@@ -38,6 +39,16 @@ class InventoryController < ApplicationController
     @quantity = params[:quantity]
     @cost = params[:cost]
     @store = current_store.id
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def inventory_list
+    @simple_items = SimpleItem.where(store_id: current_store.id)
+    @serialized_items = SerializedItem.where(store_id: current_store.id)
+    authorize :inventory, :inventory_list?
 
     respond_to do |format|
       format.js

@@ -23,6 +23,10 @@ class InventoryPolicy < Struct.new(:user, :inventory)
 		true
 	end
 
+	def inventory_list?
+		true
+	end
+
   # class Scope < Scope
   #   def resolve
   #     scope
