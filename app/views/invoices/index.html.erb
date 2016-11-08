@@ -6,18 +6,24 @@
     <table class="table table-condensed table-hover">
         <thead>
             <tr>
+                <th> Invoice # </th>
                 <th> Customer </th>
                 <th> Created By </th>
                 <th> Date & Time </th>
-                <th> Invoice Total </th>
+                <th> Total Sale </th>
+                <th> Total Taxes </th>
+                <th> Total w/ Taxes </th>
             </tr>
         </thead>
         <tbody>
           <% current_store.invoices.each do |invoice| %>
             <tr>
+              <td><%= invoice.id %></td>
               <td><%= invoice.customer.first_name %></td>
               <td><%= invoice.user.first_name %></td>
               <td><%= invoice.created_at.strftime("%D %r") %></td>
+              <td><%= invoice.subtotal %></td>
+              <td><%= invoice.sales_tax %></td>
               <td><%= invoice.total %></td>
             </tr>
           <% end %>

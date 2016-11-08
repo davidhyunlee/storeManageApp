@@ -9,6 +9,9 @@
 		$("#subtotal").text(parseFloat($("#subtotal").text()) + <%= @serialized_line_item.sellable.retail_price %>)
 		$("#salestax").text(parseFloat($("#salestax").text()) + (<%= @serialized_line_item.sellable.retail_price %> * <%= Setting.sales_tax %>))
 		$("#total").text(parseFloat($("#total").text()) + <%= @serialized_line_item.sellable.retail_price %> + (<%= @serialized_line_item.sellable.retail_price %> * <%= Setting.sales_tax %>))
+		$("#hidden_subtotal").attr("value", $("#subtotal").text())
+		$("#hidden_salestax").attr("value", $("#salestax").text())
+		$("#hidden_total").attr("value", $("#total").text())
 <% elsif @serialized_line_item.locked %>
 	alert("The serial number you entered is now locked. Reason: Has already been scanned or sold.");
 	$(".add-area").empty();
