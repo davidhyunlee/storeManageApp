@@ -6,9 +6,14 @@
 		$(".line_item_area").append("<%= j render partial: 'invoices/add_serialized_line_item' %>");
 		<% @serialized_line_item.lock %>
 		$(".add-area").empty();
-		$("#subtotal").text(parseFloat($("#subtotal").text()) + <%= @serialized_line_item.sellable.retail_price %>)
-		$("#salestax").text(parseFloat($("#salestax").text()) + (<%= @serialized_line_item.sellable.retail_price %> * <%= Setting.sales_tax %>))
-		$("#total").text(parseFloat($("#total").text()) + <%= @serialized_line_item.sellable.retail_price %> + (<%= @serialized_line_item.sellable.retail_price %> * <%= Setting.sales_tax %>))
+
+		var subtotal = parseFloat($("#subtotal").text()) + <%= @serialized_line_item.sellable.retail_price %>
+		var salestax = parseFloat($("#salestax").text()) + (<%= @serialized_line_item.sellable.retail_price %> * <%= Setting.sales_tax %>)
+		var total = parseFloat($("#total").text()) + <%= @serialized_line_item.sellable.retail_price %> + (<%= @serialized_line_item.sellable.retail_price %> * <%= Setting.sales_tax %>)
+		
+		$("#subtotal").text(subtotal.toFixed(2))
+		$("#salestax").text(salestax.toFixed(2))
+		$("#total").text(total.toFixed(2))
 		$("#hidden_subtotal").attr("value", $("#subtotal").text())
 		$("#hidden_salestax").attr("value", $("#salestax").text())
 		$("#hidden_total").attr("value", $("#total").text())

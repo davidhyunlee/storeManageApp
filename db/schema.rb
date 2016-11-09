@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161108090831) do
+ActiveRecord::Schema.define(version: 20161109001234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,8 @@ ActiveRecord::Schema.define(version: 20161108090831) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "simple_item_id"
+    t.decimal  "item_price"
+    t.decimal  "tax_amount"
     t.index ["invoice_id"], name: "index_line_items_on_invoice_id", using: :btree
     t.index ["sellable_id"], name: "index_line_items_on_sellable_id", using: :btree
     t.index ["serialized_item_id"], name: "index_line_items_on_serialized_item_id", using: :btree
