@@ -22,9 +22,9 @@
               <td><%= invoice.customer.first_name %></td>
               <td><%= invoice.user.first_name %></td>
               <td><%= invoice.created_at.strftime("%D %r") %></td>
-              <td><%= invoice.subtotal %></td>
-              <td><%= invoice.sales_tax %></td>
-              <td><%= invoice.total %></td>
+              <td><%= number_to_currency(invoice.subtotal) %></td>
+              <td><%= number_to_currency(invoice.sales_tax) %></td>
+              <td><%= number_to_currency(invoice.total) %></td>
             </tr>
           <% end %>
         </tbody>
