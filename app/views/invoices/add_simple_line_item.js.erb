@@ -2,6 +2,8 @@
 	$("#error").modal('show');
 <% elsif @simple_item.quantity <= 0 %>
 	alert("This item is sold out. Must receive more to sell.")
+<% elsif @quantity.to_i > @simple_item.quantity %>
+	alert("You are trying to sell more than you have of this item.")
 <% else %>
 	$(".line_item_area").append("<%= j render partial: 'invoices/add_simple_line_item' %>");
 	$(".add-area").empty();

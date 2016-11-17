@@ -5,6 +5,6 @@ class Payment < ApplicationRecord
   belongs_to :user
   belongs_to :carrier
 
-  validates :amount, :payment_type, :store_id, :customer_id, :carrier_id, :user_id, :presence => true
+  validates :amount, :payment_type_id, :store_id, :customer_id, :carrier_id, :user_id, :presence => true
   validates :amount, :numericality => true
 end

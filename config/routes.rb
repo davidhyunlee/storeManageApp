@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get 'invoices/add_serialized_line_item', as: :add_serialized_line_item
   get 'invoices/add_simple_line_item', as: :add_simple_line_item
 
+  resources :payments
+
   resources :customers do
     resources :payments, shallow: true
     resources :invoices, shallow: true

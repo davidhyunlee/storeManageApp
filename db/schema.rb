@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161109001234) do
+ActiveRecord::Schema.define(version: 20161117060930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,21 +92,28 @@ ActiveRecord::Schema.define(version: 20161109001234) do
     t.index ["customer_id"], name: "index_numbers_on_customer_id", using: :btree
   end
 
+  create_table "payment_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "payments", force: :cascade do |t|
-    t.decimal  "amount",       precision: 10, scale: 2
-    t.string   "payment_type"
+    t.decimal  "amount",          precision: 10, scale: 2
     t.integer  "invoice_id"
     t.integer  "store_id"
     t.integer  "customer_id"
     t.integer  "carrier_id"
     t.integer  "user_id"
     t.integer  "number_id"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "payment_type_id"
     t.index ["carrier_id"], name: "index_payments_on_carrier_id", using: :btree
     t.index ["customer_id"], name: "index_payments_on_customer_id", using: :btree
     t.index ["invoice_id"], name: "index_payments_on_invoice_id", using: :btree
     t.index ["number_id"], name: "index_payments_on_number_id", using: :btree
+    t.index ["payment_type_id"], name: "index_payments_on_payment_type_id", using: :btree
     t.index ["store_id"], name: "index_payments_on_store_id", using: :btree
     t.index ["user_id"], name: "index_payments_on_user_id", using: :btree
   end
@@ -215,6 +222,7 @@ ActiveRecord::Schema.define(version: 20161109001234) do
   add_foreign_key "payments", "customers"
   add_foreign_key "payments", "invoices"
   add_foreign_key "payments", "numbers"
+  add_foreign_key "payments", "payment_types"
   add_foreign_key "payments", "stores"
   add_foreign_key "payments", "users"
   add_foreign_key "received_items", "sellables"
