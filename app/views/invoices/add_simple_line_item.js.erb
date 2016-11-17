@@ -1,21 +1,19 @@
 <% if @simple_item.nil? %>
 	$("#error").modal('show');
-<% elsif  %>
-
-
-
-
-
-
-<% if @simple_item.nil? %>
-	$("#error").modal('show');
-<% elsif !@simple_item.available? %>
-	alert("This product has been sold already or is not available.");
-<% elsif !@simple_item.locked %>
-		$(".line_item_area").append("<%= j render partial: 'invoices/add_simple_line_item' %>");
-		<% @simple_item.lock %>
-		$(".add-area").empty();
-<% elsif @simple_item.locked %>
-	alert("The serial number you entered is now locked. Reason: Has already been scanned or sold.");
+<% elsif @simple_item.quantity <= 0 %>
+	alert("This item is sold out. Must receive more to sell.")
+<% else %>
+	$(".line_item_area").append("<%= j render partial: 'invoices/add_simple_line_item' %>");
 	$(".add-area").empty();
+
+	var subtotal = parseFloat($("#subtotal").text()) + <%= @simple_item.sellable.retail_price * @quantity.to_i %>
+	var salestax = parseFloat($("#salestax").text()) + (<%= @simple_item.sellable.retail_price * @quantity.to_i %> * <%= Setting.sales_tax %>)
+	var total = parseFloat($("#total").text()) + <%= @simple_item.sellable.retail_price * @quantity.to_i %> + (<%= @simple_item.sellable.retail_price * @quantity.to_i %> * <%= Setting.sales_tax %>)
+	
+	$("#subtotal").text(subtotal.toFixed(2))
+	$("#salestax").text(salestax.toFixed(2))
+	$("#total").text(total.toFixed(2))
+	$("#hidden_subtotal").attr("value", $("#subtotal").text())
+	$("#hidden_salestax").attr("value", $("#salestax").text())
+	$("#hidden_total").attr("value", $("#total").text())
 <% end %>

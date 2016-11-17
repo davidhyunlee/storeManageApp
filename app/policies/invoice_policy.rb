@@ -31,6 +31,10 @@ class InvoicePolicy < ApplicationPolicy
 		true
 	end
 
+	def add_simple_line_item?
+		true
+	end
+
   class Scope < Scope
     def resolve
       scope

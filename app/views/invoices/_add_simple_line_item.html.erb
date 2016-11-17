@@ -1,0 +1,17 @@
+<tr>
+    <td> <%= @simple_item.sellable.sku %> </td>
+    <td> <%= @simple_item.sellable.description %></td>
+    <td> <%= @quantity %> </td>
+    <td> <%= number_to_currency(@simple_item.sellable.retail_price * @quantity.to_i) %> </td>
+    <td> <%= number_to_currency((@simple_item.sellable.retail_price * @quantity.to_i) * Setting.sales_tax) %> </td>
+    <td> <%= number_to_currency((@simple_item.sellable.retail_price * @quantity.to_i) + ((@simple_item.sellable.retail_price * @quantity.to_i) * Setting.sales_tax)) %> </td>
+</tr>
+
+<% child_index = Time.now.to_i %>
+<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][quantity]" value="<%= @quantity %>" />
+<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sold_price]" value="<%= (@simple_item.sellable.retail_price * @quantity.to_i) + ((@simple_item.sellable.retail_price * @quantity.to_i) * Setting.sales_tax) %>" />
+<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sellable_id]" value="<%= @simple_item.sellable.id %>" />
+<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][simple_item_id]" value="<%= @simple_item.id %>" />
+<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][tax_amount]" value="<%= (@simple_item.sellable.retail_price * @quantity.to_i) * Setting.sales_tax %>" />
+<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][item_price]" value="<%= @simple_item.sellable.retail_price * @quantity.to_i %>" />
+
