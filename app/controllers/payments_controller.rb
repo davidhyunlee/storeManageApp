@@ -37,7 +37,8 @@ class PaymentsController < ApplicationController
         format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
         format.json { render :show, status: :created, location: @payment }
       else
-        format.html { render :new }
+        format.html { redirect_to new_customer_payment_path(Customer.find(params[:payment][:customer_id]))
+                      flash[:danger] = "Payment was not posted. There was an error." }
         format.json { render json: @payment.errors, status: :unprocessable_entity }
       end
     end

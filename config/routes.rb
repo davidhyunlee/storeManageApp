@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'sellables/search'
   get 'invoices/add_serialized_line_item', as: :add_serialized_line_item
   get 'invoices/add_simple_line_item', as: :add_simple_line_item
+  get 'invoices/add_payment_line_item', as: :add_payment_line_item
 
   resources :payments
 

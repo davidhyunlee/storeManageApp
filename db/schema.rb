@@ -175,8 +175,8 @@ ActiveRecord::Schema.define(version: 20161117060930) do
   end
 
   create_table "simple_items", force: :cascade do |t|
-    t.integer  "store_id"
-    t.integer  "sellable_id"
+    t.integer  "store_id",    null: false
+    t.integer  "sellable_id", null: false
     t.integer  "quantity"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false

@@ -1,0 +1,17 @@
+<tr>
+    <td> PAYMENT </td>
+    <td> <%= @payment_type.name  %><br /><small><b>Number:</b> <%= number_to_phone(@number.number, area_code: true) %></small></td>
+    <td> 1 </td>
+    <td> <%= number_to_currency(@amount) %> </td>
+    <td> </td>
+    <td> <%= number_to_currency(@amount) %> </td>
+</tr>
+
+<% child_index = Time.now.to_i %>
+<input type="hidden" name="invoice[payments_attributes][<%= child_index %>][number_id]" value="<%= @number.id %>" />
+<input type="hidden" name="invoice[payments_attributes][<%= child_index %>][amount]" value="<%= @amount %>" />
+<input type="hidden" name="invoice[payments_attributes][<%= child_index %>][store_id]" value="<%= current_store.id %>" />
+<input type="hidden" name="invoice[payments_attributes][<%= child_index %>][customer_id]" value="<%= @customer.id %>" />
+<input type="hidden" name="invoice[payments_attributes][<%= child_index %>][carrier_id]" value="<%= @carrier.id %>" />
+<input type="hidden" name="invoice[payments_attributes][<%= child_index %>][payment_type_id]" value="<%= @payment_type.id %>" />
+<input type="hidden" name="invoice[payments_attributes][<%= child_index %>][user_id]" value="<%= current_user.id %>" />

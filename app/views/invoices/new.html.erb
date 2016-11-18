@@ -85,6 +85,7 @@
 	<%= f.submit "Finalize Invoice", class: "btn btn-primary" %>
 <% end %>
 
+<button data-toggle="modal" href="#payment">Add Payment</button>
 
 
 
@@ -129,6 +130,53 @@
             <div class="modal-footer">
                 <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
             </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<div class="modal fade draggable-modal modal-scroll bs-modal-lg" id="payment" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Add Payment to Sale</h4>
+            </div>
+            <%= form_tag('/invoices/add_payment_line_item', method: :get, remote: true) do %>
+            <div class="modal-body">
+				<div class="form-horizontal">
+		            <div class="form-group">
+		                <%= label_tag :number_id, "Number", class: "col-md-2 control-label" %>
+		                <div class="col-md-10">
+		                	<%= collection_select :payment, :number_id, @customer.numbers.all, :id, :number, {prompt: "Select a Number"}, {class: "form-control"} %>
+		                </div>
+		            </div>
+		            <div class="form-group">
+		                <%= label :carrier_id, "Carrier", class: "col-md-2 control-label" %>
+		                <div class="col-md-10">
+		                	<%= collection_select :payment, :carrier_id, Carrier.all, :id, :name, {prompt: "Select a Number"}, {class: "form-control"} %>
+		                </div>
+		            </div>
+		            <div class="form-group">
+		                <%= label :payment_type_id, "Payment Type", class: "col-md-2 control-label" %>
+		                <div class="col-md-10">
+							<%= collection_select :payment, :payment_type_id, PaymentType.all, :id, :name, {prompt: "Select Payment Type"}, {class: "form-control"} %>
+		                </div>
+		            </div>
+		            <div class="form-group">
+		                <%= label :amount, "Payment Amount", class: "col-md-2 control-label" %>
+		                <div class="col-md-10">
+							<%= text_field_tag :amount, "", {class: "form-control"} %>
+		                </div>
+		            </div>
+	        	</div>
+            </div>
+            <div class="modal-footer">
+            	<%= submit_tag "Add Payment", {class: "btn btn-success green"} %>
+            </div>
+            <% end %>
         </div>
         <!-- /.modal-content -->
     </div>

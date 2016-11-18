@@ -97,6 +97,20 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def add_payment_line_item
+    @carrier = Carrier.find(params[:payment][:carrier_id])
+    @payment_type = PaymentType.find(params[:payment][:payment_type_id])
+    @number = Number.find(params[:payment][:number_id])
+    @customer = @number.customer
+    @amount = params[:amount]
+
+    authorize Invoice
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_invoice
@@ -105,6 +119,6 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:customer_id, :user_id, :store_id, :total, :sales_tax, :subtotal, line_items_attributes: [ :invoice_id, :sellable_id, :simple_item_id, :serialized_item_id, :quantity, :tax_amount, :item_price, :sold_price ])
+      params.require(:invoice).permit(:customer_id, :user_id, :store_id, :total, :sales_tax, :subtotal, line_items_attributes: [ :invoice_id, :sellable_id, :simple_item_id, :serialized_item_id, :quantity, :tax_amount, :item_price, :sold_price ], payments_attributes: [:carrier_id, :number_id, :payment_type_id, :amount, :customer_id, :invoice_id, :user_id, :store_id])
     end
 end

@@ -7,13 +7,17 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create(first_name: "Vinnie", email: "vinniecell@hotmail.com", password: "password")
-User.create(first_name: "david", email: "jinetix@gmail.com", password: "password")
+User.create(first_name: "David", email: "a@a.com", password: "pass")
 
 Store.create(name: "Vinnie Cellular", alias: "Default Store")
+Store.create(name: "Vinnie Cellular", alias: "Second Store")
 
 Carrier.create(name: "T-Mobile")
 Carrier.create(name: "MetroPCS")
 
 Category.create(name: "Mobile Phone", description: "Mobile Phone")
+
+PaymentType.create(name: "New Activation")
+PaymentType.create(name: "Monthly Payment")
 
 Setting.sales_tax = 0.09
