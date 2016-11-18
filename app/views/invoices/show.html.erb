@@ -1,24 +1,68 @@
-<p id="notice"><%= notice %></p>
+<h3 class="page-title"> Customer: <%= @invoice.customer.first_name.titleize %>
+  <br /><small>sale made by: <%= @invoice.user.first_name %> at <%= @invoice.store.alias %></small>
+</h3>
 
-<p>
-  <strong>Customer:</strong>
-  <%= @invoice.customer %>
-</p>
+<div class="table-scrollable">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th> SKU </th>
+                <th> Description </th>
+                <th> Quantity </th>
+                <th> Price </th>
+                <th> Tax </th>
+                <th> Total </th>
+            </tr>
+        </thead>
+        <tbody>
+        	<% @invoice.line_items.each do |li| %>
+            <tr>
+                <td> <%= li.sellable.sku %> </td>
+                <td> <%= li.sellable.description %>
+                	<% if li.serialized_item %>
+                	<br /><small><b>Serial Number:</b> <%= li.serialized_item.serial_number %></small>
+                	<% end %>
+                </td>
+                <td> <%= li.quantity %> </td>
+                <td> <%= number_to_currency(li.item_price) %> </td>
+                <td> <%= number_to_currency(li.tax_amount) %> </td>
+                <td> <%= number_to_currency(li.sold_price) %> </td>
+            </tr>
+            <% end %>
+            <% @invoice.payments.each do |pm| %>
+            <tr>
+                <td> PAYMENT </td>
+                <td> <%= pm.payment_type.name %>
+                	<br /><small><b>Phone Number:</b> <%= number_to_phone(pm.number.number, area_code: true) %></small>
+                </td>
+                <td> 1 </td>
+                <td> <%= number_to_currency(pm.amount) %> </td>
+                <td> N/A </td>
+                <td> <%= number_to_currency(pm.amount) %> </td>
+            </tr>				
+            <% end %>
+        </tbody>
+    </table>
+</div>
 
-<p>
-  <strong>User:</strong>
-  <%= @invoice.user %>
-</p>
-
-<p>
-  <strong>Store:</strong>
-  <%= @invoice.store %>
-</p>
-
-<p>
-  <strong>Total:</strong>
-  <%= @invoice.total %>
-</p>
+<div class="row">
+	<div class="col-md-4 col-md-offset-8">
+		<table class="table table-condensed table-bordered table-hover">
+			<tr>
+				<td>Sub Total:</td>
+				<td><%= number_to_currency(@invoice.subtotal) %></td>
+			</tr>
+			<tr>
+				<td>Sales Tax:</td>
+				<td><%= number_to_currency(@invoice.sales_tax) %></td>
+			</tr>
+			<tr>
+				<td>Total:</td>
+				<td><%= number_to_currency(@invoice.total) %></td>
+			</tr>
+		</table>
+	</div>
+</div>
 
 <%= link_to 'Edit', edit_invoice_path(@invoice) %> |
 <%= link_to 'Back', invoices_path %>

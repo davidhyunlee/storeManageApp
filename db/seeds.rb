@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create(first_name: "Vinnie", email: "vinniecell@hotmail.com", password: "password")
-User.create(first_name: "David", email: "a@a.com", password: "pass")
+User.create(first_name: "Vinnie", email: "vinniecell@hotmail.com", password: "password", role: 3)
+User.create(first_name: "David", email: "a@a.com", password: "pass", role: 3)
 
 Store.create(name: "Vinnie Cellular", alias: "Default Store")
 Store.create(name: "Vinnie Cellular", alias: "Second Store")

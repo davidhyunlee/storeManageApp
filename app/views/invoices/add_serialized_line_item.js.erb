@@ -8,14 +8,20 @@
 		$(".add-area").empty();
 
 		var subtotal = parseFloat($("#subtotal").text()) + <%= @serialized_line_item.sellable.retail_price %>
-		var salestax = parseFloat($("#salestax").text()) + (<%= @serialized_line_item.sellable.retail_price %> * <%= Setting.sales_tax %>)
+		<% if @serialized_line_item.sellable.taxable %>
+		var salestax = parseFloat($("#salestax").text()) + (<%= @serialized_line_item.sellable.taxable_price %> * <%= Setting.sales_tax %>)
+		<% end %>
 		var total = parseFloat($("#total").text()) + <%= @serialized_line_item.sellable.retail_price %> + (<%= @serialized_line_item.sellable.retail_price %> * <%= Setting.sales_tax %>)
 		
 		$("#subtotal").text(subtotal.toFixed(2))
+		<% if @serialized_line_item.sellable.taxable %>
 		$("#salestax").text(salestax.toFixed(2))
+		<% end %>
 		$("#total").text(total.toFixed(2))
 		$("#hidden_subtotal").attr("value", $("#subtotal").text())
+		<% if @serialized_line_item.sellable.taxable %>
 		$("#hidden_salestax").attr("value", $("#salestax").text())
+		<% end %>
 		$("#hidden_total").attr("value", $("#total").text())
 <% elsif @serialized_line_item.locked %>
 	alert("The serial number you entered is now locked. Reason: Has already been scanned or sold.");

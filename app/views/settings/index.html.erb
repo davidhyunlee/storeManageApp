@@ -1,0 +1,18 @@
+<h3 class="page-title"> General Settings
+  <small>global site settings</small>
+</h3>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Setting</th>
+    <th>Value</th>
+    <th>Actions</th>
+  </tr>
+  <% @settings.each do |s| %>
+  <tr>
+    <td><%= s[0] %></td>
+    <td><%= s[1] %></td>
+    <td><%= link_to 'Edit', edit_setting_path(s[0]), class: "btn green" %></td>
+  </tr>
+  <% end %>
+</table>

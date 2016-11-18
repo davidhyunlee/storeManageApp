@@ -3,8 +3,8 @@
     <td> <%= @simple_item.sellable.description %></td>
     <td> <%= @quantity %> </td>
     <td> <%= number_to_currency(@simple_item.sellable.retail_price * @quantity.to_i) %> </td>
-    <td> <%= number_to_currency((@simple_item.sellable.retail_price * @quantity.to_i) * Setting.sales_tax) %> </td>
-    <td> <%= number_to_currency((@simple_item.sellable.retail_price * @quantity.to_i) + ((@simple_item.sellable.retail_price * @quantity.to_i) * Setting.sales_tax)) %> </td>
+    <td> <%= number_to_currency((@simple_item.sellable.taxable_price * @quantity.to_i) * Setting.sales_tax) if @simple_item.sellable.taxable %> </td>
+    <td> <%= number_to_currency((@simple_item.sellable.retail_price * @quantity.to_i) + ((@simple_item.sellable.retail_price * @quantity.to_i) * Setting.sales_tax)) if @simple_item.sellable.taxable %> <%= number_to_currency(@simple_item.sellable.retail_price * @quantity.to_i) unless @simple_item.sellable.taxable %></td>
 </tr>
 
 <% child_index = Time.now.to_i %>
