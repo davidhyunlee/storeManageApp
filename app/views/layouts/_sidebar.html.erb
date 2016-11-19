@@ -225,10 +225,8 @@
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li class="nav-item  ">
-                                    <a href="#" class="nav-link ">
-                                        <span class="title">Daily Sales Report</span>
-                                    </a>
+                                <li class="nav-item">
+                                    <%= link_to "Daily Sales Report", reports_sales_path, class: "nav-link", data: { no_turbolink: true } %>
                                 </li>
                             </ul>
                         </li>

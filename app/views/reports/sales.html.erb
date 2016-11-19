@@ -2,6 +2,11 @@
   <small>for <%= @selected_date %></small>
 </h3>
 
+<%= form_tag '/reports/sales', method: :get do %>
+	<%= date_field_tag :date %>
+	<%= submit_tag "Get Report", class: "btn btn-sm green" %>
+<% end %>
+
 <div class="portlet box bordered light">
     <table class="table table-condensed table-hover">
         <thead>

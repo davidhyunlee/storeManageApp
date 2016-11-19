@@ -11,8 +11,24 @@ class User < ApplicationRecord
 		self.role ||= :employee
 	end
 
-	def is_manager?
-		if self.role == :superuser || self.role == :manager
+	def manager_accessible
+		if self.superuser? || self.manager?
+			return true
+		else
+			return false
+		end
+	end
+
+	def lead_accessible
+		if self.superuser? || self.manager? || self.lead?
+			return true
+		else
+			return false
+		end
+	end
+
+	def employee_accessible
+		if self.superuser? || self.manager? || self.lead? || self.employee?
 			return true
 		else
 			return false
