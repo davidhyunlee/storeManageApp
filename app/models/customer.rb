@@ -18,6 +18,22 @@ class Customer < ApplicationRecord
   	now.year - self.dob.year - ((now.month > self.dob.month || (now.month == self.dob.month && now.day >= self.dob.day)) ? 0 : 1) if self.dob
 	end
 
+	def full_name
+		fullname = ""
+		fullname << self.first_name.titleize if self.first_name
+		fullname << " #{self.middle_name.titleize}" if self.middle_name
+		fullname << " #{self.last_name.titleize}" if self.last_name
+		return fullname
+	end
+
+	def full_name_lmf
+		fullname = ""
+		fullname << "#{self.last_name.titleize}," if self.last_name
+		fullname << " #{self.first_name.titleize}" if self.first_name
+		fullname << " #{self.middle_name.titleize}" if self.middle_name
+		return fullname
+	end
+
 	def downcase_name
 		self.first_name.downcase!
 		self.middle_name.downcase!

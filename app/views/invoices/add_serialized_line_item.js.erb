@@ -9,9 +9,9 @@
 
 		var subtotal = parseFloat($("#subtotal").text()) + <%= @serialized_line_item.sellable.retail_price %>
 		<% if @serialized_line_item.sellable.taxable %>
-		var salestax = parseFloat($("#salestax").text()) + (<%= @serialized_line_item.sellable.taxable_price %> * <%= Setting.sales_tax %>)
+		var salestax = parseFloat($("#salestax").text()) + (<%= @serialized_line_item.sellable.taxable_price %> * <%= Setting.sales_tax.to_f %>)
 		<% end %>
-		var total = parseFloat($("#total").text()) + <%= @serialized_line_item.sellable.retail_price %> + (<%= @serialized_line_item.sellable.retail_price %> * <%= Setting.sales_tax %>)
+		var total = parseFloat($("#total").text()) + <%= @serialized_line_item.sellable.retail_price %> + (<%= @serialized_line_item.sellable.retail_price %> * <%= Setting.sales_tax.to_f %>)
 		
 		$("#subtotal").text(subtotal.toFixed(2))
 		<% if @serialized_line_item.sellable.taxable %>

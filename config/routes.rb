@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get 'invoices/add_simple_line_item', as: :add_simple_line_item
   get 'invoices/add_payment_line_item', as: :add_payment_line_item
 
+  get 'reports/sales' => 'reports#sales'
+  get 'reports/payments' => 'reports#payments'
+
   resources :payments, :settings
 
   resources :customers do

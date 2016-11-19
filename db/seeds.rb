@@ -21,3 +21,5 @@ PaymentType.create(name: "New Activation")
 PaymentType.create(name: "Monthly Payment")
 
 Setting.sales_tax = 0.09
+Setting.mts_surcharge = 0.18
+Setting.time_zone = "Pacific Time (US & Canada)"
