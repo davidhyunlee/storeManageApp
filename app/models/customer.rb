@@ -35,8 +35,8 @@ class Customer < ApplicationRecord
 	end
 
 	def downcase_name
-		self.first_name.downcase!
-		self.middle_name.downcase!
-		self.last_name.downcase!
+		self.first_name.downcase! if self.first_name
+		self.middle_name.downcase! if self.middle_name
+		self.last_name.downcase! if self.last_name
 	end
 end

@@ -1,11 +1,12 @@
 class SettingPolicy < ApplicationPolicy
 	def index?
-		true
+		@current_user.superuser?
 	end
 
 	def update?
-		true
+		@current_user.superuser?
 	end
+
   class Scope < Scope
     def resolve
       scope

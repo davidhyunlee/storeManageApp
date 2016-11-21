@@ -5,7 +5,7 @@ class CreateLineItems < ActiveRecord::Migration[5.0]
       t.references :sellable, foreign_key: true
       t.references :serialized_item, foreign_key: true
       t.integer :quantity
-      t.decimal :sold_price
+      t.decimal :sold_price, precision: 10, scale: 2
 
       t.timestamps
     end

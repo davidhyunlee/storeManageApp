@@ -1,5 +1,4 @@
 class CustomerPolicy < ApplicationPolicy
-
 	def index?
 		@current_user.employee_accessible
 	end

@@ -3,6 +3,7 @@ class CreatePayments < ActiveRecord::Migration[5.0]
     create_table :payments do |t|
       t.decimal :amount, precision: 10, scale: 2
       t.string :payment_type
+      t.boolean :verified
       t.references :invoice, foreign_key: true
       t.references :store, foreign_key: true
       t.references :customer, foreign_key: true

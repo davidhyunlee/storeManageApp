@@ -2,10 +2,10 @@
 defaults: &defaults
 
 development:
-  <<: *defaults
+  # <<: *defaults
 
 test:
-  <<: *defaults
+  # <<: *defaults
 
 production:
-  <<: *defaults
+  # <<: *defaults

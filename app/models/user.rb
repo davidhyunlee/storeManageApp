@@ -34,4 +34,21 @@ class User < ApplicationRecord
 			return false
 		end
 	end
+
+	def full_name
+		fullname = ""
+		fullname << self.first_name.titleize if self.first_name
+		fullname << " #{self.middle_name.titleize}" if self.middle_name
+		fullname << " #{self.last_name.titleize}" if self.last_name
+		return fullname
+	end
+
+	def full_name_lmf
+		fullname = ""
+		fullname << "#{self.last_name.titleize}," if self.last_name
+		fullname << " #{self.first_name.titleize}" if self.first_name
+		fullname << " #{self.middle_name.titleize}" if self.middle_name
+		return fullname
+	end
+
 end

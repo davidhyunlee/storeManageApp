@@ -51,9 +51,9 @@ ActiveRecord::Schema.define(version: 20161117060930) do
     t.integer  "customer_id"
     t.integer  "user_id"
     t.integer  "store_id"
-    t.decimal  "total"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.decimal  "total",       precision: 10, scale: 2
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.decimal  "sales_tax"
     t.decimal  "subtotal"
     t.index ["customer_id"], name: "index_invoices_on_customer_id", using: :btree
@@ -66,9 +66,9 @@ ActiveRecord::Schema.define(version: 20161117060930) do
     t.integer  "sellable_id"
     t.integer  "serialized_item_id"
     t.integer  "quantity"
-    t.decimal  "sold_price"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.decimal  "sold_price",         precision: 10, scale: 2
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.integer  "simple_item_id"
     t.decimal  "item_price"
     t.decimal  "tax_amount"
@@ -94,12 +94,17 @@ ActiveRecord::Schema.define(version: 20161117060930) do
 
   create_table "payment_types", force: :cascade do |t|
     t.string   "name"
+    t.boolean  "fee"
+    t.decimal  "fee_amount"
+    t.integer  "carrier_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["carrier_id"], name: "index_payment_types_on_carrier_id", using: :btree
   end
 
   create_table "payments", force: :cascade do |t|
     t.decimal  "amount",          precision: 10, scale: 2
+    t.boolean  "verified"
     t.integer  "invoice_id"
     t.integer  "store_id"
     t.integer  "customer_id"
@@ -134,16 +139,20 @@ ActiveRecord::Schema.define(version: 20161117060930) do
   create_table "sellables", force: :cascade do |t|
     t.integer  "category_id"
     t.integer  "carrier_id"
+    t.string   "name"
     t.string   "description"
     t.string   "sku"
-    t.decimal  "msrp"
-    t.decimal  "taxable_price"
-    t.decimal  "retail_price"
+    t.string   "manufacturer"
+    t.string   "model"
+    t.string   "color"
+    t.decimal  "msrp",              precision: 10, scale: 2
+    t.decimal  "taxable_price",     precision: 10, scale: 2
+    t.decimal  "retail_price",      precision: 10, scale: 2
     t.integer  "estimated_on_hand"
     t.boolean  "taxable"
     t.boolean  "serialized"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.index ["carrier_id"], name: "index_sellables_on_carrier_id", using: :btree
     t.index ["category_id"], name: "index_sellables_on_category_id", using: :btree
   end
@@ -218,6 +227,7 @@ ActiveRecord::Schema.define(version: 20161117060930) do
   add_foreign_key "line_items", "simple_items"
   add_foreign_key "numbers", "carriers"
   add_foreign_key "numbers", "customers"
+  add_foreign_key "payment_types", "carriers"
   add_foreign_key "payments", "carriers"
   add_foreign_key "payments", "customers"
   add_foreign_key "payments", "invoices"
