@@ -11,6 +11,7 @@ class LineItem < ApplicationRecord
 		item = SimpleItem.find(self.simple_item.id) if self.simple_item
 		item.quantity -= self.quantity
 		if item.save
+			item.lock if item.class == SerializedItem
 		else
 
 		end

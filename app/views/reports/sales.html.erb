@@ -1,14 +1,32 @@
 <h3 class="page-title"> Daily Sales Report
-  <small>for <%= @selected_date %></small>
+  <small>for</small> <b><%= @selected_date.strftime("%B %e, %Y") %></b>
 </h3>
 
-<%= form_tag '/reports/sales', method: :get do %>
-	<%= date_field_tag :date %>
-	<%= submit_tag "Get Report", class: "btn btn-sm green" %>
-<% end %>
+<div class="form-group">
+  <div class="row">
+    <%= form_tag '/reports/sales', method: :get do %>
+    <div class="col-md-3">
+      <div class="input-group">
+          <%= date_field_tag :date, nil, class: "form-control" %>
+          <span class="input-group-btn">
+              <%= submit_tag "Get Report", class: "btn blue" %>
+          </span>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
 
-<div class="portlet box bordered light">
-    <table class="table table-condensed table-hover">
+<hr>
+
+<div class="portlet light">
+  <div class="portlet-title">
+      <div class="caption">
+          <i class="fa fa-money"></i>Sales
+      </div>
+  </div>
+  <div class="portlet-body">
+    <table class="table table-hover table-bordered">
         <thead>
             <tr>
                 <th> Invoice # </th>
@@ -23,9 +41,9 @@
         <tbody>
           <% @invoices.each do |invoice| %>
             <tr>
-              <td><%= link_to invoice.id, invoice_path(invoice) %></td>
+              <td><%= link_to "#{invoice.id} (view)", invoice_path(invoice) %></td>
               <td><%= link_to invoice.customer.full_name_lmf, customer_path(invoice.customer) %></td>
-              <td><%= invoice.user.first_name %></td>
+              <td><%= link_to invoice.user.first_name, user_path(invoice.user) %></td>
               <td><%= invoice.created_at.in_time_zone(Setting.time_zone).strftime("%D %r") %></td>
               <td><%= number_to_currency(invoice.subtotal) %></td>
               <td><%= number_to_currency(invoice.sales_tax) %></td>
@@ -34,17 +52,33 @@
           <% end %>
         </tbody>
     </table>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-8">
+        <table class="table table-bordered table-hover">
+          <tr>
+            <td><b>Total Sales:</b></td>
+            <td><%= number_to_currency(@total) %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>  
 </div>
 
-Total Sales: <%= number_to_currency(@total) %>
-
-<div class="portlet box bordered light">
-    <table class="table table-condensed table-hover">
+<div class="portlet light">
+  <div class="portlet-title">
+      <div class="caption">
+          <i class="fa fa-money"></i>Payments
+      </div>
+  </div>
+  <div class="portlet-body">
+    <table class="table table-hover table-bordered">
         <thead>
             <tr>
                 <th> Payment Type </th>
                 <th> Customer </th>
                 <th> Number & Carrier </th>
+                <th> Verified? </th>
                 <th> Created By </th>
                 <th> Amount </th>
             </tr>
@@ -52,15 +86,29 @@ Total Sales: <%= number_to_currency(@total) %>
         <tbody>
           <% @payments.each do |payment| %>
             <tr>
-				<td><%= payment.payment_type.name %></td>
-				<td><%= payment.customer.full_name_lmf %></td>
-				<td><%= payment.number.number %> (<%= payment.carrier.name %>)</td>
-				<td><%= payment.user.first_name %></td>
-				<td><%= payment.amount %></td>
+        <td><%= payment.payment_type.name %></td>
+        <td><%= payment.customer.full_name_lmf %></td>
+        <td><%= number_to_phone(payment.number.number, area_code: true) %> (<%= payment.carrier.name %>)</td>
+        <td>
+          <%= "Yes" if payment.verified? %>
+          <%= "No" unless payment.verified? %>
+          <%= link_to "(verify)", dashboard_path unless payment.verified? %>
+        </td>
+        <td><%= payment.user.first_name %></td>
+        <td><%= payment.amount %></td>
             </tr>
           <% end %>
         </tbody>
     </table>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-8">
+        <table class="table table-bordered table-hover">
+          <tr>
+            <td><b>Total Payments:</b></td>
+            <td><%= number_to_currency(@payments_total) %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>  
 </div>
-
-Total Payments: <%= number_to_currency(@payments_total) %>

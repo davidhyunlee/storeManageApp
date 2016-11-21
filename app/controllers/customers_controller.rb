@@ -9,13 +9,13 @@ class CustomersController < ApplicationController
         @numbers = Number.where(number: params[:query])
         @page_title = "Search Results for: #{params[:query]}"
       elsif /^.+@.+$/.match(params[:query]).class == MatchData
-        @customers = Customer.where(email: params[:query])
+        @customers = Customer.where(email: params[:query].downcase)
         @page_title = "Search Results for E-mail: #{params[:query]}"
       elsif params[:query] == ""
         @customers = Customer.all
         @page_title = "Listing All Customers"
       else
-        @customers = Customer.where(first_name: params[:query])
+        @customers = Customer.where(first_name: params[:query].downcase)
         @page_title = "Searching by First Name: #{params[:query]}"
       end
     else

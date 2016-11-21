@@ -1,4 +1,4 @@
-<h3 class="page-title"> Store Inventory
+<h3 class="page-title"> Inventory for <b><%= current_store.alias %></b>
   <small></small>
 </h3>
 
@@ -19,7 +19,7 @@
                 <td> <%= item.sellable.sku %> </td>
                 <td> <%= item.sellable.description %> </td>
                 <td> <%= item.quantity %> </td>
-                <td> <%= item.sellable.retail_price %> </td>
+                <td> <%= number_to_currency(item.sellable.retail_price) %> </td>
             </tr>
           <% end %>
         </tbody>

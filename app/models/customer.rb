@@ -38,5 +38,6 @@ class Customer < ApplicationRecord
 		self.first_name.downcase! if self.first_name
 		self.middle_name.downcase! if self.middle_name
 		self.last_name.downcase! if self.last_name
+		self.email.downcase! if self.email
 	end
 end

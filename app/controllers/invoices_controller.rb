@@ -37,6 +37,10 @@ class InvoicesController < ApplicationController
     @invoice.customer_id = @customer.id
     authorize Invoice
 
+    unless params[:invoice][:line_items_attributes]
+      redirect_to new_customer_invoice_path(@customer), notice: "You tried to create a blank sale invoice." and return
+    end
+
     respond_to do |format|
       if @invoice.save
         format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }

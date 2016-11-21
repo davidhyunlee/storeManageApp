@@ -4,7 +4,7 @@
 	alert("This product has been sold already or is not available.");
 <% elsif !@serialized_line_item.locked %>
 		$(".line_item_area").append("<%= j render partial: 'invoices/add_serialized_line_item' %>");
-		<% @serialized_line_item.lock %>
+		<%# @serialized_line_item.lock %>
 		$(".add-area").empty();
 
 		var subtotal = parseFloat($("#subtotal").text()) + <%= @serialized_line_item.sellable.retail_price %>

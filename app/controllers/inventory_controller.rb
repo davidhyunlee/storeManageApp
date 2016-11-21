@@ -1,8 +1,9 @@
 class InventoryController < ApplicationController
   def index
     @store = current_store
-    @simple_items = SimpleItem.where(store_id: current_store.id)
-    @serialized_items = SerializedItem.where(store_id: current_store.id)
+    # @simple_items = SimpleItem.where(store_id: current_store.id)
+    @simple_items = SimpleItem.where("store_id = ? AND quantity > 0", current_store.id)
+    @serialized_items = SerializedItem.where(store_id: current_store.id, quantity: 1)
     authorize :inventory, :index?
   end
 
@@ -46,8 +47,8 @@ class InventoryController < ApplicationController
   end
 
   def inventory_list
-    @simple_items = SimpleItem.where(store_id: current_store.id)
-    @serialized_items = SerializedItem.where(store_id: current_store.id)
+    @simple_items = SimpleItem.where("store_id = ? AND quantity > 0", current_store.id)
+    @serialized_items = SerializedItem.where(store_id: current_store.id, quantity: 1)
     authorize :inventory, :inventory_list?
 
     respond_to do |format|
