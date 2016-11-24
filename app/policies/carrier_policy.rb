@@ -4,6 +4,14 @@ class CarrierPolicy < ApplicationPolicy
 		@current_user.superuser?
 	end
 
+	def show?
+		@current_user.superuser?
+	end
+
+	def update?
+		@current_user.superuser?
+	end
+
 	def new?
 		@current_user.superuser?
 	end
@@ -13,6 +21,10 @@ class CarrierPolicy < ApplicationPolicy
 	end
 
 	def destroy?
+		@current_user.superuser?
+	end
+
+	def create?
 		@current_user.superuser?
 	end
 

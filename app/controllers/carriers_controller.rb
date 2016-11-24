@@ -45,6 +45,7 @@ class CarriersController < ApplicationController
   # PATCH/PUT /carriers/1
   # PATCH/PUT /carriers/1.json
   def update
+    authorize @carrier
     respond_to do |format|
       if @carrier.update(carrier_params)
         format.html { redirect_to @carrier, notice: 'Carrier was successfully updated.' }
