@@ -23,6 +23,10 @@ class StorePolicy < ApplicationPolicy
 		@current_user.superuser?
 	end
 
+	def show?
+		@current_user.superuser?
+	end
+
   class Scope < Scope
     def resolve
       scope

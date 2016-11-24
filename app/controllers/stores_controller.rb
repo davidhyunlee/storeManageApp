@@ -46,7 +46,7 @@ class StoresController < ApplicationController
   # PATCH/PUT /stores/1.json
   def update
   	authorize @store
-    
+
     respond_to do |format|
       if @store.update(store_params)
         format.html { redirect_to @store, notice: 'Store was successfully updated.' }
@@ -78,6 +78,6 @@ class StoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def store_params
-      params.fetch(:store, {})
+      params.require(:store).permit(:name, :alias)
     end
 end
