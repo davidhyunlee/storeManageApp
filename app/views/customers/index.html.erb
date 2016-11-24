@@ -2,53 +2,69 @@
   <small></small>
 </h3>
 
-<p id="notice"><%= notice %></p>
-
-<div class="portlet box bordered light">
-    <table class="table table-condensed table-hover">
-        <thead>
-            <tr>
-                <th> # </th>
-                <th> First </th>
-                <th> Last </th>
-                <th> Middle </th>
-                <th> Number(s) </th>
-                <th> E-mail </th>
-            </tr>
-        </thead>
-        <tbody>
-        <% if @numbers %>
-            <% @numbers.each do |number| %>
-            <tr>
-                <td> <%= link_to number.customer.id, customer_path(number.customer) %> </td>
-                <td> <%= link_to "#{number.customer.first_name.titleize}", customer_path(number.customer) if number.customer.first_name %> </td>
-                <td> <%= link_to number.customer.last_name.titleize, customer_path(number.customer) if number.customer.last_name%> </td>
-                <td> <%= link_to "#{number.customer.middle_name.titleize}", customer_path(number.customer) if number.customer.middle_name %> </td>
-                <td> 
-                    <% number.customer.numbers.each do |morenumbers| %> 
-                    <%= link_to number_to_phone(morenumbers.number, area_code: true), "", class: "tooltips", data: { container: "body", placement: "right", :"original-title" => "#{number.carrier.name}" } %> <br />
-                    <% end %>
-                </td>
-                <td> <%= mail_to number.customer.email %> </td>
-            </tr>
+<table class="table table-condensed table-bordered table-hover">
+    <thead>
+        <tr>
+            <th> # </th>
+            <th> First </th>
+            <th> Last </th>
+            <th> Middle </th>
+            <th> Number(s) </th>
+            <th> E-mail </th>
+            <% if current_user.superuser? %>
+            <th> Actions </th>
             <% end %>
+        </tr>
+    </thead>
+    <tbody>
+
+    <% if @numbers %>
+        <% @numbers.each do |number| %>
+        <tr>
+            <td> <%= link_to number.customer.id, customer_path(number.customer) %> </td>
+            <td> <%= link_to "#{number.customer.first_name.titleize}", customer_path(number.customer) if number.customer.first_name %> </td>
+            <td> <%= link_to number.customer.last_name.titleize, customer_path(number.customer) if number.customer.last_name%> </td>
+            <td> <%= link_to "#{number.customer.middle_name.titleize}", customer_path(number.customer) if number.customer.middle_name %> </td>
+            <td> 
+                <% number.customer.numbers.each do |morenumbers| %> 
+                <%= link_to number_to_phone(morenumbers.number, area_code: true), "", class: "tooltips", data: { container: "body", placement: "right", :"original-title" => "#{number.carrier.name}" } %> <br />
+                <% end %>
+            </td>
+            <td> <%= mail_to number.customer.email %> </td>
+            <td>
+                <div class="btn-group btn-group-sm btn-group-solid">
+                    <%= link_to 'Show', number.customer, class: "btn green" %>
+                    <%= link_to 'Edit', edit_customer_path(number.customer), class: "btn blue" %>
+                    <%= link_to 'Destroy', number.customer, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn red" %>
+                </div>
+            </td>
+        </tr>
         <% end %>
-        <% if @customers %>
-          <% @customers.each do |customer| %>
-            <tr>
-                <td> <%= link_to customer.id, customer_path(customer) %> </td>
-                <td> <%= link_to "#{customer.first_name.titleize}", customer_path(customer) if customer.first_name %> </td>
-                <td> <%= link_to customer.last_name.titleize, customer_path(customer) if customer.last_name%> </td>
-                <td> <%= link_to "#{customer.middle_name.titleize}", customer_path(customer) if customer.middle_name %> </td>
-                <td> 
-                    <% customer.numbers.each do |number| %> 
-                    <%= link_to number_to_phone(number.number, area_code: true), "", class: "tooltips", data: { container: "body", placement: "right", :"original-title" => "#{number.carrier.name}" } %> <br />
-                    <% end %>
-                </td>
-                <td> <%= mail_to customer.email %> </td>
-            </tr>
-          <% end %>
-        <% end %>
-        </tbody>
-    </table>
-</div>
+    <% end %>
+
+    <% if @customers %>
+      <% @customers.each do |customer| %>
+        <tr>
+            <td> <%= link_to customer.id, customer_path(customer) %> </td>
+            <td> <%= link_to "#{customer.first_name.titleize}", customer_path(customer) if customer.first_name %> </td>
+            <td> <%= link_to customer.last_name.titleize, customer_path(customer) if customer.last_name%> </td>
+            <td> <%= link_to "#{customer.middle_name.titleize}", customer_path(customer) if customer.middle_name %> </td>
+            <td> 
+                <% customer.numbers.each do |number| %> 
+                <%= link_to number_to_phone(number.number, area_code: true), "", class: "tooltips", data: { container: "body", placement: "right", :"original-title" => "#{number.carrier.name}" } %> <%= "(#{number.carrier.name})" %><br />
+                <% end %>
+            </td>
+            <td> <%= mail_to customer.email %> </td>
+            <td>
+                <div class="btn-group btn-group-sm btn-group-solid">
+                    <%= link_to 'Show', customer, class: "btn green" %>
+                    <%= link_to 'Edit', edit_customer_path(customer), class: "btn blue" %>
+                    <%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn red" %>
+                </div>
+            </td>
+        </tr>
+      <% end %>
+    <% end %>
+
+    </tbody>
+</table>

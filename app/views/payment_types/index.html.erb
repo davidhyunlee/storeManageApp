@@ -1,0 +1,33 @@
+<h3 class="page-title"> <b>Payment Types</b>
+</h3>
+
+<table class="table table-hover table-bordered table-striped">
+    <thead>
+        <tr>
+            <th> Name </th>
+            <th> Fee? </th>
+            <th> Fee Amount </th>
+            <th> Carrier </th>
+            <th> Actions </th>
+        </tr>
+    </thead>
+    <tbody>
+      <% @payment_types.each do |pt| %>
+        <tr>
+            <td> <%= pt.name %> </td>
+            <td> <%= "Yes" if pt.fee %> <%= "No" unless pt.fee %> </td>
+            <td> <%= number_to_currency(pt.fee_amount) %> </td>
+            <td> <%= pt.carrier.name if pt.carrier %> </td>
+            <td>
+                <div class="btn-group">
+                    <%#= link_to 'Show', pt %>
+                    <%#= link_to "Edit", edit_user_path(user), class: "btn btn-default" %>
+                    <%# if policy(payment_type).destroy? %>
+                    <%#= link_to 'Delete', user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                    <%# end %>
+                </div>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

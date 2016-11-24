@@ -1,27 +1,3 @@
-<h3 class="page-title"> New Carrier
-  <small></small>
-</h3>
+<h3 class="page-title">New Carrier</h3>
 
-<%= form_for @carrier do |f| %>
-
-	<div class="portlet light bordered">
-      <div class="portlet-title">
-        <div class="caption">
-            <i class="icon-speech"></i>
-            <span class="caption-subject bold uppercase">Carrier Information</span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <%= f.label :name, "Carrier Name" %>
-            <%= f.text_field :name, class: "form-control" %>          
-          </div>
-        </div>
-      </div>
-    </div>
-    <%= f.submit "Create Carrier", class: "btn green-meadow" %>
-
-
-<% end %>
-
+<%= render 'form', carrier: @carrier %>

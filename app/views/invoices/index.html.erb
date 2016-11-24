@@ -2,37 +2,36 @@
   <small></small>
 </h3>
 
-<div class="portlet box bordered light">
-    <table class="table table-condensed table-hover">
-        <thead>
-            <tr>
-                <th> Invoice # </th>
-                <th> Customer </th>
-                <th> Created By </th>
-                <th> Date & Time </th>
-                <th> Total Sale </th>
-                <th> Total Taxes </th>
-                <th> Total w/ Taxes </th>
-                <% if current_user.superuser? %>
-                <th> Actions </th>
-                <% end %>
-            </tr>
-        </thead>
-        <tbody>
-          <% current_store.invoices.each do |invoice| %>
-            <tr>
-              <td><%= link_to invoice.id, invoice_path(invoice) %></td>
-              <td><%= link_to invoice.customer.full_name_lmf, customer_path(invoice.customer) %></td>
-              <td><%= invoice.user.first_name %></td>
-              <td><%= invoice.created_at.in_time_zone(Setting.time_zone).strftime("%D %r") %></td>
-              <td><%= number_to_currency(invoice.subtotal) %></td>
-              <td><%= number_to_currency(invoice.sales_tax) %></td>
-              <td><%= number_to_currency(invoice.total) %></td>
-              <% if current_user.superuser? %>
-              <td><%= link_to 'Show', invoice %> <%= link_to 'Edit', edit_invoice_path(invoice) %> <%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-              <% end %>
-            </tr>
+
+<table class="table table-condensed table-bordered table-hover">
+    <thead>
+        <tr>
+            <th> Invoice # </th>
+            <th> Customer </th>
+            <th> Created By </th>
+            <th> Date & Time </th>
+            <th> Total Sale </th>
+            <th> Total Taxes </th>
+            <th> Total w/ Taxes </th>
+            <% if current_user.superuser? %>
+            <th> Actions </th>
+            <% end %>
+        </tr>
+    </thead>
+    <tbody>
+      <% current_store.invoices.each do |invoice| %>
+        <tr>
+          <td><%= link_to invoice.id, invoice_path(invoice) %></td>
+          <td><%= link_to invoice.customer.full_name_lmf, customer_path(invoice.customer) %></td>
+          <td><%= invoice.user.first_name %></td>
+          <td><%= invoice.created_at.in_time_zone(Setting.time_zone).strftime("%D %r") %></td>
+          <td><%= number_to_currency(invoice.subtotal) %></td>
+          <td><%= number_to_currency(invoice.sales_tax) %></td>
+          <td><%= number_to_currency(invoice.total) %></td>
+          <% if current_user.superuser? %>
+          <td><%= link_to 'Show', invoice %> <%= link_to 'Edit', edit_invoice_path(invoice) %> <%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% end %>
-        </tbody>
-    </table>
-</div>
+        </tr>
+      <% end %>
+    </tbody>
+</table>

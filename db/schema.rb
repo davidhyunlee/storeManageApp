@@ -104,15 +104,15 @@ ActiveRecord::Schema.define(version: 20161117060930) do
 
   create_table "payments", force: :cascade do |t|
     t.decimal  "amount",          precision: 10, scale: 2
-    t.boolean  "verified"
+    t.boolean  "verified",                                 default: false
     t.integer  "invoice_id"
     t.integer  "store_id"
     t.integer  "customer_id"
     t.integer  "carrier_id"
     t.integer  "user_id"
     t.integer  "number_id"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
     t.integer  "payment_type_id"
     t.index ["carrier_id"], name: "index_payments_on_carrier_id", using: :btree
     t.index ["customer_id"], name: "index_payments_on_customer_id", using: :btree

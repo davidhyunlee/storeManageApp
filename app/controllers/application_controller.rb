@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include Pundit
+  before_action :require_login
   after_action :verify_authorized
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   protect_from_forgery with: :exception
@@ -18,9 +19,9 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :current_store, :set_store
 
-  # def authenticate
-  #   redirect_to '/login' unless current_user
-  # end
+  def require_login
+    redirect_to '/login' unless current_user
+  end
 
   private
 

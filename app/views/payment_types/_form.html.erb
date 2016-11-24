@@ -1,0 +1,47 @@
+<%= form_for(payment_type) do |f| %>
+  <% if payment_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(payment_type.errors.count, "error") %> prohibited this payment_type from being saved:</h2>
+
+      <ul>
+      <% payment_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+      <%= f.label :fee, "Fee?" %>
+      <div class="mt-checkbox-list">
+          <label class="mt-checkbox mt-checkbox-outline"> (Check for Yes, Unchecked for No)
+              <%= f.check_box :fee, class: "form-control" %>
+              <span></span>
+          </label>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :fee_amount, "Fee Amount" %>
+    <%= f.text_field :fee_amount, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :carrier_id %>
+    <%= f.collection_select :carrier_id, Carrier.all, :id, :name, {prompt: "Select a Carrier"}, {class: "form-control"} %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit "Create Payment Type", class: "btn green" %>
+  </div>
+<% end %>
+
+
+
+
+

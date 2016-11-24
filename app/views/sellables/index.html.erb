@@ -2,33 +2,41 @@
   <small>index of all sellable items.</small>
 </h3>
 
-<p id="notice"><%= notice %></p>
-
-<div class="portlet box bordered light">
-    <table class="table table-condensed table-hover">
-        <thead>
-            <tr>
-                <th> SKU </th>
-                <th> Description </th>
-                <th> Category </th>
-                <th> Carrier </th>
-                <th> MSRP </th>
-                <th> Retail Price </th>
-                <th> Serialized? </th>
-            </tr>
-        </thead>
-        <tbody>
-          <% @sellables.each do |sellable| %>
-            <tr>
-                <td> <%= link_to sellable.sku, sellable_path(sellable) %> </td>
-                <td> <%= link_to sellable.description, sellable_path(sellable) %> </td>
-                <td> <%= link_to sellable.category.name, sellable_path(sellable) if sellable.category %> </td>
-                <td> <%= link_to sellable.carrier.name, sellable_path(sellable) if sellable.carrier %> </td>
-                <td> <%= link_to number_to_currency(sellable.msrp), sellable_path(sellable) %> </td>
-                <td> <%= link_to number_to_currency(sellable.retail_price), sellable_path(sellable) %> </td>
-                <td> <%= "Yes" if sellable.serialized %> <%= "No" unless sellable.serialized %> </td>
-            </tr>
-          <% end %>
-        </tbody>
-    </table>
-</div>
+<table class="table table-condensed table-bordered table-hover">
+    <thead>
+        <tr>
+            <th> SKU </th>
+            <th> Description </th>
+            <th> Category </th>
+            <th> Carrier </th>
+            <th> MSRP </th>
+            <th> Retail Price </th>
+            <th> Serialized? </th>
+            <% if current_user.superuser? %>
+            <th> Actions </th>
+            <% end %>
+        </tr>
+    </thead>
+    <tbody>
+      <% @sellables.each do |sellable| %>
+        <tr>
+            <td> <%= link_to sellable.sku, sellable_path(sellable) %> </td>
+            <td> <%= link_to sellable.description, sellable_path(sellable) %> </td>
+            <td> <%= link_to sellable.category.name, sellable_path(sellable) if sellable.category %> </td>
+            <td> <%= link_to sellable.carrier.name, sellable_path(sellable) if sellable.carrier %> </td>
+            <td> <%= link_to number_to_currency(sellable.msrp), sellable_path(sellable) %> </td>
+            <td> <%= link_to number_to_currency(sellable.retail_price), sellable_path(sellable) %> </td>
+            <td> <%= "Yes" if sellable.serialized %> <%= "No" unless sellable.serialized %> </td>
+            <% if current_user.superuser? %>
+            <td>
+                <div class="btn-group btn-group-sm btn-group-solid">
+                    <%= link_to 'Show', sellable, class: "btn green" %>
+                    <%= link_to 'Edit', edit_sellable_path(sellable), class: "btn blue" %>
+                    <%= link_to 'Destroy', sellable, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn red" %>
+                </div>
+            </td>
+            <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+</table>

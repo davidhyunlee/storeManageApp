@@ -216,6 +216,21 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li class="nav-item  ">
+                                    <%= link_to root_path, class: "nav-link nav-toggle", data: { no_turbolink: true } do %>
+                                        <i class="fa fa-folder"></i>
+                                        <span class="title">Payment Types</span>
+                                        <span class="arrow"></span>
+                                    <% end %>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item">
+                                            <%= link_to "List Payment Types", payment_types_path, class: "nav-link", data: { no_turbolink: true } %>
+                                        </li>
+                                        <li class="nav-item">
+                                            <%= link_to "New Payment Type", new_payment_type_path, class: "nav-link", data: { no_turbolink: true } %>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item  ">
