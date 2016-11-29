@@ -4,7 +4,7 @@ class SellablesController < ApplicationController
   # GET /sellables
   # GET /sellables.json
   def index
-    @sellables = Sellable.all
+    @sellables = Sellable.order(params[:sort]).page(params[:page])
     authorize @sellables
   end
 

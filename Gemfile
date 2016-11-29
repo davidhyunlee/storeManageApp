@@ -30,6 +30,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'pundit'
 gem 'aasm'
 gem "rails-settings-cached"
+gem 'kaminari'
 
 
 # Use Capistrano for deployment

@@ -6,20 +6,20 @@ class CustomersController < ApplicationController
   def index
     if params[:query]
       if params[:query].length == 10 && params[:query].to_i != 0
-        @numbers = Number.where(number: params[:query])
+        @numbers = Number.where(number: params[:query]).page(params[:page])
         @page_title = "Search Results for: #{params[:query]}"
       elsif /^.+@.+$/.match(params[:query]).class == MatchData
-        @customers = Customer.where(email: params[:query].downcase)
+        @customers = Customer.where(email: params[:query].downcase).page(params[:page])
         @page_title = "Search Results for E-mail: #{params[:query]}"
       elsif params[:query] == ""
-        @customers = Customer.all
+        @customers = Customer.order(:first_name).page(params[:page])
         @page_title = "Listing All Customers"
       else
-        @customers = Customer.where(first_name: params[:query].downcase)
+        @customers = Customer.where(first_name: params[:query].downcase).page(params[:page])
         @page_title = "Searching by First Name: #{params[:query]}"
       end
     else
-      @customers = Customer.all
+      @customers = Customer.order(:first_name).page(params[:page])
       @page_title = "Customer Listing"
     end
 
