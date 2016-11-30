@@ -53,12 +53,14 @@
                                 </li>
                             </ul>
                         </li>
+                        <% if policy(:page).select_store? %>
                         <li class="nav-item">
                             <%= link_to store_select_path, class: "nav-link", data: { no_turbolink: true } do %>
                                 <i class="fa fa-building"></i>
                                 <span class="title">Switch Store</span>
                             <% end %>
                         </li>
+                        <% end %>
                         <li class="heading">
                             <h3 class="uppercase">Modules</h3>
                         </li>
@@ -117,12 +119,14 @@
                                         <%= "<span class='selected'></span>".html_safe if params[:controller] == "inventories" && params[:action] == "new" %>
                                     <% end %>
                                 </li>
+                                <% if policy(:inventory).receive? %>
                                 <li class="nav-item <%= "active open" if params[:controller] == "inventory" && params[:action] == "receive" %>">
                                     <%= link_to inventory_receive_path, class: "nav-link", data: { no_turbolink: true } do %>
                                         <span class="title">Receive Inventory</span>
                                         <%= "<span class='selected'></span>".html_safe if params[:controller] == "sellables" && params[:action] == "new" %>
                                     <% end %>
                                 </li>
+                                <% end %>
                             </ul>
                         </li>
                         <li class="nav-item  ">
@@ -136,6 +140,18 @@
                                     <%= link_to invoices_path, class: "nav-link", data: { no_turbolink: true } do %>
                                         <span class="title">List Invoices</span>
                                     <% end %>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-file-text"></i>
+                                <span class="title">Reports</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item">
+                                    <%= link_to "Daily Sales Report", reports_sales_path, class: "nav-link", data: { no_turbolink: true } %>
                                 </li>
                             </ul>
                         </li>
@@ -230,18 +246,6 @@
                                             <%= link_to "New Payment Type", new_payment_type_path, class: "nav-link", data: { no_turbolink: true } %>
                                         </li>
                                     </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item  ">
-                            <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="fa fa-file-text"></i>
-                                <span class="title">Reports</span>
-                                <span class="arrow"></span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="nav-item">
-                                    <%= link_to "Daily Sales Report", reports_sales_path, class: "nav-link", data: { no_turbolink: true } %>
                                 </li>
                             </ul>
                         </li>

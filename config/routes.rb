@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get 'reports/sales' => 'reports#sales'
   get 'reports/payments' => 'reports#payments'
 
-  resources :payments, :settings, :payment_types
+  resources :payments, :settings, :payment_types, :serialized_items
 
   resources :customers do
     resources :payments, shallow: true

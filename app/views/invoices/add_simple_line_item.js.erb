@@ -9,10 +9,12 @@
 	$(".add-area").empty();
 
 	var subtotal = parseFloat($("#subtotal").text()) + <%= @simple_item.sellable.retail_price * @quantity.to_i %>
+	
 	<% if @simple_item.sellable.taxable %>
 	var salestax = parseFloat($("#salestax").text()) + (<%= @simple_item.sellable.taxable_price * @quantity.to_i %> * <%= Setting.sales_tax.to_f %>)
 	var total = parseFloat($("#total").text()) + <%= @simple_item.sellable.retail_price * @quantity.to_i %> + (<%= @simple_item.sellable.retail_price * @quantity.to_i %> * <%= Setting.sales_tax %>)
 	<% end %>
+	
 	<% unless @simple_item.sellable.taxable %>
 	var total = subtotal
 	<% end %>

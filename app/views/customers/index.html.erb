@@ -32,11 +32,13 @@
             </td>
             <td> <%= mail_to number.customer.email %> </td>
             <td>
+                <% if current_user.superuser? %>
                 <div class="btn-group btn-group-sm btn-group-solid">
                     <%= link_to 'Show', number.customer, class: "btn green" %>
                     <%= link_to 'Edit', edit_customer_path(number.customer), class: "btn blue" %>
                     <%= link_to 'Destroy', number.customer, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn red" %>
                 </div>
+                <% end %>
             </td>
         </tr>
         <% end %>
@@ -55,6 +57,7 @@
                 <% end %>
             </td>
             <td> <%= mail_to customer.email %> </td>
+            <% if current_user.superuser? %>
             <td>
                 <div class="btn-group btn-group-sm btn-group-solid">
                     <%= link_to 'Show', customer, class: "btn green" %>
@@ -62,6 +65,7 @@
                     <%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn red" %>
                 </div>
             </td>
+            <% end %>
         </tr>
       <% end %>
     <% end %>

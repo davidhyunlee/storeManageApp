@@ -1,10 +1,10 @@
 class ReportPolicy < ApplicationPolicy
 	def sales?
-		@current_user.manager_accessible
+		@current_user.employee_accessible
 	end
 
 	def payments?
-		@current_user.manager_accessible
+		@current_user.employee_accessible
 	end
 
   class Scope < Scope

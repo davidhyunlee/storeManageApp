@@ -4,7 +4,7 @@ class PagePolicy < Struct.new(:user, :page)
   end
 
   def select_store?
-  	true if user
+  	user.superuser?
   end
 
   # class Scope < Scope

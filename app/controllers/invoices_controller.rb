@@ -91,7 +91,7 @@ class InvoicesController < ApplicationController
   end
 
   def add_simple_line_item
-    @sellable = Sellable.find_by(sku: params[:sku])
+    # @sellable = Sellable.find_by(sku: params[:sku])
     @simple_item = SimpleItem.find_by(sellable_id: @sellable.id)
     @quantity = params[:quantity]
     authorize Invoice

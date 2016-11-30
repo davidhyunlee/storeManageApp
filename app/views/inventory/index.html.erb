@@ -36,6 +36,9 @@
                 <th> Serial Number </th>
                 <th> Locked? </th>
                 <th> Quantity </th>
+                <% if current_user.superuser? %>
+                <th> Actions </th>
+                <% end %>
             </tr>
         </thead>
         <tbody>
@@ -46,6 +49,15 @@
                 <td> <%= item.serial_number %> </td>
                 <td> <%= "Yes" if item.locked %> <%= "No" unless item.locked %> </td>
                 <td> <%= item.quantity %> </td>
+                <% if current_user.superuser? %>
+                <td>
+                    <div class="btn-group btn-group-sm btn-group-solid">
+                        <%#= link_to 'Show', item, class: "btn green" %>
+                        <%#= link_to 'Edit', item, class: "btn blue" %>
+                        <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn red" %>
+                    </div>                    
+                </td>
+                <% end %>
             </tr>
           <% end %>
         </tbody>
