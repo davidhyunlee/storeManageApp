@@ -104,19 +104,71 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h3>Address</h3>
-                                                <ul class="list-unstyled">
-                                                    <li><%= f.text_field :address, class: "form-control" %></li>
-                                                    <li><%= f.text_field :address_2, class: "form-control" %></li>
-                                                    <li><%= f.text_field :city, class: "form-control" %>, <%= f.text_field :state, class: "form-control" %> <%= f.text_field :zip, class: "form-control" %></li>
-                                                </ul>
+                                            <div class="form-group">
+                                                <%= f.label :address %>
+                                                <%= f.text_field :address, class: "form-control" %>
+                                            </div>
+                                            <div class="form-group">
+                                                <%= f.label :address_2 %>
+                                                <%= f.text_field :address_2, class: "form-control" %>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <%= f.label :city %>
+                                                        <%= f.text_field :city, class: "form-control" %>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <%= f.label :state %>
+                                                        <%= f.text_field :state, class: "form-control" %>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <%= f.label :zip %>
+                                                        <%= f.text_field :zip, class: "form-control" %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h3>E-mail</h3>
+                                                <div class="form-group">
+                                                    <%= f.label :email %>
+                                                    <%= f.text_field :email, class: "form-control" %>
+                                                </div>
                                         </div>
                                         <div class="col-md-6">
                                             <h3>Mobile Numbers</h3>
-                                                <ul class="list-unstyled">
-                                                    <%= f.fields_for :numbers do |number_fields| %>
-                                                    <li><%= number_fields.text_field :number, class: "form-control" %></li>
-                                                    <% end %>
-                                                </ul>                                                
+                                                <%= f.fields_for :numbers do |number_fields| %>
+                                                <div class="row">
+                                                    <div class="col-md-7">
+                                                        <%= f.label :number %>
+                                                        <%= number_fields.text_field :number, class: "form-control" %>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <%= f.label :carrier_id, "Carrier" %>
+                                                        <%= number_fields.collection_select :carrier_id, Carrier.all, :id, :name, {prompt: false}, {class: "form-control"} %>
+                                                    </div>
+                                                </div>
+                                                <% end %>
+
+                                            <h3>Add New Number(s)</h3>
+                                            <div id="mobile_numbers"></div>
+                                            <%= link_to "Add More Numbers", add_number_path, remote: true, cache: false, class: 'add_number_link' %>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h3>PIN</h3>
+                                                    <%= f.label :pin, "PIN" %>
+                                                    <%= f.text_field :pin, class: "form-control" %>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h3>Last 4</h3>
+                                                    <%= f.label :last4, "Last 4 SSN" %>
+                                                    <%= f.text_field :last4, class: "form-control" %>
+                                                </div>
+                                            </div>                                            
                                         </div>
                                     </div>
 
@@ -125,6 +177,7 @@
                                             <%= f.text_area :notes, class: "form-control" %>
                                         </div>
 
+                                    <br />
                                     <%= f.submit "Update Customer", class: "btn green" %>
                                     <% end %>      
                                 </div>

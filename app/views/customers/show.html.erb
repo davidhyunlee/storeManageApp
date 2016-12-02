@@ -115,13 +115,24 @@
                                                     <% @customer.numbers.each do |number| %>
                                                     <li><%= number_to_phone(number.number, area_code: true) %> (<%= number.carrier.name %>)</li>
                                                     <% end %>
-                                                </ul>                                                
+                                                </ul>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h3>PIN</h3>
+                                                    <%= @customer.pin %>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h3>Last 4</h3>
+                                                    <%= @customer.last4 %>
+                                                </div>
+                                            </div>                                             
                                         </div>
                                     </div>
 
                                     <h3>Notes</h3>
                                         <div class="notes">
-                                            <%= @customer.notes %>
+                                            <%= simple_format(@customer.notes) %>
                                         </div>
                                 </div>
                                 <!-- END PERSONAL INFO TAB -->

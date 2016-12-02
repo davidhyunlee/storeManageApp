@@ -61,7 +61,7 @@
                     <div class="page-content">
                     	<%= render "layouts/page_bar" %>
                         <% flash.each do |key, value| %>
-                                <div class="alert alert-<%= key %> fade in" style="margin-top: 20px;">
+                                <div class="alert alert-<%= key %> <%= "alert-success" if key == "notice" %> fade in" style="margin-top: 20px;">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 <%= value %>
                                 </div>
