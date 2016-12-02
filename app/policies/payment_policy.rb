@@ -1,17 +1,30 @@
 class PaymentPolicy < ApplicationPolicy
 	def new?
-		true
+		@current_user.employee_accessible
 	end
 
 	def create?
-		true
+		@current_user.employee_accessible
 	end
 
 	def edit?
+		@current_user.employee_accessible
 	end
 
 	def show?
-		true
+		@current_user.employee_accessible
+	end
+
+	def index?
+		@current_user.employee_accessible
+	end
+
+	def update?
+		@current_user.employee_accessible
+	end
+
+	def destroy?
+		@current_user.employee_accessible
 	end
 
 

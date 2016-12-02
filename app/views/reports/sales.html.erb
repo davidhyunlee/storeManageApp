@@ -95,7 +95,7 @@
           <%= link_to "(verify)", dashboard_path unless payment.verified? %>
         </td>
         <td><%= payment.user.first_name %></td>
-        <td><%= payment.amount %></td>
+        <td><%= number_to_currency(payment.amount) %></td>
             </tr>
           <% end %>
         </tbody>

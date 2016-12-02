@@ -4,7 +4,8 @@ class PaymentsController < ApplicationController
   # GET /payments
   # GET /payments.json
   def index
-    @payments = Payment.all
+    @payments = current_store.payments.order("created_at DESC").page(params[:page])
+    authorize @payments
   end
 
   # GET /payments/1
@@ -31,6 +32,11 @@ class PaymentsController < ApplicationController
     @payment.store_id = current_store.id
     @payment.user_id = current_user.id
     authorize @payment
+
+    # If Payment Type has a fee attached to it, add the fee to the payment amount.
+    if @payment.payment_type.fee
+      @payment.amount += @payment.payment_type.fee_amount
+    end
 
     respond_to do |format|
       if @payment.save
@@ -61,6 +67,7 @@ class PaymentsController < ApplicationController
   # DELETE /payments/1
   # DELETE /payments/1.json
   def destroy
+    authorize @payment
     @payment.destroy
     respond_to do |format|
       format.html { redirect_to payments_url, notice: 'Payment was successfully destroyed.' }

@@ -21,7 +21,7 @@ class Customer < ApplicationRecord
 	def full_name
 		fullname = ""
 		fullname << self.first_name.titleize if self.first_name
-		fullname << " #{self.middle_name.titleize}" if self.middle_name
+		fullname << " #{self.middle_name.titleize}" if self.middle_name != ""
 		fullname << " #{self.last_name.titleize}" if self.last_name
 		return fullname
 	end
@@ -30,7 +30,7 @@ class Customer < ApplicationRecord
 		fullname = ""
 		fullname << "#{self.last_name.titleize}," if self.last_name
 		fullname << " #{self.first_name.titleize}" if self.first_name
-		fullname << " #{self.middle_name.titleize}" if self.middle_name
+		fullname << " #{self.middle_name.titleize}" if self.middle_name != ""
 		return fullname
 	end
 

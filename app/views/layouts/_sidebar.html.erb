@@ -145,6 +145,20 @@
                         </li>
                         <li class="nav-item  ">
                             <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-money"></i>
+                                <span class="title">Payments</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <%= link_to payments_path, class: "nav-link", data: { no_turbolink: true } do %>
+                                        <span class="title">Payments List</span>
+                                    <% end %>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="fa fa-file-text"></i>
                                 <span class="title">Reports</span>
                                 <span class="arrow"></span>
