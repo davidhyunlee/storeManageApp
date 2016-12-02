@@ -1,6 +1,6 @@
 class InventoryPolicy < Struct.new(:user, :inventory)
 	def receive?
-		user.manager_accessible
+		user.employee_accessible
 	end
 
 	def add_serialized_to_queue?

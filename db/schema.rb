@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161117060930) do
+ActiveRecord::Schema.define(version: 20161202111705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,6 +153,8 @@ ActiveRecord::Schema.define(version: 20161117060930) do
     t.boolean  "serialized"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
+    t.decimal  "promo_price",       precision: 10, scale: 2
+    t.decimal  "port_price",        precision: 10, scale: 2
     t.index ["carrier_id"], name: "index_sellables_on_carrier_id", using: :btree
     t.index ["category_id"], name: "index_sellables_on_category_id", using: :btree
   end
