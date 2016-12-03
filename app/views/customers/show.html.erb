@@ -89,10 +89,13 @@
                                     <a href="#tab_1_1" data-toggle="tab">Customer Info</a>
                                 </li>
                                 <li>
-                                    <a href="#tab_1_2" data-toggle="tab">Activation Check</a>
+                                    <a href="#tab_1_2" data-toggle="tab">Payment History</a>
                                 </li>
                                 <li>
-                                    <a href="#tab_1_3" data-toggle="tab">Customer Care</a>
+                                    <a href="#tab_1_3" data-toggle="tab">Invoice History</a>
+                                </li>
+                                <li>
+                                    <a href="#tab_1_4" data-toggle="tab">Customer Care</a>
                                 </li>
                             </ul>
                         </div>
@@ -136,13 +139,60 @@
                                         </div>
                                 </div>
                                 <!-- END PERSONAL INFO TAB -->
-                                <!-- CHANGE AVATAR TAB -->
+                                <!-- PAYMENT HISTORY TAB -->
                                 <div class="tab-pane" id="tab_1_2">
-                                    
+                                    <table class="table table-condensed table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th> Type </th>
+                                                <th> Number </th>
+                                                <th> Amount </th>
+                                                <th> Date </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% @customer.payments.order("created_at DESC").each do |payment| %>
+                                            <tr>
+                                                <td><%= payment.payment_type.name %></td>
+                                                <td><%= number_to_phone(payment.number.number, area_code: true) %></td>
+                                                <td><%= number_to_currency(payment.amount) %></td>
+                                                <td><%= payment.created_at.in_time_zone(Setting.time_zone).strftime("%D %r") %></td>
+                                            </tr>
+                                            <% end %>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <!-- END CHANGE AVATAR TAB -->
-                                <!-- CUSTOMER CARE -->
+                                <!-- END PAYMENT HISTORY TAB -->
+                                <!-- PAYMENT HISTORY TAB -->
                                 <div class="tab-pane" id="tab_1_3">
+                                    <table class="table table-condensed table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th> # </th>
+                                                <th> Created By </th>
+                                                <th> Date </th>
+                                                <th> Subtotal </th>
+                                                <th> Taxes </th>
+                                                <th> Total </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% @customer.invoices.order("created_at DESC").each do |invoice| %>
+                                            <tr>
+                                                <td><%= link_to invoice.id, invoice %></td>
+                                                <td><%= invoice.user.full_name %></td>
+                                                <td><%= invoice.created_at.in_time_zone(Setting.time_zone).strftime("%D %r") %></td>
+                                                <td><%= number_to_currency(invoice.subtotal) %></td>
+                                                <td><%= number_to_currency(invoice.sales_tax) %></td>
+                                                <td><%= number_to_currency(invoice.total) %></td>
+                                            </tr>
+                                            <% end %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END PAYMENT HISTORY TAB -->
+                                <!-- CUSTOMER CARE -->
+                                <div class="tab-pane" id="tab_1_4">
                                     <% @customer.numbers.each do |number| %>
                                     <h3 class="form-section"><%= number_to_phone(number.number, area_code: true) %></h3>
                                         <div class="row">
