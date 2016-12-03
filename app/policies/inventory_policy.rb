@@ -12,7 +12,7 @@ class InventoryPolicy < Struct.new(:user, :inventory)
 	end
 
 	def save?
-		user.manager_accessible
+		user.employee_accessible
 	end
 
 	def search?
