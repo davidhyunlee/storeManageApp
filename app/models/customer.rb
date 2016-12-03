@@ -4,6 +4,7 @@ class Customer < ApplicationRecord
 	has_many :invoices, inverse_of: :customer
 	accepts_nested_attributes_for :numbers, allow_destroy: true, reject_if: :all_blank
 	before_save :downcase_name
+	belongs_to :store
 
 	validates :first_name, :last_name, :presence => true
 

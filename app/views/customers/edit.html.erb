@@ -122,7 +122,7 @@
                                                 <div class="col-md-3">
                                                     <div class="form-group">
                                                         <%= f.label :state %>
-                                                        <%= f.text_field :state, class: "form-control" %>
+                                                        <%= f.select :state, options_for_select(us_states), {prompt: false}, {class: "form-control"} %>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">

@@ -31,6 +31,7 @@ gem 'pundit'
 gem 'aasm'
 gem "rails-settings-cached"
 gem 'kaminari'
+gem 'has_scope'
 
 
 # Use Capistrano for deployment

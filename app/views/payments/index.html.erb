@@ -22,7 +22,7 @@
       <tr>
           <td> <%= payment.payment_type.name %> </td>
           <td> <%= link_to payment.customer.full_name_lmf, customer_path(payment.customer) %> </td>
-          <td> <%= payment.number.number %> (<%= payment.number.carrier.name %>) </td>
+          <td> <%= number_to_phone(payment.number.number, area_code: true) %> (<%= payment.number.carrier.name %>) </td>
           <td> <%= payment.verified? %> </td>
           <td> <%= payment.user.full_name %></td>
           <td> <%= number_to_currency(payment.payment_type.fee_amount) %> </td>

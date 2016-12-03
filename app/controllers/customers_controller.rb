@@ -51,6 +51,7 @@ class CustomersController < ApplicationController
   # POST /customers.json
   def create
     @customer = Customer.new(customer_params)
+    @customer.store_id = current_store.id
     authorize @customer
 
     respond_to do |format|
