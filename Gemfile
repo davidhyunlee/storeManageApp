@@ -32,6 +32,7 @@ gem 'aasm'
 gem "rails-settings-cached"
 gem 'kaminari'
 gem 'has_scope'
+gem 'textacular'
 
 
 # Use Capistrano for deployment
