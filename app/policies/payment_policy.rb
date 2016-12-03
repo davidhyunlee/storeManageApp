@@ -27,6 +27,9 @@ class PaymentPolicy < ApplicationPolicy
 		@current_user.employee_accessible
 	end
 
+	def carrier_and_payment_types?
+		@current_user.employee_accessible
+	end
 
   class Scope < Scope
     def resolve

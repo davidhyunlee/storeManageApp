@@ -1,43 +1,37 @@
-<h3 class="page-title"> Posting a Payment for <%= @customer.first_name if @customer%>
+<h3 class="page-title"> Posting a Payment for <%= @customer.full_name_lmf if @customer%>
   <small></small>
 </h3>
 
 <div class="portlet light bordered">
 	<div class="portlet-body form">
-	    <%= form_for @payment, :html => {class: 'form-horizontal', role: 'form'} do |f| %>
-	    	<%= f.hidden_field :customer_id, value: @customer.id %>
-	        <div class="form-body">
-	            <div class="form-group">
-	                <%= f.label :number_id, "Number", class: "col-md-2 control-label" %>
-	                <div class="col-md-10">
-						<%= f.collection_select :number_id, @customer.numbers.all, :id, :number, {prompt: "Select a Phone Number"}, {class: "form-control"} %>
-	                </div>
-	            </div>
-	            <div class="form-group">
-	                <%= f.label :carrier_id, "Carrier", class: "col-md-2 control-label" %>
-	                <div class="col-md-10">
-						<%= f.collection_select :carrier_id, Carrier.all, :id, :name, {prompt: "Select a Carrier"}, {class: "form-control"} %>
-	                </div>
-	            </div>
-	            <div class="form-group">
-	                <%= f.label :payment_type_id, "Payment Type", class: "col-md-2 control-label" %>
-	                <div class="col-md-10">
-						<%= f.collection_select :payment_type_id, PaymentType.all, :id, :name, {prompt: "Select Payment Type"}, {class: "form-control"} %>
-	                </div>
-	            </div>
-	            <div class="form-group">
-	                <%= f.label :amount, "Payment Amount", class: "col-md-2 control-label" %>
-	                <div class="col-md-10">
-						<%= f.text_field :amount, {class: "form-control"} %>
-	                </div>
-	            </div>
-	        <div class="form-actions">
-	            <div class="row">
-	                <div class="col-md-offset-2 col-md-10">
-	                	<%= f.submit "Post Payment", class: "btn green" %>
-	                </div>
-	            </div>
-	        </div>
-	    <% end %>
+
+	<div class="form-group">
+		<%= label_tag "Number" %>
+		<%= collection_select :number, :id, @customer.numbers.all, :id, :number, {prompt: "Select a Phone Number"}, {class: "form-control number"} %>
+	</div>
+
+    <div class="payment_fields">
+    </div>
+
 	</div>
 </div>
+
+<script>
+$(".number").change(function(){
+
+  var value = {
+  	customer_id: "<%= @customer.id %>",
+  	number_id: $(this).val()
+  }
+  
+  $.ajax({
+    url: "/payments/carrier_and_payment_types",
+    type: 'GET',
+    data: value,
+    success: function(data) {
+      $("#products_list").html(data.products)
+    }
+  })
+
+})	
+</script>

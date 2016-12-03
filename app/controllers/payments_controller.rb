@@ -33,6 +33,10 @@ class PaymentsController < ApplicationController
     @payment.user_id = current_user.id
     authorize @payment
 
+    if params[:payment][:payment_type_id] == ""
+      redirect_to new_customer_payment_path(Customer.find(params[:payment][:customer_id])), notice: "Payment failed. No Payment Type selected." and return
+    end
+
     # If Payment Type has a fee attached to it, add the fee to the payment amount.
     if @payment.payment_type.fee
       @payment.amount += @payment.payment_type.fee_amount
@@ -44,7 +48,7 @@ class PaymentsController < ApplicationController
         format.json { render :show, status: :created, location: @payment }
       else
         format.html { redirect_to new_customer_payment_path(Customer.find(params[:payment][:customer_id]))
-                      flash[:danger] = "Payment was not posted. There was an error." }
+                      flash[:danger] = "Payment was not posted. There was an error. #{@payment.errors.inspect}" }
         format.json { render json: @payment.errors, status: :unprocessable_entity }
       end
     end
@@ -72,6 +76,17 @@ class PaymentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to payments_url, notice: 'Payment was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def carrier_and_payment_types
+    authorize Payment
+    @number = Number.find(params[:number_id])
+    @customer = Customer.find(params[:customer_id])
+    @payment_types = PaymentType.where(carrier_id: @number.carrier.id).or(PaymentType.where(carrier_id: nil))
+
+    respond_to do |format|
+      format.js
     end
   end
 

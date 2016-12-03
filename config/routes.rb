@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get 'reports/sales' => 'reports#sales'
   get 'reports/payments' => 'reports#payments'
 
+  get 'payments/carrier_and_payment_types' => 'payments#carrier_and_payment_types'
+
   resources :payments, :settings, :payment_types, :serialized_items
 
   resources :customers do
