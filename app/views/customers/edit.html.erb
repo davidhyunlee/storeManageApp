@@ -132,6 +132,11 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <h3>Store Origin</h3>
+                                                <div class="form-group">
+                                                    <%= f.label :store_id, "Store Origin" %>
+                                                    <%= f.collection_select :store_id, Store.all, :id, :alias, {include_blank: true}, {class: "form-control"} %>
+                                                </div>
                                             <h3>Date of Birth</h3>
                                                 <div class="form-group">
                                                     <%= f.label :dob, "Birthdate" %>
