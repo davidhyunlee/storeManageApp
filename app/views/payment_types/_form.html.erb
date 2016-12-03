@@ -37,7 +37,8 @@
 
 
   <div class="actions">
-    <%= f.submit "Create Payment Type", class: "btn green" %>
+    <%= f.submit "Create Payment Type", class: "btn green" if params[:action] == "new" %>
+    <%= f.submit "Update Payment Type", class: "btn green" if params[:action] == "edit" %>
   </div>
 <% end %>
 

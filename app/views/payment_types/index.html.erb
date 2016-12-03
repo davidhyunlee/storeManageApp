@@ -8,7 +8,9 @@
             <th> Fee? </th>
             <th> Fee Amount </th>
             <th> Carrier </th>
+            <% if current_user.superuser? %>
             <th> Actions </th>
+            <% end %>
         </tr>
     </thead>
     <tbody>
@@ -18,15 +20,16 @@
             <td> <%= "Yes" if pt.fee %> <%= "No" unless pt.fee %> </td>
             <td> <%= number_to_currency(pt.fee_amount) %> </td>
             <td> <%= pt.carrier.name if pt.carrier %> </td>
+            <% if current_user.superuser? %>
             <td>
                 <div class="btn-group">
-                    <%#= link_to 'Show', pt %>
-                    <%#= link_to "Edit", edit_user_path(user), class: "btn btn-default" %>
-                    <%# if policy(payment_type).destroy? %>
-                    <%#= link_to 'Delete', user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-                    <%# end %>
+                    <%= link_to "Edit", edit_payment_type_path(pt), class: "btn btn-default" %>
+                    <% if policy(:payment_type).destroy? %>
+                    <%= link_to 'Delete', payment_type_path(pt), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                    <% end %>
                 </div>
             </td>
+            <% end %>
         </tr>
         <% end %>
     </tbody>

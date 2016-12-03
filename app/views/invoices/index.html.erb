@@ -19,7 +19,7 @@
         </tr>
     </thead>
     <tbody>
-      <% current_store.invoices.each do |invoice| %>
+      <% @invoices.each do |invoice| %>
         <tr>
           <td><%= link_to invoice.id, invoice_path(invoice) %></td>
           <td><%= link_to invoice.customer.full_name_lmf, customer_path(invoice.customer) %></td>

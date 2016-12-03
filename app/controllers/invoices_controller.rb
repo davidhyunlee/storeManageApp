@@ -4,7 +4,7 @@ class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.all
+    @invoices = current_store.invoices.order("created_at DESC").all
     authorize @invoices
   end
 
