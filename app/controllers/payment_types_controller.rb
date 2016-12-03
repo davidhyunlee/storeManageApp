@@ -61,8 +61,13 @@ class PaymentTypesController < ApplicationController
   # DELETE /payment_types/1
   # DELETE /payment_types/1.json
   def destroy
-    @payment_type.destroy
     authorize @payment_type
+    begin
+      @payment_type.destroy
+    rescue ActiveRecord::InvalidForeignKey
+      flash[:warning] = "There are payments that are utilizing this Payment Type. Unless you unassociate those payments with the payment type, you cannot delete this as it will leave payments with an unassociated payment type."
+      redirect_to payment_types_path and return
+    end
 
     respond_to do |format|
       format.html { redirect_to payment_types_url, notice: 'Payment type was successfully destroyed.' }
