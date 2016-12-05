@@ -24,7 +24,7 @@
         <tr>
             <td> <%= link_to number.customer.last_name.titleize, customer_path(number.customer) if number.customer.last_name%> </td>
             <td> <%= link_to "#{number.customer.first_name.titleize}", customer_path(number.customer) if number.customer.first_name %> </td>
-            <td> <%= customer.store.alias if customer.store %> </td>
+            <td> <%= number.customer.store.alias if number.customer.store %> </td>
             <td> 
                 <% number.customer.numbers.each do |morenumbers| %> 
                 <%= link_to number_to_phone(morenumbers.number, area_code: true), "", class: "tooltips", data: { container: "body", placement: "right", :"original-title" => "#{number.carrier.name}" } %> <br />
