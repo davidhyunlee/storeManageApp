@@ -1,0 +1,39 @@
+<h3 class="page-title"> <b>Serialized Item Inventory</b> for <b><%= current_store.alias %></b></h3>
+
+<div class="portlet box bordered light">
+    <table class="table table-condensed table-bordered table-hover">
+        <thead>
+            <tr>
+                <th> SKU </th>
+                <th> Description </th>
+                <th> Serial Number </th>
+                <th> Locked? </th>
+                <th> Quantity </th>
+                <% if current_user.superuser? %>
+                <th> Actions </th>
+                <% end %>
+            </tr>
+        </thead>
+        <tbody>
+          <% @inventory.each do |item| %>
+            <tr>
+                <td> <%= item.sellable.sku %> </td>
+                <td> <%= item.sellable.description %> </td>
+                <td> <%= item.serial_number %> </td>
+                <td> <%= "Yes" if item.locked %> <%= "No" unless item.locked %> </td>
+                <td> <%= item.quantity %> </td>
+                <% if current_user.superuser? %>
+                <td>
+                    <div class="btn-group btn-group-sm btn-group-solid">
+                        <%= link_to 'Edit', edit_serialized_item_path(item), class: "btn blue" %>
+                        <%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn red" %>
+                    </div>                    
+                </td>
+                <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+</div>
+
+<%= paginate @inventory %>

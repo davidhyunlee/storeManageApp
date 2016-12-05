@@ -3,6 +3,23 @@ class SerializedItemsController < ApplicationController
   end
 
   def edit
+    @serialized_item = SerializedItem.find(params[:id])
+    authorize SerializedItem
+  end
+
+  def update
+    @serialized_item = SerializedItem.find(params[:id])
+    authorize @serialized_item
+
+    respond_to do |format|
+      if @serialized_item.update(serialized_item_params)
+        format.html { redirect_to serialized_inventory_path, notice: 'Serialized item was successfully updated.' }
+        format.json { render :show, status: :ok, location: @serialized_item }
+      else
+        format.html { render :edit }
+        format.json { render json: @serialized_item.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def show
@@ -18,4 +35,11 @@ class SerializedItemsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def serialized_item_params
+      params.require(:serialized_item).permit(:store_id, :serial_number, :sellable_id, :locked, :cost)
+    end
 end

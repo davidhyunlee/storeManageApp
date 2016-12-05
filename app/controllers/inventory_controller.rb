@@ -1,11 +1,21 @@
 class InventoryController < ApplicationController
   def index
-    @store = current_store
-    # @simple_items = SimpleItem.where(store_id: current_store.id)
     @simple_items = SimpleItem.where("store_id = ? AND quantity > 0", current_store.id)
     @serialized_items = SerializedItem.where(store_id: current_store.id, quantity: 1).order(:sellable_id).page(params[:page])
 
     authorize :inventory, :index?
+  end
+
+  def simple_inventory
+    @inventory = SimpleItem.where("store_id = ? AND quantity > 0", current_store.id).order(:sellable_id).page(params[:page])
+
+    authorize :inventory, :simple_inventory?
+  end
+
+  def serialized_inventory
+    @inventory = SerializedItem.where(store_id: current_store.id, quantity: 1).order(:sellable_id).page(params[:page])
+
+    authorize :inventory, :serialized_inventory?
   end
 
   def receive

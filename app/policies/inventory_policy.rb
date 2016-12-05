@@ -3,6 +3,14 @@ class InventoryPolicy < Struct.new(:user, :inventory)
 		user.employee_accessible
 	end
 
+	def serialized_inventory?
+		user.employee_accessible
+	end
+
+	def simple_inventory?
+		user.employee_accessible
+	end
+
 	def add_serialized_to_queue?
 		user.employee_accessible
 	end

@@ -92,6 +92,6 @@ class SellablesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sellable_params
-      params.require(:sellable).permit(:category_id, :carrier_id, :description, :sku, :msrp, :taxable_price, :retail_price, :estimated_on_hand, :taxable, :serialized)
+      params.require(:sellable).permit(:category_id, :carrier_id, :description, :sku, :msrp, :taxable_price, :retail_price, :estimated_on_hand, :taxable, :serialized, :port_price, :promo_price)
     end
 end

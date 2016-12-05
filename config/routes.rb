@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'inventory/add_sellable_to_queue', as: :add_sellable_to_queue
   get 'inventory' => 'inventory#index'
   get 'inventory/inventory_list' => 'inventory#inventory_list'
+  get 'inventory/simple_inventory' => 'inventory#simple_inventory', as: :simple_inventory
+  get 'inventory/serialized_inventory' => 'inventory#serialized_inventory', as: :serialized_inventory
 
   get 'sellables/search'
   get 'invoices/add_serialized_line_item', as: :add_serialized_line_item

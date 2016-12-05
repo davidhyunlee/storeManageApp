@@ -109,50 +109,58 @@
                         <li class="nav-item  <%= "active open" if params[:controller] == "inventory" %>">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="fa fa-th"></i>
-                                <span class="title">Inventory</span>
+                                <span class="title">Store Inventory</span>
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li class="nav-item <%= "active open" if params[:controller] == "inventory" && params[:action] == "index" %>">
-                                    <%= link_to inventory_path, class: "nav-link", data: { no_turbolink: true } do %>
-                                        <span class="title">Store Inventory</span>
-                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "inventories" && params[:action] == "new" %>
+                                <li class="nav-item <%= "active open" if params[:controller] == "inventory" && params[:action] == "simple_inventory" %>">
+                                    <%= link_to simple_inventory_path, class: "nav-link", data: { no_turbolink: true } do %>
+                                        <span class="title">Simple Inventory</span>
+                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "inventory" && params[:action] == "simple_inventory" %>
+                                    <% end %>
+                                </li>
+                                <li class="nav-item <%= "active open" if params[:controller] == "inventory" && params[:action] == "serialized_inventory" %>">
+                                    <%= link_to serialized_inventory_path, class: "nav-link", data: { no_turbolink: true } do %>
+                                        <span class="title">Serialized Inventory</span>
+                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "inventory" && params[:action] == "serialized_inventory" %>
                                     <% end %>
                                 </li>
                                 <% if policy(:inventory).receive? %>
                                 <li class="nav-item <%= "active open" if params[:controller] == "inventory" && params[:action] == "receive" %>">
                                     <%= link_to inventory_receive_path, class: "nav-link", data: { no_turbolink: true } do %>
                                         <span class="title">Receive Inventory</span>
-                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "sellables" && params[:action] == "new" %>
+                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "inventory" && params[:action] == "receive" %>
                                     <% end %>
                                 </li>
                                 <% end %>
                             </ul>
                         </li>
-                        <li class="nav-item  ">
+                        <li class="nav-item <%= "active open" if params[:controller] == "invoices" %>">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="fa fa-file"></i>
                                 <span class="title">Invoices</span>
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li class="nav-item  ">
+                                <li class="nav-item <%= "active open" if params[:controller] == "invoices" && params[:action] == "index" %>">
                                     <%= link_to invoices_path, class: "nav-link", data: { no_turbolink: true } do %>
                                         <span class="title">List Invoices</span>
+                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "invoices" && params[:action] == "index" %>
                                     <% end %>
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item  ">
+                        <li class="nav-item <%= "active open" if params[:controller] == "payments" %>">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="fa fa-money"></i>
                                 <span class="title">Payments</span>
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li class="nav-item  ">
+                                <li class="nav-item <%= "active open" if params[:controller] == "payments" && params[:action] == "index" %>">
                                     <%= link_to payments_path, class: "nav-link", data: { no_turbolink: true } do %>
                                         <span class="title">Payments List</span>
+                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "payments" && params[:action] == "index" %>
                                     <% end %>
                                 </li>
                             </ul>

@@ -1,0 +1,26 @@
+<h3 class="page-title"><b>Simple Item Inventory</b> for <b><%= current_store.alias %></b></h3>
+
+<div class="portlet box bordered light">
+    <table class="table table-condensed table-bordered table-hover">
+        <thead>
+            <tr>
+                <th> SKU </th>
+                <th> Description </th>
+                <th> Quantity </th>
+                <th> Price </th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @inventory.each do |item| %>
+            <tr>
+                <td> <%= item.sellable.sku %> </td>
+                <td> <%= item.sellable.description %> </td>
+                <td> <%= item.quantity %> </td>
+                <td> <%= number_to_currency(item.sellable.retail_price) %> </td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+</div>
+
+<%= paginate @inventory %>

@@ -101,6 +101,22 @@
                                             <%= f.text_field :retail_price, class: "form-control" %>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <%= f.label :promo_price, "Promo Price:", class: "col-md-2 control-label" do %>
+                                            Promo Price: <span class="required"> * </span>
+                                        <% end %>
+                                        <div class="col-md-10">
+                                            <%= f.text_field :promo_price, class: "form-control" %>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <%= f.label :port_price, "Port-in Price:", class: "col-md-2 control-label" do %>
+                                            Port-In Price: <span class="required"> * </span>
+                                        <% end %>
+                                        <div class="col-md-10">
+                                            <%= f.text_field :port_price, class: "form-control" %>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
