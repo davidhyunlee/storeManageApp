@@ -1,8 +1,4 @@
-<h1 class="page-title"> Receive Inventory
-    <small><%= "for #{current_store.alias}" %></small>
-</h1>
-
-<%= flash[:warning] %>
+<h1 class="page-title"> <b>Receive Inventory</b> for <b><%= current_store.alias %></b></h1>
 
 <div class="portlet light bordered">
     <div>
@@ -18,19 +14,21 @@
 				<% end %>
 			</div>
 			<div class="col-md-6">
+				<%= form_tag('/sellables/get_list', method: :get, remote: true) do %>
 				<div class="input-group">
-	                <span class="input-group-btn">
-	                    <button class="btn red" type="button" data-toggle="modal" href="#draggable">
-	                    	<i class="fa fa-list"></i>
-	                    </button>
-	                </span>
-	                <input type="text" class="form-control" placeholder="Search...">
-	                <span class="input-group-btn">
-	                    <button class="btn blue" type="button">
-	                    	<i class="fa fa-search"></i>
-	                    </button>
-	                </span>
-	            </div>
+            <span class="input-group-btn">
+                <button class="btn red listing" type="button" data-toggle="modal" href="#draggable">
+                	<i class="fa fa-list"></i>
+                </button>
+            </span>
+            <input type="text" name="query" class="form-control list-input" placeholder="Search products..">
+            <span class="input-group-btn">
+                <button class="btn blue" type="submit">
+                	<i class="fa fa-search"></i>
+                </button>
+            </span>
+        </div>
+        <% end %>
 			</div>
 		</div>
     </div>
@@ -39,25 +37,55 @@
     </div>
 </div>
 
-
 <% queue_index = 1 %>
 
-        <%= form_tag('/inventory/save', method: :post) do %>
-            <div class="table-scrollable">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th> SKU </th>
-                            <th> Description </th>
-                            <th> Quantity </th>
-                            <th> Cost </th>
-                        </tr>
-                    </thead>
-                    <tbody class="queue-area">
+<%= form_tag('/inventory/save', method: :post) do %>
+    <div class="table-scrollable">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th> SKU </th>
+                    <th> Description </th>
+                    <th> Quantity </th>
+                    <th> Cost </th>
+                </tr>
+            </thead>
+            <tbody class="queue-area">
 
-                    </tbody>
-                </table>
+            </tbody>
+        </table>
+    </div>
+    <button type="submit" class="btn green">Receive Inventory</button>
+<% end %>
+
+
+<div class="modal fade draggable-modal bs-modal-lg" id="draggable" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Product List</h4>
             </div>
-            <button type="submit" class="btn green">Receive Inventory</button>
-        <% end %>
+            <div class="modal-body sellable-list">
+            	
 
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script type="text/javascript">
+	$(".listing").on("click", function() {
+		$.ajax({
+	    url: "/sellables/get_list",
+	    type: 'GET',
+	    data: "",
+	  })
+	})
+</script>

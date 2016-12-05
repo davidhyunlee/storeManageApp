@@ -41,9 +41,9 @@
             <th> Description </th>
             <th> Category </th>
             <th> Carrier </th>
-            <th> MSRP </th>
             <th> Retail Price </th>
-            <th> Serialized? </th>
+            <th> Promo Price </th>
+            <th> Port Price </th>
             <% if current_user.superuser? %>
             <th> Actions </th>
             <% end %>
@@ -56,9 +56,9 @@
             <td> <%= link_to sellable.description, sellable_path(sellable) %> </td>
             <td> <%= link_to sellable.category.name, sellable_path(sellable) if sellable.category %> </td>
             <td> <%= link_to sellable.carrier.name, sellable_path(sellable) if sellable.carrier %> </td>
-            <td> <%= link_to number_to_currency(sellable.msrp), sellable_path(sellable) %> </td>
             <td> <%= link_to number_to_currency(sellable.retail_price), sellable_path(sellable) %> </td>
-            <td> <%= "Yes" if sellable.serialized %> <%= "No" unless sellable.serialized %> </td>
+            <td> <%= number_to_currency(sellable.promo_price) %> </td>
+            <td> <%= number_to_currency(sellable.port_price) %> </td>
             <% if current_user.superuser? %>
             <td>
                 <div class="btn-group btn-group-sm btn-group-solid">

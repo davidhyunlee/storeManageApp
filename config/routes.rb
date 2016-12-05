@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'inventory/serialized_inventory' => 'inventory#serialized_inventory', as: :serialized_inventory
 
   get 'sellables/search'
+  get 'sellables/get_list'
   get 'invoices/add_serialized_line_item', as: :add_serialized_line_item
   get 'invoices/add_simple_line_item', as: :add_simple_line_item
   get 'invoices/add_payment_line_item', as: :add_payment_line_item

@@ -84,6 +84,21 @@ class SellablesController < ApplicationController
     end      
   end
 
+  def get_list
+    if params[:query] == ""
+      @sellables = Sellable.all.page(params[:page])
+    elsif params[:query]
+      @sellables = Sellable.basic_search(description: params[:query]).page(params[:page])
+    else
+      @sellables = Sellable.all.page(params[:page])
+    end
+    authorize Sellable
+
+    respond_to do |format|
+      format.js
+    end      
+  end  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sellable

@@ -31,6 +31,10 @@ class SellablePolicy < ApplicationPolicy
 		@current_user.employee_accessible
 	end
 
+	def get_list?
+		@current_user.employee_accessible
+	end
+
   class Scope < Scope
     def resolve
       scope

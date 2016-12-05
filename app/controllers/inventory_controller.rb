@@ -74,6 +74,12 @@ class InventoryController < ApplicationController
     @current_store = current_store
     @created_serialized_items = []
 
+    # Case when users try to receive nothing.
+    unless params[:serialized_items]
+      flash[:success] = "Congratulations, you have received absolutely nothing! :)"
+      render :receive and return
+    end
+
     # Testing for duplicate serial number or blank serial number entry.
     if @serialized_items
       @serialized_items.each do |item|

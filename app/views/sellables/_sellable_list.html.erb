@@ -1,0 +1,33 @@
+<table class="table table-condensed table-bordered table-hover">
+    <thead>
+        <tr>
+            <th> SKU </th>
+            <th> Description </th>
+            <th> Carrier </th>
+        </tr>
+    </thead>
+    <tbody>
+      <% @sellables.each do |sellable| %>
+        <tr>
+            <td><a href="#" class="sellable-sku"><%= sellable.sku %></a></td>
+            <td><%= sellable.description %></td>
+            <td><%= sellable.carrier.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>
+
+<%= paginate @sellables, remote: true %>
+
+<script type="text/javascript">
+    $(".sellable-sku").on("click", function() {
+        $.ajax({
+        url: "/inventory/search",
+        type: 'GET',
+        data: {sku: $(this).text()},
+      })
+
+        $("#draggable").modal("hide");
+
+    })
+</script>
