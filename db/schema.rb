@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161203035839) do
+ActiveRecord::Schema.define(version: 20161206010342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 20161203035839) do
     t.datetime "created_at",                                               null: false
     t.datetime "updated_at",                                               null: false
     t.integer  "payment_type_id"
+    t.boolean  "invoiced",                                 default: false
     t.index ["carrier_id"], name: "index_payments_on_carrier_id", using: :btree
     t.index ["customer_id"], name: "index_payments_on_customer_id", using: :btree
     t.index ["invoice_id"], name: "index_payments_on_invoice_id", using: :btree
@@ -124,6 +125,17 @@ ActiveRecord::Schema.define(version: 20161203035839) do
     t.index ["payment_type_id"], name: "index_payments_on_payment_type_id", using: :btree
     t.index ["store_id"], name: "index_payments_on_store_id", using: :btree
     t.index ["user_id"], name: "index_payments_on_user_id", using: :btree
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.string   "sku"
+    t.string   "name"
+    t.string   "description"
+    t.decimal  "price"
+    t.integer  "carrier_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["carrier_id"], name: "index_plans_on_carrier_id", using: :btree
   end
 
   create_table "received_items", force: :cascade do |t|
@@ -241,6 +253,7 @@ ActiveRecord::Schema.define(version: 20161203035839) do
   add_foreign_key "payments", "payment_types"
   add_foreign_key "payments", "stores"
   add_foreign_key "payments", "users"
+  add_foreign_key "plans", "carriers"
   add_foreign_key "received_items", "sellables"
   add_foreign_key "received_items", "stores"
   add_foreign_key "received_items", "users"

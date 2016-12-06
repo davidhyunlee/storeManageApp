@@ -50,7 +50,7 @@
 	<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][tax_amount]" value="0" />
 <% end %>
 
-<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][item_price]" value="<%= @serialized_line_item.sellable.retail_price %>" />
+<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][item_price]" value="<%= @serialized_line_item.sellable.retail_price if @pricing == "retail" %><%= @serialized_line_item.sellable.promo_price if @pricing == "promo" %><%= @serialized_line_item.sellable.port_price if @pricing == "port" %>" />
 
 
 <% if @serialized_line_item.sellable.taxable? %>

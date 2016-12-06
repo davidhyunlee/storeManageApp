@@ -9,9 +9,21 @@
 
 <% child_index = Time.now.to_i %>
 <input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][quantity]" value="<%= @quantity %>" />
-<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sold_price]" value="<%= (@simple_item.sellable.retail_price * @quantity.to_i) + ((@simple_item.sellable.retail_price * @quantity.to_i) * Setting.sales_tax.to_f) %>" />
+
+<% if @simple_item.sellable.taxable %>
+	<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sold_price]" value="<%= (@simple_item.sellable.retail_price * @quantity.to_i) + ((@simple_item.sellable.taxable_price * @quantity.to_i) * Setting.sales_tax.to_f) %>" />
+<% else %>
+	<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sold_price]" value="<%= (@simple_item.sellable.retail_price * @quantity.to_i) %>" />
+<% end %>
+
 <input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sellable_id]" value="<%= @simple_item.sellable.id %>" />
 <input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][simple_item_id]" value="<%= @simple_item.id %>" />
-<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][tax_amount]" value="<%= (@simple_item.sellable.taxable_price * @quantity.to_i) * Setting.sales_tax.to_f %>" />
+
+<% if @simple_item.sellable.taxable %>
+	<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][tax_amount]" value="<%= (@simple_item.sellable.taxable_price * @quantity.to_i) * Setting.sales_tax.to_f %>" />
+<% else %>
+	<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][tax_amount]" value="0" />
+<% end %>
+
 <input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][item_price]" value="<%= @simple_item.sellable.retail_price * @quantity.to_i %>" />
 
