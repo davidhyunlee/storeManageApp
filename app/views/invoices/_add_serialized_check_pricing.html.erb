@@ -1,0 +1,20 @@
+<p>What type of sale is this?</p>
+
+<button class="btn blue price_check retail_price">New Activation / Upgrade <%= "(#{number_to_currency(@sellable.retail_price)})" if @sellable.retail_price %></button>
+<button class="btn blue price_check promo_price">Promotional <%= "(#{number_to_currency(@sellable.promo_price)})" if @sellable.promo_price %></button>
+<button class="btn blue price_check port_price">Port-In <%= "(#{number_to_currency(@sellable.port_price)})" if @sellable.port_price %></button>
+
+<script>
+
+	$(".retail_price").on("click", function() {
+		$(".add-area").empty().append("<%= j render partial: 'invoices/add_serialized', locals: {pricing: "retail"} %>");
+      });
+	$(".promo_price").on("click", function() {
+		$(".add-area").empty().append("<%= j render partial: 'invoices/add_serialized', locals: {pricing: "promo"} %>");
+      });
+	$(".port_price").on("click", function() {
+		$(".add-area").empty().append("<%= j render partial: 'invoices/add_serialized', locals: {pricing: "port"} %>");
+      });
+
+</script>
+

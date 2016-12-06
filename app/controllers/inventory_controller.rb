@@ -58,8 +58,19 @@ class InventoryController < ApplicationController
   end
 
   def inventory_list
-    @simple_items = SimpleItem.where("store_id = ? AND quantity > 0", current_store.id)
-    @serialized_items = SerializedItem.where(store_id: current_store.id, quantity: 1)
+    if params[:query] == ""
+      @sellables = Sellable.all.page(params[:page])
+      @simple_items = SimpleItem.where("store_id = ? AND quantity > 0", current_store.id).page(params[:page])
+      @serialized_items = SerializedItem.where(store_id: current_store.id, quantity: 1).page(params[:page])
+    elsif params[:query]
+      @sellables = Sellable.basic_search(description: params[:query]).page(params[:page]) if params[:query]
+      @simple_items = SimpleItem.where("store_id = ? AND quantity > 0", current_store.id).page(params[:page])
+      @serialized_items = SerializedItem.where(store_id: current_store.id, quantity: 1).page(params[:page])
+    else
+      @sellables = Sellable.all.page(params[:page])
+      @simple_items = SimpleItem.where("store_id = ? AND quantity > 0", current_store.id).page(params[:page])
+      @serialized_items = SerializedItem.where(store_id: current_store.id, quantity: 1).page(params[:page])    
+    end
     authorize :inventory, :inventory_list?
 
     respond_to do |format|
@@ -75,7 +86,7 @@ class InventoryController < ApplicationController
     @created_serialized_items = []
 
     # Case when users try to receive nothing.
-    unless params[:serialized_items]
+    unless params[:serialized_items] || params[:simple_items]
       flash[:success] = "Congratulations, you have received absolutely nothing! :)"
       render :receive and return
     end

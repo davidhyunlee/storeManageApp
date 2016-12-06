@@ -82,6 +82,7 @@ class InvoicesController < ApplicationController
 
   def add_serialized_line_item
     @serialized_line_item = SerializedItem.find_by(serial_number: params[:serial_number])
+    @pricing = params[:pricing]
     @qty = params[:quantity]
     authorize Invoice
 
@@ -91,8 +92,8 @@ class InvoicesController < ApplicationController
   end
 
   def add_simple_line_item
-    # @sellable = Sellable.find_by(sku: params[:sku])
-    @simple_item = SimpleItem.find_by(sellable_id: @sellable.id)
+    sellable = Sellable.find_by(sku: params[:sku])
+    @simple_item = SimpleItem.find_by(sellable_id: sellable.id)
     @quantity = params[:quantity]
     authorize Invoice
 

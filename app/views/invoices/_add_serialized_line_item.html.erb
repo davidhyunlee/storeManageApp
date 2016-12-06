@@ -2,16 +2,71 @@
     <td> <%= @serialized_line_item.sellable.sku %> </td>
     <td> <%= @serialized_line_item.sellable.description %><br /><small class="li-serial"><b>Serial:</b> <%= @serialized_line_item.serial_number %></small> </td>
     <td> 1 </td>
-    <td> <%= number_to_currency(@serialized_line_item.sellable.retail_price) %> </td>
-    <td> <%= number_to_currency(@serialized_line_item.sellable.retail_price * Setting.sales_tax.to_f) %> </td>
-    <td> <%= number_to_currency(@serialized_line_item.sellable.retail_price + (@serialized_line_item.sellable.retail_price * Setting.sales_tax.to_f)) %> </td>
+    <td>
+    	<% if @pricing == "retail" %>
+    		<%= number_to_currency(@serialized_line_item.sellable.retail_price) %>
+    	<% elsif @pricing == "promo" %>
+    		<%= number_to_currency(@serialized_line_item.sellable.promo_price) %>
+    	<% elsif @pricing == "port" %>
+    		<%= number_to_currency(@serialized_line_item.sellable.port_price) %>
+    	<% end %>
+    </td>
+    <td>
+    	<% if @serialized_line_item.sellable.taxable? %>
+    		<%= number_to_currency(@serialized_line_item.sellable.taxable_price * Setting.sales_tax.to_f) %>
+    	<% else %>
+    		
+    	<% end %>
+    </td>
+    <td>
+    	<% if @serialized_line_item.sellable.taxable? %>
+    		<% if @pricing == "retail" %>
+    			<%= number_to_currency(@serialized_line_item.sellable.retail_price + (@serialized_line_item.sellable.taxable_price * Setting.sales_tax.to_f)) %>
+    		<% elsif @pricing == "promo" %>
+    			<%= number_to_currency(@serialized_line_item.sellable.promo_price + (@serialized_line_item.sellable.taxable_price * Setting.sales_tax.to_f)) %>
+    		<% elsif @pricing == "port" %>
+    			<%= number_to_currency(@serialized_line_item.sellable.port_price + (@serialized_line_item.sellable.taxable_price * Setting.sales_tax.to_f)) %>
+    		<% end %>
+    	<% else %>
+    		<% if @pricing == "retail" %>
+    			<%= number_to_currency(@serialized_line_item.sellable.retail_price) %>
+    		<% elsif @pricing == "promo" %>
+    			<%= number_to_currency(@serialized_line_item.sellable.promo_price) %>
+    		<% elsif @pricing == "port" %>
+    			<%= number_to_currency(@serialized_line_item.sellable.port_price) %>
+    		<% end %>
+    	<% end %>
+    </td>
 </tr>
 
 <% child_index = Time.now.to_i %>
 <input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][quantity]" value="1" />
-<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sold_price]" value="<%= @serialized_line_item.sellable.retail_price + (@serialized_line_item.sellable.retail_price * Setting.sales_tax.to_f) %>" />
 <input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sellable_id]" value="<%= @serialized_line_item.sellable.id %>" />
 <input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][serialized_item_id]" value="<%= @serialized_line_item.id %>" />
-<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][tax_amount]" value="<%= @serialized_line_item.sellable.retail_price * Setting.sales_tax.to_f %>" />
+
+<% if @serialized_line_item.sellable.taxable? %>
+	<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][tax_amount]" value="<%= @serialized_line_item.sellable.taxable_price * Setting.sales_tax.to_f %>" />
+<% else %>
+	<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][tax_amount]" value="0" />
+<% end %>
+
 <input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][item_price]" value="<%= @serialized_line_item.sellable.retail_price %>" />
 
+
+<% if @serialized_line_item.sellable.taxable? %>
+	<% if @pricing == "retail" %>
+		<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sold_price]" value="<%= @serialized_line_item.sellable.retail_price + (@serialized_line_item.sellable.taxable_price * Setting.sales_tax.to_f) %>" />
+	<% elsif @pricing == "promo" %>
+		<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sold_price]" value="<%= @serialized_line_item.sellable.promo_price + (@serialized_line_item.sellable.taxable_price * Setting.sales_tax.to_f) %>" />
+	<% elsif @pricing == "port" %>
+		<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sold_price]" value="<%= @serialized_line_item.sellable.port_price + (@serialized_line_item.sellable.taxable_price * Setting.sales_tax.to_f) %>" />
+	<% end %>
+<% else %>
+	<% if @pricing == "retail" %>
+		<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sold_price]" value="<%= @serialized_line_item.sellable.retail_price %>" />
+	<% elsif @pricing == "promo" %>
+		<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sold_price]" value="<%= @serialized_line_item.sellable.promo_price %>" />
+	<% elsif @pricing == "port" %>
+		<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sold_price]" value="<%= @serialized_line_item.sellable.port_price %>" />
+	<% end %>
+<% end %>

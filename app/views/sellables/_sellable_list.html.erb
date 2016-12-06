@@ -22,7 +22,7 @@
 <script type="text/javascript">
     $(".sellable-sku").on("click", function() {
         $.ajax({
-        url: "/inventory/search",
+        url: "/sellables/search",
         type: 'GET',
         data: {sku: $(this).text()},
       })

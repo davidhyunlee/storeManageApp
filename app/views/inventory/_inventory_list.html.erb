@@ -1,56 +1,81 @@
-<h3>Simple Items</h3>
-<div class="portlet box bordered light">
-    <table class="table table-condensed table-hover">
-        <thead>
-            <tr>
-                <th> SKU </th>
-                <th> Description </th>
-                <th> Quantity </th>
-                <th> Price </th>
-            </tr>
-        </thead>
-        <tbody>
-          <% @simple_items.each do |item| %>
-            <tr>
-                <td class="sku"><a><%= item.sellable.sku %></a></td>
-                <td> <%= item.sellable.description %> </td>
-                <td> <%= item.quantity %> </td>
-                <td> <%= item.sellable.retail_price %> </td>
-            </tr>
-          <% end %>
-        </tbody>
-    </table>
-</div>
+<div class="portlet-body">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#tab_1_1" data-toggle="tab" aria-expanded="true"> Global Product List </a>
+        </li>
+        <li class="">
+            <a href="#tab_1_2" data-toggle="tab" aria-expanded="false"> Simple Items </a>
+        </li>
+        <li class="">
+            <a href="#tab_1_3" data-toggle="tab" aria-expanded="false"> Serialized Items </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active fade in" id="tab_1_1">
+            <table class="table table-condensed table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th> SKU </th>
+                        <th> Description </th>
+                        <th> Carrier </th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <% @sellables.each do |sellable| %>
+                    <tr>
+                        <td><a href="#" class="sellable-sku"><%= sellable.sku %></a></td>
+                        <td><%= sellable.description %></td>
+                        <td><%= sellable.carrier.name %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+            </table>
 
-<h3>Serialized Items</h3>
-<div class="portlet box bordered light">
-    <table class="table table-condensed table-hover">
-        <thead>
-            <tr>
-                <th> SKU </th>
-                <th> Description </th>
-                <th> Serial Number </th>
-                <th> Locked? </th>
-                <th> Quantity </th>
-            </tr>
-        </thead>
-        <tbody>
-          <% @serialized_items.each do |item| %>
-            <tr>
-                <td class="sku"><a><%= item.sellable.sku %></a></td>
-                <td> <%= item.sellable.description %> </td>
-                <td> <%= item.serial_number %> </td>
-                <td> <%= "Yes" if item.locked %> <%= "No" unless item.locked %> </td>
-                <td> <%= item.quantity %> </td>
-            </tr>
-          <% end %>
-        </tbody>
-    </table>
-</div>
+            <%= paginate @sellables, remote: true %>
+        </div>
+        <div class="tab-pane fade" id="tab_1_2">
+            <table class="table table-condensed table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th> SKU </th>
+                        <th> Description </th>
+                        <th> Quantity </th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <% @simple_items.each do |si| %>
+                    <tr>
+                        <td><a href="#" class="sellable-sku"><%= si.sellable.sku %></a></td>
+                        <td><%= si.sellable.description %></td>
+                        <td><%= si.quantity %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+            </table>
 
-<script type="text/javascript">
-	$(".sku").click(function() {
-		$(".sku-search").empty().val( $(this).text() );
-		$("#draggable").modal('hide');
-	})
-</script>
+            <%= paginate @simple_items, remote: true %>
+        </div>
+        <div class="tab-pane fade" id="tab_1_3">
+            <table class="table table-condensed table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th> SKU </th>
+                        <th> Description </th>
+                        <th> Serial Number </th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <% @serialized_items.each do |si| %>
+                    <tr>
+                        <td><a href="#" class="sellable-sku"><%= si.sellable.sku %></a></td>
+                        <td><%= si.sellable.description %></td>
+                        <td><%= si.serial_number %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+            </table>
+
+            <%= paginate @serialized_items, remote: true %>
+        </div>
+    </div>
+</div>

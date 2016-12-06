@@ -4,7 +4,7 @@
     <div>
 		<div class="row">
 			<div class="col-md-6">
-				<%= form_tag('/inventory/search', method: :get, remote: true) do %>
+				<%= form_tag('/sellables/search', method: :get, remote: true) do %>
 					<div class="input-group">
 					    <%= text_field_tag "sku", nil, placeholder: "Enter SKU", class: "form-control sku-search" %>
 					    <span class="input-group-btn">

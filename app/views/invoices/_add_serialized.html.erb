@@ -15,7 +15,12 @@
 	        <td> <%= @sellable.description %> </td>
 	        <td> <%= text_field_tag "serial_number", nil, placeholder: "", class: "form-control", maxlength: 20, size: 20  %> </td>
 	        <td> 1 </td>
-	        <td> <%= number_to_currency(@sellable.retail_price) %> </td>
+	        <td> 
+	        	<%= number_to_currency(@sellable.retail_price) if pricing == "retail" %>
+	        	<%= number_to_currency(@sellable.promo_price) if pricing == "promo" %>
+	        	<%= number_to_currency(@sellable.port_price) if pricing == "port" %>
+	        	<%= hidden_field_tag "pricing", pricing %>
+	        </td>
 	    </tr>
 	</tbody>
 </table>

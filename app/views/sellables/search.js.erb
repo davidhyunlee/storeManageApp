@@ -6,10 +6,10 @@
 	<% end %>
 <% elsif @sellable.serialized? %>
 	$(".sku-search").val("");
-	$(".add-area").empty().append("<%= j render partial: 'invoices/add_serialized' %>");
+	$(".add-area").empty().append("<%= j render partial: 'inventory/add_serialized' %>");
 <% else %>
 	$(".sku-search").val("");
-	$(".add-area").empty().append("<%= j render partial: 'invoices/add_sellable' %>");
+	$(".add-area").empty().append("<%= j render partial: 'inventory/add_sellable' %>");
 <% end %>
 
 
