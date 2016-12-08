@@ -33,6 +33,7 @@ gem "rails-settings-cached"
 gem 'kaminari'
 gem 'has_scope'
 gem 'textacular'
+gem 'ckeditor'
 
 
 # Use Capistrano for deployment

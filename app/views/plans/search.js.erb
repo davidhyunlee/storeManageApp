@@ -1,0 +1,2 @@
+$(".search-results").empty().append("<%= j render partial: 'plans/search' %>");
+$(".ajax-paginate").empty().append("<%= j paginate @plans, remote: true %>");

@@ -1,17 +1,62 @@
-<%= form_for(plan) do |f| %>
-  <% if plan.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(plan.errors.count, "error") %> prohibited this plan from being saved:</h2>
+<% if plan.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(plan.errors.count, "error") %> prohibited this plan from being saved:</h2>
 
-      <ul>
-      <% plan.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
+    <ul>
+    <% plan.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
   </div>
 <% end %>
+
+<div class="portlet form light bordered">
+  <%= form_for plan, :html => {:class => 'form-horizontal form-bordered form-row-stripped'} do |f| %>
+    <div class="form-body">
+        <div class="form-group">
+            <%= f.label :name, "Plan Name", class: "control-label col-md-3" %>
+            <div class="col-md-9">
+                <%= f.text_field :name, placeholder: "Plan Name", class: "form-control" %>
+                <span class="help-block">This is the name that will show up on options and lists.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <%= f.label :description, "Plan Description", class: "control-label col-md-3" %>
+            <div class="col-md-9">
+                <%= f.text_field :description, placeholder: "Optional", class: "form-control" %>
+                <span class="help-block">Optional: Add a description of the plan. This description will show as a tooltip to guide new users.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <%= f.label :description, "Plan Code", class: "control-label col-md-3" %>
+            <div class="col-md-9">
+                <%= f.text_field :code, placeholder: "Enter a Plan Code / Identifier", class: "form-control" %>
+                <span class="help-block">This plan code will be used during invoicing. Best practice to use the plan code the carrier uses on their official documentation to avoid confusion.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <%= f.label :price, "Price", class: "control-label col-md-3" %>
+            <div class="col-md-9">
+                <%= f.text_field :price, placeholder: "Price of Plan", class: "form-control" %>
+                <span class="help-block">This value will be used during invoicing.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <%= f.label :carrier_id, class: "control-label col-md-3" %>
+            <div class="col-md-9">
+                <%= f.collection_select :carrier_id, Carrier.all, :id, :name, {prompt: "Select a Carrier"}, {class: "form-control"} %>
+                <span class="help-block">Select the carrier this plan is relevant to.</span>
+            </div>
+        </div>
+
+        <div class="form-actions actions">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-9">
+                    <%= f.submit "Submit", class: "btn green" %>
+                    <%= f.submit "Reset", type: "reset", class: "btn default" %>
+                </div>
+            </div>
+        </div>
+    </div>
+  <% end %>
+</div>

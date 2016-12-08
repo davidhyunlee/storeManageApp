@@ -1,278 +1,301 @@
 <!-- BEGIN SIDEBAR -->
-            <div class="page-sidebar-wrapper">
-                <!-- BEGIN SIDEBAR -->
-                <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-                <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-                <div class="page-sidebar navbar-collapse collapse">
-                    <!-- BEGIN SIDEBAR MENU -->
-                    <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
-                    <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
-                    <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
-                    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-                    <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
-                    <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-                    <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
-                        <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
-                        <li class="sidebar-toggler-wrapper hide">
-                            <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-                            <div class="sidebar-toggler"> </div>
-                            <!-- END SIDEBAR TOGGLER BUTTON -->
-                        </li>
-                        <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
-                        <li class="sidebar-search-wrapper">
-                            <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-                            <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
-                            <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
-                            <form class="sidebar-search  sidebar-search-bordered" action="/customers" method="GET">
-                                <a href="javascript:;" class="remove">
-                                    <i class="icon-close"></i>
-                                </a>
-                                <div class="input-group">
-                                    <input type="text" name="query" class="form-control" placeholder="Search...">
-                                    <span class="input-group-btn">
-                                        <a href="javascript:;" class="btn submit">
-                                            <i class="icon-magnifier"></i>
-                                        </a>
-                                    </span>
-                                </div>
-                            </form>
-                            <!-- END RESPONSIVE QUICK SEARCH FORM -->
-                        </li>
-                        <li class="nav-item start ">
-                            <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="icon-home"></i>
-                                <span class="title">Home</span>
-                                <span class="arrow"></span>
+<div class="page-sidebar-wrapper">
+    <!-- BEGIN SIDEBAR -->
+    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+    <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+    <div class="page-sidebar navbar-collapse collapse">
+        <!-- BEGIN SIDEBAR MENU -->
+        <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+        <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+        <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+        <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+        <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+        <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+        <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+            <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+            <li class="sidebar-toggler-wrapper hide">
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                <div class="sidebar-toggler"> </div>
+                <!-- END SIDEBAR TOGGLER BUTTON -->
+            </li>
+            <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+            <li class="sidebar-search-wrapper">
+                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+                <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+                <form class="sidebar-search  sidebar-search-bordered" action="/customers" method="GET">
+                    <a href="javascript:;" class="remove">
+                        <i class="icon-close"></i>
+                    </a>
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <a href="javascript:;" class="btn submit">
+                                <i class="icon-magnifier"></i>
                             </a>
-                            <ul class="sub-menu">
-                                <li class="nav-item start ">
-                                    <%= link_to dashboard_path, class: "nav-link", data: { no_turbolink: true } do %>
-                                        <i class="icon-bar-chart"></i>
-                                        <span class="title">Dashboard</span>
-                                    <% end %>
-                                </li>
-                            </ul>
-                        </li>
-                        <% if policy(:page).select_store? %>
-                        <li class="nav-item">
-                            <%= link_to store_select_path, class: "nav-link", data: { no_turbolink: true } do %>
-                                <i class="fa fa-building"></i>
-                                <span class="title">Switch Store</span>
-                            <% end %>
-                        </li>
+                        </span>
+                    </div>
+                </form>
+                <!-- END RESPONSIVE QUICK SEARCH FORM -->
+            </li>
+            <li class="nav-item start ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Home</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item start ">
+                        <%= link_to dashboard_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <i class="icon-bar-chart"></i>
+                            <span class="title">Dashboard</span>
                         <% end %>
-                        <li class="heading">
-                            <h3 class="uppercase">Modules</h3>
-                        </li>
-                        <li class="nav-item  <%= "active open" if params[:controller] == "customers" %>">
-                            <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="icon-users"></i>
-                                <span class="title">Customers</span>
-                                <%= "<span class='selected'></span>".html_safe if params[:controller] == "customers" %>
-                                <span class="arrow <%= "open" if params[:controller] == "customers" %>"></span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="nav-item <%= "active open" if params[:controller] == "customers" && params[:action] == "index" %>">
-                                    <%= link_to customers_path, class: "nav-link", data: { no_turbolink: true } do %>
-                                        <span class="title">Customer List</span>
-                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "customers" && params[:action] == "index" %>
-                                    <% end %>
-                                </li>
-                                <li class="nav-item <%= "active open" if params[:controller] == "customers" && params[:action] == "new" %>">
-                                    <%= link_to new_customer_path, class: "nav-link", data: { no_turbolink: true } do %>
-                                        <span class="title">Add Customer</span>
-                                    <% end %>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item  <%= "active open" if params[:controller] == "sellables" %>">
-                            <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="fa fa-mobile"></i>
-                                <span class="title">Products</span>
-                                <span class="arrow"></span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="nav-item  ">
-                                    <%= link_to sellables_path, class: "nav-link", data: { no_turbolink: true } do %>
-                                        <span class="title">List Products</span>
-                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "sellables" && params[:action] == "index" %>
-                                    <% end %>
-                                </li>
-                                <li class="nav-item <%= "active open" if params[:controller] == "sellables" && params[:action] == "new" %>">
-                                    <%= link_to new_sellable_path, class: "nav-link", data: { no_turbolink: true } do %>
-                                        <span class="title">New Product</span>
-                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "sellables" && params[:action] == "new" %>
-                                    <% end %>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item  <%= "active open" if params[:controller] == "inventory" %>">
-                            <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="fa fa-th"></i>
-                                <span class="title">Store Inventory</span>
-                                <span class="arrow"></span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="nav-item <%= "active open" if params[:controller] == "inventory" && params[:action] == "simple_inventory" %>">
-                                    <%= link_to simple_inventory_path, class: "nav-link", data: { no_turbolink: true } do %>
-                                        <span class="title">Simple Inventory</span>
-                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "inventory" && params[:action] == "simple_inventory" %>
-                                    <% end %>
-                                </li>
-                                <li class="nav-item <%= "active open" if params[:controller] == "inventory" && params[:action] == "serialized_inventory" %>">
-                                    <%= link_to serialized_inventory_path, class: "nav-link", data: { no_turbolink: true } do %>
-                                        <span class="title">Serialized Inventory</span>
-                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "inventory" && params[:action] == "serialized_inventory" %>
-                                    <% end %>
-                                </li>
-                                <% if policy(:inventory).receive? %>
-                                <li class="nav-item <%= "active open" if params[:controller] == "inventory" && params[:action] == "receive" %>">
-                                    <%= link_to inventory_receive_path, class: "nav-link", data: { no_turbolink: true } do %>
-                                        <span class="title">Receive Inventory</span>
-                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "inventory" && params[:action] == "receive" %>
-                                    <% end %>
-                                </li>
-                                <% end %>
-                            </ul>
-                        </li>
-                        <li class="nav-item <%= "active open" if params[:controller] == "invoices" %>">
-                            <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="fa fa-file"></i>
-                                <span class="title">Invoices</span>
-                                <span class="arrow"></span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="nav-item <%= "active open" if params[:controller] == "invoices" && params[:action] == "index" %>">
-                                    <%= link_to invoices_path, class: "nav-link", data: { no_turbolink: true } do %>
-                                        <span class="title">List Invoices</span>
-                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "invoices" && params[:action] == "index" %>
-                                    <% end %>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item <%= "active open" if params[:controller] == "payments" %>">
-                            <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="fa fa-money"></i>
-                                <span class="title">Payments</span>
-                                <span class="arrow"></span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="nav-item <%= "active open" if params[:controller] == "payments" && params[:action] == "index" %>">
-                                    <%= link_to payments_path, class: "nav-link", data: { no_turbolink: true } do %>
-                                        <span class="title">Payments List</span>
-                                        <%= "<span class='selected'></span>".html_safe if params[:controller] == "payments" && params[:action] == "index" %>
-                                    <% end %>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item  ">
-                            <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="fa fa-file-text"></i>
-                                <span class="title">Reports</span>
-                                <span class="arrow"></span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="nav-item">
-                                    <%= link_to "Daily Sales Report", reports_sales_path, class: "nav-link", data: { no_turbolink: true } %>
-                                </li>
-                            </ul>
-                        </li>
-                        <% if current_user.superuser? %>
-                        <li class="heading">
-                            <h3 class="uppercase">ADMINISTRATOR</h3>
-                        </li>
-                        <li class="nav-item  ">
-                            <a href="javascript:;" class="nav-link nav-toggle">
-                                <i class="fa fa-cogs"></i>
-                                <span class="title">Settings</span>
-                                <span class="arrow"></span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="nav-item  ">
-                                    <%= link_to settings_path, class: "nav-link", data: { no_turbolink: true } do %>
-                                        <i class="fa fa-cog"></i>
-                                        <span class="title">General Settings</span>
-                                    <% end %>
-                                </li>
-                                <li class="nav-item  ">
-                                    <%= link_to root_path, class: "nav-link nav-toggle", data: { no_turbolink: true } do %>
-                                        <i class="fa fa-user"></i>
-                                        <span class="title">Users</span>
-                                        <span class="arrow"></span>
-                                    <% end %>
-                                    <ul class="sub-menu">
-                                        <li class="nav-item">
-                                            <%= link_to "List Users", users_path, class: "nav-link", data: { no_turbolink: true } %>
-                                        </li>
-                                        <li class="nav-item">
-                                            <%= link_to "Create New User", new_user_path, class: "nav-link", data: { no_turbolink: true } %>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item  ">
-                                    <%= link_to root_path, class: "nav-link nav-toggle", data: { no_turbolink: true } do %>
-                                        <i class="fa fa-building"></i>
-                                        <span class="title">Stores</span>
-                                        <span class="arrow"></span>
-                                    <% end %>
-                                    <ul class="sub-menu">
-                                        <li class="nav-item">
-                                            <%= link_to "List Stores", stores_path, class: "nav-link", data: { no_turbolink: true } %>
-                                        </li>
-                                        <li class="nav-item">
-                                            <%= link_to "Create New Store", new_store_path, class: "nav-link", data: { no_turbolink: true } %>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item  ">
-                                    <%= link_to root_path, class: "nav-link nav-toggle", data: { no_turbolink: true } do %>
-                                        <i class="fa fa-signal"></i>
-                                        <span class="title">Carriers</span>
-                                        <span class="arrow"></span>
-                                    <% end %>
-                                    <ul class="sub-menu">
-                                        <li class="nav-item">
-                                            <%= link_to "List Carriers", carriers_path, class: "nav-link", data: { no_turbolink: true } %>
-                                        </li>
-                                        <li class="nav-item">
-                                            <%= link_to "Add New Carrier", new_carrier_path, class: "nav-link", data: { no_turbolink: true } %>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item  ">
-                                    <%= link_to root_path, class: "nav-link nav-toggle", data: { no_turbolink: true } do %>
-                                        <i class="fa fa-folder"></i>
-                                        <span class="title">Categories</span>
-                                        <span class="arrow"></span>
-                                    <% end %>
-                                    <ul class="sub-menu">
-                                        <li class="nav-item">
-                                            <%= link_to "List Categories", categories_path, class: "nav-link", data: { no_turbolink: true } %>
-                                        </li>
-                                        <li class="nav-item">
-                                            <%= link_to "Add New Category", new_category_path, class: "nav-link", data: { no_turbolink: true } %>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item  ">
-                                    <%= link_to root_path, class: "nav-link nav-toggle", data: { no_turbolink: true } do %>
-                                        <i class="fa fa-folder"></i>
-                                        <span class="title">Payment Types</span>
-                                        <span class="arrow"></span>
-                                    <% end %>
-                                    <ul class="sub-menu">
-                                        <li class="nav-item">
-                                            <%= link_to "List Payment Types", payment_types_path, class: "nav-link", data: { no_turbolink: true } %>
-                                        </li>
-                                        <li class="nav-item">
-                                            <%= link_to "New Payment Type", new_payment_type_path, class: "nav-link", data: { no_turbolink: true } %>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
+                    </li>
+                </ul>
+            </li>
+            <% if policy(:page).select_store? %>
+            <li class="nav-item">
+                <%= link_to store_select_path, class: "nav-link", data: { no_turbolink: true } do %>
+                    <i class="fa fa-building"></i>
+                    <span class="title">Switch Store</span>
+                <% end %>
+            </li>
+            <% end %>
+            <li class="heading">
+                <h3 class="uppercase">Modules</h3>
+            </li>
+            <li class="nav-item  <%= "active open" if params[:controller] == "customers" %>">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-users"></i>
+                    <span class="title">Customers</span>
+                    <%= "<span class='selected'></span>".html_safe if params[:controller] == "customers" %>
+                    <span class="arrow <%= "open" if params[:controller] == "customers" %>"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item <%= "active open" if params[:controller] == "customers" && params[:action] == "index" %>">
+                        <%= link_to customers_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <span class="title">Customer List</span>
+                            <%= "<span class='selected'></span>".html_safe if params[:controller] == "customers" && params[:action] == "index" %>
                         <% end %>
-                </div>
-                <!-- END SIDEBAR -->
-            </div>
-            <!-- END SIDEBAR -->
+                    </li>
+                    <li class="nav-item <%= "active open" if params[:controller] == "customers" && params[:action] == "new" %>">
+                        <%= link_to new_customer_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <span class="title">Add Customer</span>
+                        <% end %>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item  <%= "active open" if params[:controller] == "sellables" %>">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-mobile"></i>
+                    <span class="title">Products</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item  ">
+                        <%= link_to sellables_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <span class="title">List Products</span>
+                            <%= "<span class='selected'></span>".html_safe if params[:controller] == "sellables" && params[:action] == "index" %>
+                        <% end %>
+                    </li>
+                    <li class="nav-item <%= "active open" if params[:controller] == "sellables" && params[:action] == "new" %>">
+                        <%= link_to new_sellable_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <span class="title">New Product</span>
+                            <%= "<span class='selected'></span>".html_safe if params[:controller] == "sellables" && params[:action] == "new" %>
+                        <% end %>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item  <%= "active open" if params[:controller] == "inventory" %>">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-th"></i>
+                    <span class="title">Store Inventory</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item <%= "active open" if params[:controller] == "inventory" && params[:action] == "simple_inventory" %>">
+                        <%= link_to simple_inventory_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <span class="title">Simple Inventory</span>
+                            <%= "<span class='selected'></span>".html_safe if params[:controller] == "inventory" && params[:action] == "simple_inventory" %>
+                        <% end %>
+                    </li>
+                    <li class="nav-item <%= "active open" if params[:controller] == "inventory" && params[:action] == "serialized_inventory" %>">
+                        <%= link_to serialized_inventory_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <span class="title">Serialized Inventory</span>
+                            <%= "<span class='selected'></span>".html_safe if params[:controller] == "inventory" && params[:action] == "serialized_inventory" %>
+                        <% end %>
+                    </li>
+                    <% if policy(:inventory).receive? %>
+                    <li class="nav-item <%= "active open" if params[:controller] == "inventory" && params[:action] == "receive" %>">
+                        <%= link_to inventory_receive_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <span class="title">Receive Inventory</span>
+                            <%= "<span class='selected'></span>".html_safe if params[:controller] == "inventory" && params[:action] == "receive" %>
+                        <% end %>
+                    </li>
+                    <% end %>
+                </ul>
+            </li>
+            <li class="nav-item <%= "active open" if params[:controller] == "invoices" %>">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-file"></i>
+                    <span class="title">Invoices</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item <%= "active open" if params[:controller] == "invoices" && params[:action] == "index" %>">
+                        <%= link_to invoices_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <span class="title">List Invoices</span>
+                            <%= "<span class='selected'></span>".html_safe if params[:controller] == "invoices" && params[:action] == "index" %>
+                        <% end %>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item <%= "active open" if params[:controller] == "plans" %>">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-file"></i>
+                    <span class="title">Plans</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item <%= "active open" if params[:controller] == "plans" && params[:action] == "index" %>">
+                        <%= link_to plans_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <span class="title">List Plans</span>
+                            <%= "<span class='selected'></span>".html_safe if params[:controller] == "plans" && params[:action] == "index" %>
+                        <% end %>
+                    </li>
+                    <% if current_user.superuser? %>
+                    <li class="nav-item <%= "active open" if params[:controller] == "plans" && params[:action] == "new" %>">
+                        <%= link_to new_plan_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <span class="title">Create Plan</span>
+                            <%= "<span class='selected'></span>".html_safe if params[:controller] == "plans" && params[:action] == "new" %>
+                        <% end %>
+                    </li>
+                    <% end %>
+                </ul>
+            </li>
+            <li class="nav-item <%= "active open" if params[:controller] == "payments" %>">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-money"></i>
+                    <span class="title">Payments</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item <%= "active open" if params[:controller] == "payments" && params[:action] == "index" %>">
+                        <%= link_to payments_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <span class="title">Payments List</span>
+                            <%= "<span class='selected'></span>".html_safe if params[:controller] == "payments" && params[:action] == "index" %>
+                        <% end %>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-file-text"></i>
+                    <span class="title">Reports</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item">
+                        <%= link_to "Daily Sales Report", reports_sales_path, class: "nav-link", data: { no_turbolink: true } %>
+                    </li>
+                </ul>
+            </li>
+            <% if current_user.superuser? %>
+            <li class="heading">
+                <h3 class="uppercase">ADMINISTRATOR</h3>
+            </li>
+            <li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-cogs"></i>
+                    <span class="title">Settings</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item  ">
+                        <%= link_to settings_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <i class="fa fa-cog"></i>
+                            <span class="title">General Settings</span>
+                        <% end %>
+                    </li>
+                    <li class="nav-item  ">
+                        <%= link_to root_path, class: "nav-link nav-toggle", data: { no_turbolink: true } do %>
+                            <i class="fa fa-user"></i>
+                            <span class="title">Users</span>
+                            <span class="arrow"></span>
+                        <% end %>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <%= link_to "List Users", users_path, class: "nav-link", data: { no_turbolink: true } %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Create New User", new_user_path, class: "nav-link", data: { no_turbolink: true } %>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item  ">
+                        <%= link_to root_path, class: "nav-link nav-toggle", data: { no_turbolink: true } do %>
+                            <i class="fa fa-building"></i>
+                            <span class="title">Stores</span>
+                            <span class="arrow"></span>
+                        <% end %>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <%= link_to "List Stores", stores_path, class: "nav-link", data: { no_turbolink: true } %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Create New Store", new_store_path, class: "nav-link", data: { no_turbolink: true } %>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item  ">
+                        <%= link_to root_path, class: "nav-link nav-toggle", data: { no_turbolink: true } do %>
+                            <i class="fa fa-signal"></i>
+                            <span class="title">Carriers</span>
+                            <span class="arrow"></span>
+                        <% end %>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <%= link_to "List Carriers", carriers_path, class: "nav-link", data: { no_turbolink: true } %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Add New Carrier", new_carrier_path, class: "nav-link", data: { no_turbolink: true } %>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item  ">
+                        <%= link_to root_path, class: "nav-link nav-toggle", data: { no_turbolink: true } do %>
+                            <i class="fa fa-folder"></i>
+                            <span class="title">Categories</span>
+                            <span class="arrow"></span>
+                        <% end %>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <%= link_to "List Categories", categories_path, class: "nav-link", data: { no_turbolink: true } %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "Add New Category", new_category_path, class: "nav-link", data: { no_turbolink: true } %>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item  ">
+                        <%= link_to root_path, class: "nav-link nav-toggle", data: { no_turbolink: true } do %>
+                            <i class="fa fa-folder"></i>
+                            <span class="title">Payment Types</span>
+                            <span class="arrow"></span>
+                        <% end %>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <%= link_to "List Payment Types", payment_types_path, class: "nav-link", data: { no_turbolink: true } %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "New Payment Type", new_payment_type_path, class: "nav-link", data: { no_turbolink: true } %>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <% end %>
+    </div>
+    <!-- END SIDEBAR -->
+</div>
+<!-- END SIDEBAR -->

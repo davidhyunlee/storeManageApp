@@ -19,6 +19,7 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.new
     @customer = Customer.find(params[:customer_id])
     @sellables = Sellable.all
+
     authorize @invoice
   end
 
@@ -124,6 +125,6 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:customer_id, :user_id, :store_id, :total, :sales_tax, :subtotal, line_items_attributes: [ :invoice_id, :sellable_id, :simple_item_id, :serialized_item_id, :quantity, :tax_amount, :item_price, :sold_price ], payments_attributes: [:carrier_id, :number_id, :payment_type_id, :amount, :customer_id, :invoice_id, :user_id, :store_id])
+      params.require(:invoice).permit(:customer_id, :user_id, :store_id, :total, :sales_tax, :subtotal, :note, line_items_attributes: [ :invoice_id, :sellable_id, :simple_item_id, :serialized_item_id, :quantity, :tax_amount, :item_price, :sold_price ], payments_attributes: [:carrier_id, :number_id, :payment_type_id, :amount, :customer_id, :invoice_id, :user_id, :store_id])
     end
 end

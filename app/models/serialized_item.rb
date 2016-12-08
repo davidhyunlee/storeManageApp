@@ -2,6 +2,7 @@ class SerializedItem < ApplicationRecord
   belongs_to :store
   belongs_to :sellable
   belongs_to :user
+  has_many :line_items, inverse_of: :serialized_item
 
   validates :sellable_id, :user_id, :cost, :quantity, :store_id, presence: true
   validates :serial_number, uniqueness: true, presence: true, length: { minimum: 1 }

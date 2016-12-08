@@ -7,6 +7,9 @@
             <th> Description </th>
             <th> Quantity </th>
             <th> Price </th>
+            <% if current_user.superuser? %>
+            <th> Actions </th>
+            <% end %>
         </tr>
     </thead>
     <tbody>
@@ -16,6 +19,9 @@
             <td> <%= item.sellable.description %> </td>
             <td> <%= item.quantity %> </td>
             <td> <%= number_to_currency(item.sellable.retail_price) %> </td>
+            <% if current_user.superuser? %>
+            <td> </td>
+            <% end %>
         </tr>
       <% end %>
     </tbody>

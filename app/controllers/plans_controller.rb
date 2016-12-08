@@ -1,30 +1,40 @@
 class PlansController < ApplicationController
   before_action :set_plan, only: [:show, :edit, :update, :destroy]
 
+  has_scope :code
+  has_scope :carrier
+  has_scope :by_name
+  has_scope :by_price, :using => [:price_from, :price_to], :type => :hash
+
   # GET /plans
   # GET /plans.json
   def index
     @plans = Plan.all
+    authorize @plans
   end
 
   # GET /plans/1
   # GET /plans/1.json
   def show
+    authorize @plan
   end
 
   # GET /plans/new
   def new
     @plan = Plan.new
+    authorize @plan
   end
 
   # GET /plans/1/edit
   def edit
+    authorize @plan
   end
 
   # POST /plans
   # POST /plans.json
   def create
     @plan = Plan.new(plan_params)
+    authorize @plan
 
     respond_to do |format|
       if @plan.save
@@ -40,6 +50,8 @@ class PlansController < ApplicationController
   # PATCH/PUT /plans/1
   # PATCH/PUT /plans/1.json
   def update
+    authorize @plan
+
     respond_to do |format|
       if @plan.update(plan_params)
         format.html { redirect_to @plan, notice: 'Plan was successfully updated.' }
@@ -54,11 +66,21 @@ class PlansController < ApplicationController
   # DELETE /plans/1
   # DELETE /plans/1.json
   def destroy
+    authorize @plan
     @plan.destroy
     respond_to do |format|
       format.html { redirect_to plans_url, notice: 'Plan was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def search
+    @plans = apply_scopes(Plan).all.page(params[:page])
+    authorize Plan
+
+    respond_to do |format|
+      format.js
+    end    
   end
 
   private
@@ -69,6 +91,6 @@ class PlansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plan_params
-      params.fetch(:plan, {})
+      params.require(:plan).permit(:code, :name, :description, :price, :carrier_id)
     end
 end

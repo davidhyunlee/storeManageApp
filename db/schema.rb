@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206012001) do
+ActiveRecord::Schema.define(version: 20161208051722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "carriers", force: :cascade do |t|
     t.string   "name",       null: false
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(version: 20161206012001) do
     t.decimal  "tax_amount"
     t.integer  "plan_id"
     t.integer  "payment_id"
+    t.string   "sale_type"
     t.index ["invoice_id"], name: "index_line_items_on_invoice_id", using: :btree
     t.index ["payment_id"], name: "index_line_items_on_payment_id", using: :btree
     t.index ["plan_id"], name: "index_line_items_on_plan_id", using: :btree
@@ -131,14 +133,32 @@ ActiveRecord::Schema.define(version: 20161206012001) do
     t.index ["user_id"], name: "index_payments_on_user_id", using: :btree
   end
 
-  create_table "plans", force: :cascade do |t|
-    t.string   "sku"
+  create_table "performance_categories", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
-    t.decimal  "price"
-    t.integer  "carrier_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "performance_trackers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "invoice_id"
+    t.integer  "performance_category_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["invoice_id"], name: "index_performance_trackers_on_invoice_id", using: :btree
+    t.index ["performance_category_id"], name: "index_performance_trackers_on_performance_category_id", using: :btree
+    t.index ["user_id"], name: "index_performance_trackers_on_user_id", using: :btree
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.string   "code"
+    t.string   "name"
+    t.string   "description"
+    t.decimal  "price",       precision: 10, scale: 2
+    t.integer  "carrier_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.index ["carrier_id"], name: "index_plans_on_carrier_id", using: :btree
   end
 
@@ -174,6 +194,7 @@ ActiveRecord::Schema.define(version: 20161206012001) do
     t.datetime "updated_at",                                 null: false
     t.decimal  "promo_price",       precision: 10, scale: 2
     t.decimal  "port_price",        precision: 10, scale: 2
+    t.decimal  "upgrade_aal_price", precision: 10, scale: 2
     t.index ["carrier_id"], name: "index_sellables_on_carrier_id", using: :btree
     t.index ["category_id"], name: "index_sellables_on_category_id", using: :btree
   end
@@ -259,6 +280,9 @@ ActiveRecord::Schema.define(version: 20161206012001) do
   add_foreign_key "payments", "payment_types"
   add_foreign_key "payments", "stores"
   add_foreign_key "payments", "users"
+  add_foreign_key "performance_trackers", "invoices"
+  add_foreign_key "performance_trackers", "performance_categories"
+  add_foreign_key "performance_trackers", "users"
   add_foreign_key "plans", "carriers"
   add_foreign_key "received_items", "sellables"
   add_foreign_key "received_items", "stores"

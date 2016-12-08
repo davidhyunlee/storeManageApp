@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
+  
   post 'inventory/save'
   get 'inventory/receive', as: :inventory_receive
   get 'inventory/search' => 'inventory#search'
@@ -20,15 +22,19 @@ Rails.application.routes.draw do
 
   get 'payments/carrier_and_payment_types' => 'payments#carrier_and_payment_types'
 
-  resources :payments, :settings, :payment_types, :serialized_items
+  resources :payments, :settings, :payment_types, :serialized_items, :products, :inventories, :invoices, :product_categories, :sellables, :stores, :users, :carriers, :categories, :performance_categories
+
+  resources :plans do
+    collection do
+      get 'search'
+    end
+  end
 
   resources :customers do
     resources :payments, shallow: true
     resources :invoices, shallow: true
     resources :numbers, shallow: true
   end
-
-  resources :products, :inventories, :invoices, :product_categories, :sellables, :stores, :users, :carriers, :categories
 
   root 'sessions#new'
 

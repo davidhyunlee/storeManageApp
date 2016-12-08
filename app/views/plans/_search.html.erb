@@ -1,0 +1,8 @@
+<% @plans.each do |plan| %>
+  <tr>
+      <td><%= plan.code %></td>
+      <td><%= plan.name %></td>
+      <td><%= plan.carrier.name %></td>
+      <td><%= number_to_currency(plan.price) %></td>
+  </tr>
+<% end %>

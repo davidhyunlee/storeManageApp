@@ -1,8 +1,10 @@
 class LineItem < ApplicationRecord
-  belongs_to :invoice
-  belongs_to :sellable
-  belongs_to :serialized_item
-  belongs_to :simple_item
+  belongs_to :invoice, inverse_of: :line_items
+  belongs_to :sellable, inverse_of: :line_items
+  belongs_to :serialized_item, inverse_of: :line_items
+  belongs_to :simple_item, inverse_of: :line_items
+  belongs_to :plan, inverse_of: :line_items
+  belongs_to :payment, inverse_of: :line_items
 
   after_create :adjust_quantity
 

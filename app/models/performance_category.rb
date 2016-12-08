@@ -1,0 +1,2 @@
+class PerformanceCategory < ApplicationRecord
+end
