@@ -123,9 +123,8 @@
                     </div>
                 </div>
             </div>
-                                  <%= f.submit "Create New Item", class: "btn green" do %>
-                        <i class="fa fa-check"></i> Submit</button>
-                      <% end %>
+                    <%= f.submit "Create New Item", class: "btn green" if params[:action] == "new" %>
+                    <%= f.submit "Update Item", class: "btn green" if params[:action] == "edit" %>
         <% end %>
     </div>
 </div>

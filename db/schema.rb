@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206010342) do
+ActiveRecord::Schema.define(version: 20161206012001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,7 +75,11 @@ ActiveRecord::Schema.define(version: 20161206010342) do
     t.integer  "simple_item_id"
     t.decimal  "item_price"
     t.decimal  "tax_amount"
+    t.integer  "plan_id"
+    t.integer  "payment_id"
     t.index ["invoice_id"], name: "index_line_items_on_invoice_id", using: :btree
+    t.index ["payment_id"], name: "index_line_items_on_payment_id", using: :btree
+    t.index ["plan_id"], name: "index_line_items_on_plan_id", using: :btree
     t.index ["sellable_id"], name: "index_line_items_on_sellable_id", using: :btree
     t.index ["serialized_item_id"], name: "index_line_items_on_serialized_item_id", using: :btree
     t.index ["simple_item_id"], name: "index_line_items_on_simple_item_id", using: :btree
@@ -240,6 +244,8 @@ ActiveRecord::Schema.define(version: 20161206010342) do
   add_foreign_key "invoices", "stores"
   add_foreign_key "invoices", "users"
   add_foreign_key "line_items", "invoices"
+  add_foreign_key "line_items", "payments"
+  add_foreign_key "line_items", "plans"
   add_foreign_key "line_items", "sellables"
   add_foreign_key "line_items", "serialized_items"
   add_foreign_key "line_items", "simple_items"
