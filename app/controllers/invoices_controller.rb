@@ -117,6 +117,15 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def add_plan
+    @plan = Plan.find_by(code: params[:code])
+    authorize Invoice
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_invoice

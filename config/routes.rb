@@ -30,6 +30,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :invoices do
+    collection do
+      get 'add_plan'
+    end
+  end
+
   resources :customers do
     resources :payments, shallow: true
     resources :invoices, shallow: true

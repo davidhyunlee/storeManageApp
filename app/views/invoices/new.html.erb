@@ -250,7 +250,7 @@
 																<%= text_field_tag "code", nil, class: "form-control input-sm" %>
 															</td>
 							            		<td>
-																<%= text_field_tag "name", nil, class: "form-control input-sm" %>
+																<%= text_field_tag "by_name", nil, class: "form-control input-sm" %>
 															</td>
 							            		<td>
 							            			<%= select_tag "carrier", options_from_collection_for_select(Carrier.all, "id", "name"), include_blank: true, class: "form-control input-sm" %>
@@ -285,15 +285,23 @@
 		$.ajax({
 	    url: "/inventory/inventory_list",
 	    type: 'GET',
-	    data: "",
+	    data: ""
 	  })
-	})
+	});
 
 	$("#plans-list").on("click", function() {
 		$.ajax({
 	    url: "/plans/search",
 	    type: 'GET',
-	    data: "",
+	    data: ""
 	  })
-	})
+	});
+
+	$(".plan_code").on("click", function() {
+		$.ajax({
+	    url: "/plans/search",
+	    type: 'GET',
+	    data: ""
+	  })
+	});
 </script>

@@ -1,8 +1,18 @@
 <% @plans.each do |plan| %>
   <tr>
-      <td><%= plan.code %></td>
+      <td><a class="plan_code"><%= plan.code %></a></td>
       <td><%= plan.name %></td>
       <td><%= plan.carrier.name %></td>
       <td><%= number_to_currency(plan.price) %></td>
   </tr>
 <% end %>
+
+<script>
+	$(".plan_code").on("click", function() {
+		$.ajax({
+	    url: "/invoices/add_plan",
+	    type: 'GET',
+	    data: {code: $( this ).text()}
+	  })
+	});
+</script>
