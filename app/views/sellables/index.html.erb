@@ -44,6 +44,7 @@
             <th> Retail Price </th>
             <th> Promo Price </th>
             <th> Port Price </th>
+            <th> AAL Price </th>
             <% if current_user.superuser? %>
             <th> Actions </th>
             <% end %>
@@ -59,6 +60,7 @@
             <td> <%= link_to number_to_currency(sellable.retail_price), sellable_path(sellable) %> </td>
             <td> <%= number_to_currency(sellable.promo_price) %> </td>
             <td> <%= number_to_currency(sellable.port_price) %> </td>
+            <td> <%= number_to_currency(sellable.upgrade_aal_price) %> </td>
             <% if current_user.superuser? %>
             <td>
                 <div class="btn-group btn-group-sm btn-group-solid">
