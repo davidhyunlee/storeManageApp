@@ -12,6 +12,10 @@
 <button class="btn blue price_check port_price">Port-In <%= "(#{number_to_currency(@sellable.port_price)})" if @sellable.port_price %></button>
 <% end %>
 
+<% if @sellable.upgrade_aal_price %>
+<button class="btn blue price_check upgrade_aal_price">Upgrade Add-A-Line <%= "(#{number_to_currency(@sellable.upgrade_aal_price)})" if @sellable.upgrade_aal_price %></button>
+<% end %>
+
 
 <script>
 
@@ -23,6 +27,9 @@
       });
 	$(".port_price").on("click", function() {
 		$(".add-area").empty().append("<%= j render partial: 'invoices/add_serialized', locals: {pricing: "port", serialized_item: @serialized_item} %>");
+      });
+	$(".upgrade_aal_price").on("click", function() {
+		$(".add-area").empty().append("<%= j render partial: 'invoices/add_serialized', locals: {pricing: "upgrade_aal", serialized_item: @serialized_item} %>");
       });
 
 </script>

@@ -22,6 +22,7 @@
 	        	<%= number_to_currency(@sellable.retail_price) if pricing == "retail" %>
 	        	<%= number_to_currency(@sellable.promo_price) if pricing == "promo" %>
 	        	<%= number_to_currency(@sellable.port_price) if pricing == "port" %>
+	        	<%= number_to_currency(@sellable.upgrade_aal_price) if pricing == "upgrade_aal" %>
 	        	<%= hidden_field_tag "pricing", pricing %>
 	        </td>
 	    </tr>

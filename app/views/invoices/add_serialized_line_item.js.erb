@@ -28,6 +28,10 @@
 			var subtotal = parseFloat($("#subtotal").text()) + <%= @serialized_line_item.sellable.port_price %>;
 			var salestax = parseFloat($("#salestax").text()) + (<%= @serialized_line_item.sellable.taxable_price %> * <%= Setting.sales_tax.to_f if @serialized_line_item.sellable.port_price != 0 %>);
 			var total = parseFloat($("#total").text()) + <%= @serialized_line_item.sellable.port_price %> + (<%= @serialized_line_item.sellable.taxable_price %> * <%= Setting.sales_tax.to_f %>);
+		<% when "upgrade_aal" %>
+			var subtotal = parseFloat($("#subtotal").text()) + <%= @serialized_line_item.sellable.upgrade_aal_price %>;
+			var salestax = parseFloat($("#salestax").text()) + (<%= @serialized_line_item.sellable.taxable_price %> * <%= Setting.sales_tax.to_f if @serialized_line_item.sellable.port_price != 0 %>);
+			var total = parseFloat($("#total").text()) + <%= @serialized_line_item.sellable.upgrade_aal_price %> + (<%= @serialized_line_item.sellable.taxable_price %> * <%= Setting.sales_tax.to_f %>);
 		<% end %>
 
 	<% else %>
@@ -44,6 +48,10 @@
 			var subtotal = parseFloat($("#subtotal").text()) + <%= @serialized_line_item.sellable.port_price %>;
 			var salestax = parseFloat($("#salestax").text());
 			var total = parseFloat($("#total").text()) + <%= @serialized_line_item.sellable.port_price %>;
+		<% when "upgrade_aal" %>
+			var subtotal = parseFloat($("#subtotal").text()) + <%= @serialized_line_item.sellable.upgrade_aal_price %>;
+			var salestax = parseFloat($("#salestax").text());
+			var total = parseFloat($("#total").text()) + <%= @serialized_line_item.sellable.upgrade_aal_price %>;
 		<% end %>
 
 	<% end %>

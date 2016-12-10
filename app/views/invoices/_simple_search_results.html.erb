@@ -3,6 +3,7 @@
       <td><a class="sku"><%= item.sellable.sku %></a></td>
       <td><%= item.sellable.description %></td>
       <td><%= item.quantity %></td>
+      <td><%= number_to_currency(item.sellable.retail_price) %></td>
   </tr>
 <% end %>
 

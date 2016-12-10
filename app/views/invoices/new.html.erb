@@ -249,6 +249,7 @@
 							                <th> SKU </th>
 							                <th> Description </th>
 							                <th> On Hand </th>
+							                <th> Price </th>
 							            </tr>
 							            <%= form_tag('/invoices/search_simple', method: :get, remote: true) do -%>
 							            <tr>
@@ -259,6 +260,8 @@
 															<%= text_field_tag "by_description", nil, class: "form-control input-sm" %>
 														</td>
 						            		<td>
+														</td>
+														<td>
 														</td>
 						            		<td>
 						            			<button type="submit"><i class="fa fa-search"></i></button>

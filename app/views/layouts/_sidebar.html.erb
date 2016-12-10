@@ -153,20 +153,20 @@
             <li class="nav-item <%= "active open" if params[:controller] == "plans" %>">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-file"></i>
-                    <span class="title">Plans</span>
+                    <span class="title">Plans & Fees</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item <%= "active open" if params[:controller] == "plans" && params[:action] == "index" %>">
                         <%= link_to plans_path, class: "nav-link", data: { no_turbolink: true } do %>
-                            <span class="title">List Plans</span>
+                            <span class="title">List Plans & Fees</span>
                             <%= "<span class='selected'></span>".html_safe if params[:controller] == "plans" && params[:action] == "index" %>
                         <% end %>
                     </li>
                     <% if current_user.superuser? %>
                     <li class="nav-item <%= "active open" if params[:controller] == "plans" && params[:action] == "new" %>">
                         <%= link_to new_plan_path, class: "nav-link", data: { no_turbolink: true } do %>
-                            <span class="title">Create Plan</span>
+                            <span class="title">Create Plan / Fee</span>
                             <%= "<span class='selected'></span>".html_safe if params[:controller] == "plans" && params[:action] == "new" %>
                         <% end %>
                     </li>

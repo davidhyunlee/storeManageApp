@@ -88,7 +88,7 @@
             <tr>
         <td><%= payment.payment_type.name %></td>
         <td><%= payment.customer.full_name_lmf %></td>
-        <td><%= number_to_phone(payment.number.number, area_code: true) %> (<%= payment.carrier.name %>)</td>
+        <td><%= number_to_phone(payment.number.number, area_code: true) if payment.number %> <%= link_to "Invoice ##{payment.invoice.id}", invoice_path(payment.invoice) if payment.invoice %> (<%= payment.carrier.name %>)</td>
         <td>
           <%= "Yes" if payment.verified? %>
           <%= "No" unless payment.verified? %>
