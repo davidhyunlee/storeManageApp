@@ -39,6 +39,22 @@ class InvoicePolicy < ApplicationPolicy
 		true
 	end
 
+	def add_plan?
+		true
+	end
+
+	def add_plan_line_item?
+		true
+	end
+
+	def add_item?
+		true
+	end
+
+	def search_items?
+		true
+	end
+
   class Scope < Scope
     def resolve
       scope

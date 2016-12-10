@@ -46,7 +46,7 @@
 		<div class="row">
 
 			<div class="col-md-4">
-				<%= form_tag('/inventory/search', method: :get, remote: true) do %>
+				<%= form_tag('/invoices/add_item', method: :get, remote: true) do %>
 					<div class="input-group">
 		        <span class="input-group-btn">
 			        <button class="btn blue listing" type="button" data-toggle="modal" href="#draggable">
@@ -58,7 +58,7 @@
 		          <button class="btn blue" type="submit">+</button>
 		        </span>
 		      </div>
-	      <% end %>
+	      		<% end %>
 			</div>
 
 			<div class="col-md-4">
@@ -145,7 +145,7 @@
 <% end %>
 
 
-
+<!-- Error Modal -->
 <div class="modal fade" id="error" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -153,7 +153,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title">Error</h4>
             </div>
-            <div class="modal-body">That product could not be found in the database.</div>
+            <div class="modal-body error-message"></div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger red" data-dismiss="modal">Close</button>
             </div>
@@ -163,7 +163,8 @@
     <!-- /.modal-dialog -->
 </div>
 
-<!-- Find Product Modal Dialog Start -->
+
+<!-- Find Product Modal -->
 <div class="modal fade draggable-modal modal-scroll bs-modal-lg" id="draggable" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -171,7 +172,40 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title">Find Product</h4>
             </div>
-            <div class="modal-body inventory_modal_body">
+            <div class="modal-body">
+
+				<div class="table-responsive">
+				    <table class="table table-striped table-bordered table-hover">
+				        <thead>
+				            <tr>
+				                <th> SKU </th>
+				                <th> Description </th>
+				                <th> Carrier </th>
+				            </tr>
+				            <%= form_tag('/invoices/search_items', method: :get, remote: true) do -%>
+				            <tr>
+								<td>
+									<%= text_field_tag "by_sku", nil, class: "form-control input-sm" %>
+								</td>
+			            		<td>
+									<%= text_field_tag "by_description", nil, class: "form-control input-sm" %>
+								</td>
+			            		<td>
+			            			<%= select_tag "by_carrier", options_from_collection_for_select(Carrier.all, "id", "name"), include_blank: true, class: "form-control input-sm" %>
+			            		</td>
+			            		<td>
+			            			<button type="submit"><i class="fa fa-search"></i></button>
+			            		</td>
+				            </tr>
+				            <% end -%>
+				        </thead>
+				        <tbody class="product-search-results">
+
+				        </tbody>
+				    </table>
+					    <div class="ajax-paginate"></div>
+				</div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
@@ -179,6 +213,9 @@
         </div>
     </div>
 </div>
+
+
+
 
 
 <div class="modal fade draggable-modal modal-scroll bs-modal-lg" id="payment" tabindex="-1" role="basic" aria-hidden="true">
@@ -235,42 +272,44 @@
             </div>
             <div class="modal-body">
             	
-							<div class="table-responsive">
-							    <table class="table table-striped table-bordered table-hover">
-							        <thead>
-							            <tr>
-							                <th> Plan Code </th>
-							                <th> Name </th>
-							                <th> Carrier </th>
-							                <th> Price </th>
-							            </tr>
-							            <%= form_tag('/plans/search', method: :get, remote: true) do -%>
-							            <tr>
-															<td>
-																<%= text_field_tag "code", nil, class: "form-control input-sm" %>
-															</td>
-							            		<td>
-																<%= text_field_tag "by_name", nil, class: "form-control input-sm" %>
-															</td>
-							            		<td>
-							            			<%= select_tag "carrier", options_from_collection_for_select(Carrier.all, "id", "name"), include_blank: true, class: "form-control input-sm" %>
-							            		</td>
-							            		<td>
-								                <div class="margin-bottom-5">
-								                		<%= text_field_tag "by_price[price_from]", nil, placeholder: "From", class: "form-control input-sm" %>
-								                </div>
-								                <%= text_field_tag "by_price[price_to]", nil, placeholder: "To", class: "form-control input-sm" %>
-							            		</td>
-							            </tr>
-							            <%= submit_tag "Search", class: "hidden" %>
-							            <% end -%>
-							        </thead>
-							        <tbody class="search-results">
+				<div class="table-responsive">
+				    <table class="table table-striped table-bordered table-hover">
+				        <thead>
+				            <tr>
+				                <th> Plan Code </th>
+				                <th> Name </th>
+				                <th> Carrier </th>
+				                <th> Price </th>
+				            </tr>
+				            <%= form_tag('/plans/search', method: :get, remote: true) do -%>
+				            <tr>
+								<td>
+									<%= text_field_tag "code", nil, class: "form-control input-sm" %>
+								</td>
+			            		<td>
+									<%= text_field_tag "by_name", nil, class: "form-control input-sm" %>
+								</td>
+			            		<td>
+			            			<%= select_tag "carrier", options_from_collection_for_select(Carrier.all, "id", "name"), include_blank: true, class: "form-control input-sm" %>
+			            		</td>
+			            		<td>
+				                <div class="margin-bottom-5">
+				                		<%= text_field_tag "by_price[price_from]", nil, placeholder: "From", class: "form-control input-sm" %>
+				                </div>
+				                <%= text_field_tag "by_price[price_to]", nil, placeholder: "To", class: "form-control input-sm" %>
+			            		</td>
+			            		<td>
+			            			<button type="submit"><i class="fa fa-search"></i></button>
+			            		</td>
+				            </tr>
+				            <% end -%>
+				        </thead>
+				        <tbody class="search-results">
 
-							        </tbody>
-							    </table>
- 							    <div class="ajax-paginate"></div>
-							</div>
+				        </tbody>
+				    </table>
+					    <div class="ajax-paginate"></div>
+				</div>
 
             </div>
             <div class="modal-footer">
@@ -283,21 +322,13 @@
 <script type="text/javascript">
 	$(".listing").on("click", function() {
 		$.ajax({
-	    url: "/inventory/inventory_list",
+	    url: "/invoices/search_items",
 	    type: 'GET',
 	    data: ""
 	  })
 	});
 
 	$("#plans-list").on("click", function() {
-		$.ajax({
-	    url: "/plans/search",
-	    type: 'GET',
-	    data: ""
-	  })
-	});
-
-	$(".plan_code").on("click", function() {
 		$.ajax({
 	    url: "/plans/search",
 	    type: 'GET',

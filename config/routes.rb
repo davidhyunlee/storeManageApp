@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   get 'payments/carrier_and_payment_types' => 'payments#carrier_and_payment_types'
 
-  resources :payments, :settings, :payment_types, :serialized_items, :products, :inventories, :invoices, :product_categories, :sellables, :stores, :users, :carriers, :categories, :performance_categories
+  resources :payments, :settings, :payment_types, :serialized_items, :products, :inventories, :product_categories, :sellables, :stores, :users, :carriers, :categories, :performance_categories
 
   resources :plans do
     collection do
@@ -33,6 +33,9 @@ Rails.application.routes.draw do
   resources :invoices do
     collection do
       get 'add_plan'
+      get 'add_plan_line_item'
+      get 'search_items'
+      get 'add_item'
     end
   end
 

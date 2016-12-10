@@ -1,0 +1,26 @@
+<%= form_tag("/invoices/add_plan_line_item", method: :get, remote: true) do %>
+<table class="table table-bordered table-hover">
+	<thead>
+	    <tr>
+	        <th> Code </th>
+	        <th> Plan Name </th>
+	        <th> Carrier </th>
+	        <th> Sale Type </th>
+	        <th> Price </th>
+	    </tr>
+	</thead>
+	<tbody>
+	    <tr>
+	        <td> <%= @plan.code %> </td>
+	        <td> <%= @plan.name %> </td>
+	        <td> <%= @plan.carrier.name if @plan.carrier %> </td>
+	        <td> <%= select_tag "sale_type", "<option>New Activation</option><option>Reactivation</option><option>Upgrade</option><option>Service Charge</option>".html_safe, class: "form-control" %> </td>
+	        <td> <%= number_to_currency(@plan.price) %> </td>
+	    </tr>
+	</tbody>
+</table>
+
+<%= hidden_field_tag "code", @plan.code %>
+
+<button class="btn yellow" type="submit"><i class="fa fa-plus"></i> Add Line</button>
+<% end %>

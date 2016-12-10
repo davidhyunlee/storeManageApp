@@ -1,0 +1,18 @@
+<% @sellables.each do |sellable| %>
+  <tr>
+      <td><a class="sku"><%= sellable.sku %></a></td>
+      <td><%= sellable.description %></td>
+      <td><%= sellable.carrier.name %></td>
+  </tr>
+<% end %>
+
+<script>
+	$(".sku").on("click", function() {
+		$.ajax({
+	    url: "/invoices/add_item",
+	    type: 'GET',
+	    data: {sku: $( this ).text()}
+	  });
+		$("#draggable").modal("hide");
+	});
+</script>

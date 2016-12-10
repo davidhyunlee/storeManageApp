@@ -24,8 +24,8 @@
         <tbody>
         	<% @invoice.line_items.each do |li| %>
             <tr>
-                <td> <%= li.sellable.sku %> </td>
-                <td> <%= li.sellable.description %>
+                <td> <%= li.sellable.sku if li.sellable %> <%= li.plan.code if li.plan %> </td>
+                <td> <%= li.sellable.description if li.sellable %> <%= li.plan.name if li.plan %>
                 	<% if li.serialized_item %>
                 	<br /><small><b>Serial Number:</b> <%= li.serialized_item.serial_number %></small>
                 	<% end %>

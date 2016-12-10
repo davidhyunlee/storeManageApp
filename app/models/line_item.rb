@@ -11,11 +11,12 @@ class LineItem < ApplicationRecord
 	def adjust_quantity
 		item = SerializedItem.find(self.serialized_item.id) if self.serialized_item
 		item = SimpleItem.find(self.simple_item.id) if self.simple_item
-		item.quantity -= self.quantity
-		if item.save
-			item.lock if item.class == SerializedItem
-		else
-
+		item.quantity -= self.quantity if item
+		if item
+			if item.save
+				item.lock if item.class == SerializedItem
+			else
+			end
 		end
 	end
 

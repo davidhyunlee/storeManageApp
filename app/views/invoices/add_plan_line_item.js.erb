@@ -1,0 +1,20 @@
+<% if @plan.nil? %>
+	$(".plancode-search").val("");
+	alert("That plan code was not found.")
+<% else %>
+	$(".line_item_area").append("<%= j render partial: 'invoices/add_plan_line_item' %>");
+	$(".add-area").empty();
+	$(".plancode-search").val("");
+
+	var subtotal = parseFloat($("#subtotal").text()) + <%= @plan.price %>
+	var salestax = parseFloat($("#salestax").text())
+	var total = parseFloat($("#total").text()) + <%= @plan.price %>
+
+	$("#subtotal").text(subtotal.toFixed(2));
+	$("#salestax").text(salestax.toFixed(2));
+	$("#total").text(total.toFixed(2));
+
+	$("#hidden_subtotal").attr("value", $("#subtotal").text());
+	$("#hidden_salestax").attr("value", $("#salestax").text());
+	$("#hidden_total").attr("value", $("#total").text());
+<% end %>

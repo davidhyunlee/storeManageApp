@@ -1,10 +1,12 @@
 <% if @serialized_line_item.nil? %>
-
+	
+	$(".error-message").empty().append("A product with that serial number was not found.")
 	$("#error").modal('show');
 
 <% elsif !@serialized_line_item.available? %>
 
-	alert("This product has been sold already or is not available.");
+	$(".error-message").empty().append("That product is not available.")
+	$("#error").modal('show');
 
 <% elsif !@serialized_line_item.locked %>
 

@@ -1,6 +1,10 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
 
+  has_scope :by_carrier
+  has_scope :by_sku
+  has_scope :by_description
+
   # GET /invoices
   # GET /invoices.json
   def index
@@ -126,6 +130,36 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def add_plan_line_item
+    @plan = Plan.find_by(code: params[:code])
+    @sale_type = params[:sale_type]
+
+    authorize Invoice
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def search_items
+    @sellables = apply_scopes(Sellable).all.page(params[:page])
+
+    authorize Invoice
+    respond_to do |format|
+      format.js
+    end 
+  end
+
+  def add_item
+    @sellable = Sellable.find_by(sku: params[:sku])
+
+    authorize Invoice
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_invoice
@@ -134,6 +168,6 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:customer_id, :user_id, :store_id, :total, :sales_tax, :subtotal, :note, line_items_attributes: [ :invoice_id, :sellable_id, :simple_item_id, :serialized_item_id, :quantity, :tax_amount, :item_price, :sold_price ], payments_attributes: [:carrier_id, :number_id, :payment_type_id, :amount, :customer_id, :invoice_id, :user_id, :store_id])
+      params.require(:invoice).permit(:customer_id, :user_id, :store_id, :total, :sales_tax, :subtotal, :note, line_items_attributes: [ :invoice_id, :sellable_id, :simple_item_id, :serialized_item_id, :quantity, :tax_amount, :item_price, :sold_price, :plan_id, :sale_type, :payment_id], payments_attributes: [:carrier_id, :number_id, :payment_type_id, :amount, :customer_id, :invoice_id, :user_id, :store_id])
     end
 end

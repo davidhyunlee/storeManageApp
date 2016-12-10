@@ -1,0 +1,6 @@
+<% if @plan.nil? %>
+	$(".add-area").empty().append("<b>Plan code not found.</b>")
+<% else %>
+	$(".add-area").empty().append("<%= j render partial: 'invoices/add_plan' %>");
+	$(".plancode-search").val("");
+<% end %>
