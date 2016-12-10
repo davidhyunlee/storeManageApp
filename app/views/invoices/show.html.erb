@@ -73,7 +73,9 @@
 	</div>
 </div>
 
+<% if @invoice.note %>
 <div class="portlet light bordered">
     <b>Notes:</b>
     <%= @invoice.note.html_safe %>
 </div>
+<% end %>
