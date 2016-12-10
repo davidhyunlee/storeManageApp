@@ -55,6 +55,14 @@ class InvoicePolicy < ApplicationPolicy
 		true
 	end
 
+	def search_serialized?
+		true
+	end
+
+	def search_simple?
+		true
+	end
+
   class Scope < Scope
     def resolve
       scope

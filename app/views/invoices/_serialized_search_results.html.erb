@@ -1,0 +1,28 @@
+<% @serialized_items.each do |item| %>
+  <tr>
+      <td><a class="sku"><%= item.sellable.sku %></a></td>
+      <td><%= item.sellable.description %></td>
+      <td><a class="serial"><%= item.serial_number %></a></td>
+      <td><%= item.sellable.carrier.name %></td>
+  </tr>
+<% end %>
+
+<script>
+	$(".sku").on("click", function() {
+		$.ajax({
+	    url: "/invoices/add_item",
+	    type: 'GET',
+	    data: {sku: $( this ).text()}
+	  });
+		$("#serialized_inventory").modal("hide");
+	});
+
+	$(".serial").on("click", function() {
+		$.ajax({
+	    url: "/invoices/add_item",
+	    type: 'GET',
+	    data: {serial_number: $( this ).text()}
+	  });
+		$("#serialized_inventory").modal("hide");
+	});	
+</script>

@@ -158,7 +158,7 @@
                                             <% @customer.payments.order("created_at DESC").each do |payment| %>
                                             <tr>
                                                 <td><%= payment.payment_type.name %></td>
-                                                <td><%= number_to_phone(payment.number.number, area_code: true) %></td>
+                                                <td><%= number_to_phone(payment.number.number, area_code: true) if payment.number %> <%= link_to "Invoice ##{payment.invoice.id}", invoice_path(payment.invoice) if payment.invoice %></td>
                                                 <td><%= number_to_currency(payment.amount) %></td>
                                                 <td><%= payment.created_at.in_time_zone(Setting.time_zone).strftime("%D %r") %></td>
                                             </tr>

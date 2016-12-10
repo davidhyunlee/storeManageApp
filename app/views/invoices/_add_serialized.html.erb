@@ -13,7 +13,10 @@
 	    <tr>
 	        <td> <%= @sellable.sku %> </td>
 	        <td> <%= @sellable.description %> </td>
-	        <td> <%= text_field_tag "serial_number", nil, placeholder: "", class: "form-control", maxlength: 20, size: 20  %> </td>
+	        <td>
+	        	<%= text_field_tag "serial_number", nil, placeholder: "", class: "form-control", maxlength: 20, size: 20 unless serialized_item %> 
+	        	<%= text_field_tag "serial_number", serialized_item.serial_number, placeholder: "", class: "form-control", maxlength: 20, size: 20 if serialized_item %> 
+	        </td>
 	        <td> 1 </td>
 	        <td> 
 	        	<%= number_to_currency(@sellable.retail_price) if pricing == "retail" %>

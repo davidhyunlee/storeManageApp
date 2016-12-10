@@ -35,6 +35,8 @@ Rails.application.routes.draw do
       get 'add_plan'
       get 'add_plan_line_item'
       get 'search_items'
+      get 'search_serialized'
+      get 'search_simple'
       get 'add_item'
     end
   end

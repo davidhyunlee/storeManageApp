@@ -1,8 +1,8 @@
 class Sellable < ApplicationRecord
   belongs_to :category
-  belongs_to :carrier
+  belongs_to :carrier, inverse_of: :sellables
   has_many :line_items
-  has_many :serialized_items
+  has_many :serialized_items, inverse_of: :sellable
   has_many :simple_items
 
 	scope :by_category, -> category_id { where(:category_id => category_id) }

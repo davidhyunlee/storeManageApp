@@ -4,6 +4,8 @@ class InvoicesController < ApplicationController
   has_scope :by_carrier
   has_scope :by_sku
   has_scope :by_description
+  has_scope :by_on_hand
+  has_scope :by_serial
 
   # GET /invoices
   # GET /invoices.json
@@ -42,7 +44,7 @@ class InvoicesController < ApplicationController
     @invoice.customer_id = @customer.id
     authorize Invoice
 
-    unless params[:invoice][:line_items_attributes]
+    unless params[:invoice][:line_items_attributes] || params[:invoice][:payments_attributes]
       redirect_to new_customer_invoice_path(@customer), notice: "You tried to create a blank sale invoice." and return
     end
 
@@ -110,8 +112,7 @@ class InvoicesController < ApplicationController
   def add_payment_line_item
     @carrier = Carrier.find(params[:payment][:carrier_id])
     @payment_type = PaymentType.find(params[:payment][:payment_type_id])
-    @number = Number.find(params[:payment][:number_id])
-    @customer = @number.customer
+    @customer = Customer.find(params[:customer_id])
     @amount = params[:amount]
 
     authorize Invoice
@@ -151,7 +152,9 @@ class InvoicesController < ApplicationController
   end
 
   def add_item
-    @sellable = Sellable.find_by(sku: params[:sku])
+    @sellable = Sellable.find_by(sku: params[:sku]) if params[:sku]
+    @sellable = SerializedItem.find_by(serial_number: params[:serial_number]).sellable if params[:serial_number]
+    @serialized_item = SerializedItem.find_by(serial_number: params[:serial_number])
 
     authorize Invoice
 
@@ -159,6 +162,24 @@ class InvoicesController < ApplicationController
       format.js
     end
   end
+
+  def search_serialized
+    @serialized_items = apply_scopes(SerializedItem).where(store_id: current_store.id, quantity: 1).page(params[:page])
+
+    authorize Invoice
+    respond_to do |format|
+      format.js
+    end 
+  end
+
+  def search_simple
+    @simple_items = apply_scopes(SimpleItem).where("store_id = ? AND quantity > 0", current_store.id).page(params[:page])
+
+    authorize Invoice
+    respond_to do |format|
+      format.js
+    end 
+  end  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -168,6 +189,6 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:customer_id, :user_id, :store_id, :total, :sales_tax, :subtotal, :note, line_items_attributes: [ :invoice_id, :sellable_id, :simple_item_id, :serialized_item_id, :quantity, :tax_amount, :item_price, :sold_price, :plan_id, :sale_type, :payment_id], payments_attributes: [:carrier_id, :number_id, :payment_type_id, :amount, :customer_id, :invoice_id, :user_id, :store_id])
+      params.require(:invoice).permit(:customer_id, :user_id, :store_id, :total, :sales_tax, :subtotal, :note, line_items_attributes: [ :invoice_id, :sellable_id, :simple_item_id, :serialized_item_id, :quantity, :tax_amount, :item_price, :sold_price, :plan_id, :sale_type, :payment_id], payments_attributes: [:carrier_id, :number_id, :payment_type_id, :amount, :customer_id, :invoice_id, :user_id, :store_id, :invoiced])
     end
 end

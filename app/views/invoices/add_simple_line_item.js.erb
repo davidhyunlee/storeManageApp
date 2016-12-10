@@ -1,32 +1,34 @@
 <% if @simple_item.nil? %>
+	$(".error-message").empty().append("That product was not found in the store inventory.")
 	$("#error").modal('show');
 <% elsif @simple_item.quantity <= 0 %>
-	alert("This item is sold out. Must receive more to sell.")
+	$(".error-message").empty().append("According to my records, we are sold out on that item. Did you forget to receive the product into the inventory?")
+	$("#error").modal('show');
+<% elsif @quantity.to_i == 0 %>
+	$(".error-message").empty().append("Uhh, weirdo. Use a valid quantity to invoice this.")
+	$("#error").modal('show');
 <% elsif @quantity.to_i > @simple_item.quantity %>
-	alert("You are trying to sell more than you have of this item.")
+	$(".error-message").empty().append("We don't have enough to sell that many! Receive more of this item into the inventory.")
+	$("#error").modal('show');
 <% else %>
 	$(".line_item_area").append("<%= j render partial: 'invoices/add_simple_line_item' %>");
 	$(".add-area").empty();
-
-	var subtotal = parseFloat($("#subtotal").text()) + <%= @simple_item.sellable.retail_price * @quantity.to_i %>
 	
 	<% if @simple_item.sellable.taxable %>
-	var salestax = parseFloat($("#salestax").text()) + (<%= @simple_item.sellable.taxable_price * @quantity.to_i %> * <%= Setting.sales_tax.to_f %>)
-	var total = parseFloat($("#total").text()) + <%= @simple_item.sellable.retail_price * @quantity.to_i %> + (<%= @simple_item.sellable.retail_price * @quantity.to_i %> * <%= Setting.sales_tax %>)
-	<% end %>
-	
-	<% unless @simple_item.sellable.taxable %>
-	var total = subtotal
+		var subtotal = parseFloat($("#subtotal").text()) + <%= @simple_item.sellable.retail_price * @quantity.to_i %>
+		var salestax = parseFloat($("#salestax").text()) + (<%= @simple_item.sellable.taxable_price * @quantity.to_i %> * <%= Setting.sales_tax.to_f %>)
+		var total = parseFloat($("#total").text()) + <%= @simple_item.sellable.retail_price * @quantity.to_i %> + (<%= @simple_item.sellable.retail_price * @quantity.to_i %> * <%= Setting.sales_tax %>)
+	<% else %>
+		var subtotal = parseFloat($("#subtotal").text()) + <%= @simple_item.sellable.retail_price * @quantity.to_i %>
+		var salestax = parseFloat($("#salestax").text()) 
+		var total = parseFloat($("#total").text()) + <%= @simple_item.sellable.retail_price * @quantity.to_i %>
 	<% end %>
 
 	$("#subtotal").text(subtotal.toFixed(2))
-	<% if @simple_item.sellable.taxable %>
 	$("#salestax").text(salestax.toFixed(2))
-	<% end %>
 	$("#total").text(total.toFixed(2))
 	$("#hidden_subtotal").attr("value", $("#subtotal").text())
-	<% if @simple_item.sellable.taxable %>
 	$("#hidden_salestax").attr("value", $("#salestax").text())
-	<% end %>
 	$("#hidden_total").attr("value", $("#total").text())
+
 <% end %>

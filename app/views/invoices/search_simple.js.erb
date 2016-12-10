@@ -1,0 +1,2 @@
+$(".simple-search-results").empty().append("<%= j render partial: 'invoices/simple_search_results' %>")
+$(".ajax-paginate-simple").empty().append("<%= j paginate @simple_items, remote: true %>");

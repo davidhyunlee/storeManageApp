@@ -2,7 +2,7 @@
 	$(".add-area").empty().append("<b>SKU was not found.</b>")
 <% elsif @sellable.serialized? %>
 	$(".sku-search").val("");
-	$(".add-area").empty().append("<%= j render partial: "invoices/add_serialized_check_pricing" %>")
+	$(".add-area").empty().append("<%= j render partial: "invoices/add_serialized_check_pricing", object: @serialized_item %>")
 <% else %>
 	$(".sku-search").val("");
 	$(".add-area").empty().append("<%= j render partial: "invoices/add_simple_item" %>")

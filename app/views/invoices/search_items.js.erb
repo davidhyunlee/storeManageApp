@@ -1,1 +1,2 @@
 $(".product-search-results").empty().append("<%= j render partial: 'invoices/product_search_results' %>")
+$(".ajax-paginate-products").empty().append("<%= j paginate @sellables, remote: true %>");

@@ -1,0 +1,18 @@
+<% @simple_items.each do |item| %>
+  <tr>
+      <td><a class="sku"><%= item.sellable.sku %></a></td>
+      <td><%= item.sellable.description %></td>
+      <td><%= item.quantity %></td>
+  </tr>
+<% end %>
+
+<script>
+	$(".sku").on("click", function() {
+		$.ajax({
+	    url: "/invoices/add_item",
+	    type: 'GET',
+	    data: {sku: $( this ).text()}
+	  });
+		$("#simple_item_inventory").modal("hide");
+	});
+</script>

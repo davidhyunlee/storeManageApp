@@ -1,19 +1,28 @@
 <p>What type of sale is this?</p>
 
-<button class="btn blue price_check retail_price">New Activation / Upgrade <%= "(#{number_to_currency(@sellable.retail_price)})" if @sellable.retail_price %></button>
+<% if @sellable.retail_price %>
+	<button class="btn blue price_check retail_price">New Activation / Upgrade <%= "(#{number_to_currency(@sellable.retail_price)})" if @sellable.retail_price %></button>
+<% end %>
+
+<% if @sellable.promo_price %>
 <button class="btn blue price_check promo_price">Promotional <%= "(#{number_to_currency(@sellable.promo_price)})" if @sellable.promo_price %></button>
+<% end %>
+
+<% if @sellable.port_price %>
 <button class="btn blue price_check port_price">Port-In <%= "(#{number_to_currency(@sellable.port_price)})" if @sellable.port_price %></button>
+<% end %>
+
 
 <script>
 
 	$(".retail_price").on("click", function() {
-		$(".add-area").empty().append("<%= j render partial: 'invoices/add_serialized', locals: {pricing: "retail"} %>");
+		$(".add-area").empty().append("<%= j render partial: 'invoices/add_serialized', locals: {pricing: "retail", serialized_item: @serialized_item } %>");
       });
 	$(".promo_price").on("click", function() {
-		$(".add-area").empty().append("<%= j render partial: 'invoices/add_serialized', locals: {pricing: "promo"} %>");
+		$(".add-area").empty().append("<%= j render partial: 'invoices/add_serialized', locals: {pricing: "promo", serialized_item: @serialized_item} %>");
       });
 	$(".port_price").on("click", function() {
-		$(".add-area").empty().append("<%= j render partial: 'invoices/add_serialized', locals: {pricing: "port"} %>");
+		$(".add-area").empty().append("<%= j render partial: 'invoices/add_serialized', locals: {pricing: "port", serialized_item: @serialized_item} %>");
       });
 
 </script>

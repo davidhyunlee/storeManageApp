@@ -1,0 +1,2 @@
+$(".serialized-search-results").empty().append("<%= j render partial: 'invoices/serialized_search_results' %>")
+$(".ajax-paginate-serialized").empty().append("<%= j paginate @serialized_items, remote: true %>");

@@ -15,24 +15,23 @@
 	$(".add-area").empty();
 
 	<% if @serialized_line_item.sellable.taxable %>
+
 		<% case @pricing when "retail" %>
 			var subtotal = parseFloat($("#subtotal").text()) + <%= @serialized_line_item.sellable.retail_price %>;
 			var salestax = parseFloat($("#salestax").text()) + (<%= @serialized_line_item.sellable.taxable_price %> * <%= Setting.sales_tax.to_f %>);
 			var total = parseFloat($("#total").text()) + <%= @serialized_line_item.sellable.retail_price %> + (<%= @serialized_line_item.sellable.taxable_price %> * <%= Setting.sales_tax.to_f %>);
 		<% when "promo" %>
 			var subtotal = parseFloat($("#subtotal").text()) + <%= @serialized_line_item.sellable.promo_price %>;
-			<% if @serialized_line_item.sellable.promo_price == 0 %>
-				var salestax = parseFloat($("#salestax").text())
-			<% else %>
-				var salestax = parseFloat($("#salestax").text()) + (<%= @serialized_line_item.sellable.taxable_price %> * <%= Setting.sales_tax.to_f %>);
-			<% end %>
+			var salestax = parseFloat($("#salestax").text()) + (<%= @serialized_line_item.sellable.taxable_price %> * <%= Setting.sales_tax.to_f %>);
 			var total = parseFloat($("#total").text()) + <%= @serialized_line_item.sellable.promo_price %> + (<%= @serialized_line_item.sellable.taxable_price %> * <%= Setting.sales_tax.to_f %>);
 		<% when "port" %>
 			var subtotal = parseFloat($("#subtotal").text()) + <%= @serialized_line_item.sellable.port_price %>;
 			var salestax = parseFloat($("#salestax").text()) + (<%= @serialized_line_item.sellable.taxable_price %> * <%= Setting.sales_tax.to_f if @serialized_line_item.sellable.port_price != 0 %>);
 			var total = parseFloat($("#total").text()) + <%= @serialized_line_item.sellable.port_price %> + (<%= @serialized_line_item.sellable.taxable_price %> * <%= Setting.sales_tax.to_f %>);
 		<% end %>
+
 	<% else %>
+
 		<% case @pricing when "retail" %>
 			var subtotal = parseFloat($("#subtotal").text()) + <%= @serialized_line_item.sellable.retail_price %>;
 			var salestax = parseFloat($("#salestax").text());
@@ -46,6 +45,7 @@
 			var salestax = parseFloat($("#salestax").text());
 			var total = parseFloat($("#total").text()) + <%= @serialized_line_item.sellable.port_price %>;
 		<% end %>
+
 	<% end %>
 
 	// Set the pricing section in invoice view to the new calculated values.
@@ -60,7 +60,8 @@
 
 <% elsif @serialized_line_item.locked %>
 
-	alert("The serial number you entered is locked. It has either been sold or scanned previously. If not sold, request an administrator to unlock the item for sale.");
+	$(".error-message").empty().append("The serial number you entered is locked. It has either been sold or scanned previously. If not sold, request an administrator to unlock the item for sale.")
+	$("#error").modal('show');
 	$(".add-area").empty();
 
 <% end %>
