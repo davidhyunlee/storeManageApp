@@ -13,7 +13,7 @@
             <th> Number(s) </th>
             <th> E-mail </th>
             <% if current_user.superuser? %>
-            <th> Actions </th>
+            <th style="width: 120px;"> Actions </th>
             <% end %>
         </tr>
     </thead>
@@ -34,9 +34,9 @@
             <td>
                 <% if current_user.superuser? %>
                 <div class="btn-group btn-group-sm btn-group-solid">
-                    <%= link_to 'Show', number.customer, class: "btn green" %>
-                    <%= link_to 'Edit', edit_customer_path(number.customer), class: "btn blue" %>
-                    <%= link_to 'Destroy', number.customer, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn red" %>
+                    <%= link_to content_tag(:i, nil, class: "fa fa-file-o"), number.customer, class: "btn green tooltips", title: "Show" %>
+                    <%= link_to content_tag(:i, nil, class: "fa fa-edit"), edit_customer_path(number.customer), class: "btn blue", title: "Edit" %>
+                    <%= link_to content_tag(:i, nil, class: "fa fa-times"), number.customer, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn red" %>
                 </div>
                 <% end %>
             </td>
@@ -59,9 +59,9 @@
             <% if current_user.superuser? %>
             <td>
                 <div class="btn-group btn-group-sm btn-group-solid">
-                    <%= link_to 'Show', customer, class: "btn green" %>
-                    <%= link_to 'Edit', edit_customer_path(customer), class: "btn blue" %>
-                    <%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn red" %>
+                    <%= link_to content_tag(:i, nil, class: "fa fa-file-o"), customer, class: "btn green tooltips", title: "Show" %>
+                    <%= link_to content_tag(:i, nil, class: "fa fa-edit"), edit_customer_path(customer), class: "btn blue", title: "Edit" %>
+                    <%= link_to content_tag(:i, nil, class: "fa fa-times"), customer, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn red" %>
                 </div>
             </td>
             <% end %>
