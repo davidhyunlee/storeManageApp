@@ -1,0 +1,19 @@
+<h3 class="page-title sbold">Sale Type Details</h3>
+
+<p>
+  <strong>Name:</strong>
+  <%= @sale_type.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @sale_type.description %>
+</p>
+
+<p>
+  <strong>Tracked:</strong>
+  <%= @sale_type.tracked %>
+</p>
+
+<%= link_to 'Edit', edit_sale_type_path(@sale_type) %> |
+<%= link_to 'Back', sale_types_path %>

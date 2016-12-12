@@ -1,0 +1,225 @@
+<% if tenant.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(tenant.errors.count, "error") %> prohibited this tenant from being saved:</h2>
+
+    <ul>
+    <% tenant.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="portlet form light bordered">
+  <%= form_for tenant, :html => {:class => 'form-horizontal form-bordered form-row-stripped'}  do |f| %>
+  <div class="form-body">
+    <div class="form-group">
+        <%= f.label :goal, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :goal, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :date_applied, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.date_field :date_applied, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :first_name, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :first_name, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :last_name, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :last_name, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :employment, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :employment, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :employment_contact, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :employment_contact, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :paycheck_amount, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :paycheck_amount, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :ssn, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :ssn, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :phone_number, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :phone_number, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :email, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :email, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :property_type, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :property_type, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :bed, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :bed, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :bath, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :bath, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :laundry, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :laundry, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :sqft, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :sqft, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :rent_budget, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :rent_budget, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :area, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :area, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :move_in_date, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :move_in_date, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :note, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.cktext_area :note, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :family_count, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :family_count, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :tenant_names, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :tenant_names, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :pets, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :pets, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :current_lease, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :current_lease, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :current_address, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :current_address, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :reference_name, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :reference_name, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :reference_contact, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :reference_contact, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :introduced, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :introduced, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :option_address1, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :option_address1, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :option_address2, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :option_address2, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :option_address3, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :option_address3, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :option_address4, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :option_address4, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :option_address5, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :option_address5, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= f.label :option_address6, class: "control-label col-md-3" %>
+        <div class="col-md-9">
+            <%= f.text_field :option_address6, placeholder: "", class: "form-control" %>
+        </div>
+    </div>
+
+    <div class="form-actions actions">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-9">
+                <%= f.submit "Submit", class: "btn green" %>
+                <%= f.submit "Reset", type: "reset", class: "btn default" %>
+            </div>
+        </div>
+    </div>
+  <% end %>
+  </div>
+</div>

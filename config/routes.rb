@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :tenants
+  resources :sale_types
   mount Ckeditor::Engine => '/ckeditor'
   
   post 'inventory/save'

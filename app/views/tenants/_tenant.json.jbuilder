@@ -1,0 +1,2 @@
+json.extract! tenant, :id, :goal, :date_applied, :first_name, :last_name, :employment, :employment_contact, :paycheck_amount, :ssn, :phone_number, :email, :type, :bed, :bath, :laundry, :sqft, :rent_budget, :area, :move_in_date, :note, :family_count, :tenant_names, :pets, :current_lease, :current_address, :reference_name, :reference_contact, :introduced, :option_address1, :option_address2, :option_address3, :option_address4, :option_address5, :option_address6, :created_at, :updated_at
+json.url tenant_url(tenant, format: :json)

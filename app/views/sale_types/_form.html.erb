@@ -1,0 +1,41 @@
+<% if sale_type.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(sale_type.errors.count, "error") %> prohibited this sale_type from being saved:</h2>
+
+    <ul>
+    <% sale_type.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="portlet form light bordered">
+<%= form_for sale_type, :html => {:class => 'form-horizontal form-bordered form-row-stripped'}  do |f| %>
+    <div class="form-body">
+        <div class="form-group">
+            <%= f.label :name, "Sale Type", class: "control-label col-md-3" %>
+            <div class="col-md-9">
+                <%= f.text_field :name, placeholder: "Sale Type", class: "form-control" %>
+                <span class="help-block">Required: Name of Sale Type. Ex: New Activation, Reactivation, Upgrade, etc.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <%= f.label :description, "Description", class: "control-label col-md-3" %>
+            <div class="col-md-9">
+                <%= f.text_field :description, placeholder: "Description of Sale Type", class: "form-control" %>
+                <span class="help-block">Optional: Description of Sale Type</span>
+            </div>
+        </div>
+
+        <div class="form-actions actions">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-9">
+                    <%= f.submit "Submit", class: "btn green" %>
+                    <%= f.submit "Reset", type: "reset", class: "btn default" %>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>
+</div>

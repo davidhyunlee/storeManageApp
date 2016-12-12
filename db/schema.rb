@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212081909) do
+ActiveRecord::Schema.define(version: 20161212224849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_trgm"
 
   create_table "carriers", force: :cascade do |t|
     t.string   "name",       null: false
@@ -177,6 +176,14 @@ ActiveRecord::Schema.define(version: 20161212081909) do
     t.index ["user_id"], name: "index_received_items_on_user_id", using: :btree
   end
 
+  create_table "sale_types", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.boolean  "tracked"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "sellables", force: :cascade do |t|
     t.integer  "category_id"
     t.integer  "carrier_id"
@@ -249,6 +256,44 @@ ActiveRecord::Schema.define(version: 20161212081909) do
     t.string   "fax_number"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "tenants", force: :cascade do |t|
+    t.string   "goal"
+    t.date     "date_applied"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "employment"
+    t.string   "employment_contact"
+    t.string   "paycheck_amount"
+    t.string   "ssn"
+    t.string   "phone_number"
+    t.string   "email"
+    t.string   "property_type"
+    t.string   "bed"
+    t.string   "bath"
+    t.string   "laundry"
+    t.string   "sqft"
+    t.string   "rent_budget"
+    t.string   "area"
+    t.string   "move_in_date"
+    t.text     "note"
+    t.string   "family_count"
+    t.string   "tenant_names"
+    t.string   "pets"
+    t.string   "current_lease"
+    t.string   "current_address"
+    t.string   "reference_name"
+    t.string   "reference_contact"
+    t.string   "introduced"
+    t.string   "option_address1"
+    t.string   "option_address2"
+    t.string   "option_address3"
+    t.string   "option_address4"
+    t.string   "option_address5"
+    t.string   "option_address6"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "users", force: :cascade do |t|

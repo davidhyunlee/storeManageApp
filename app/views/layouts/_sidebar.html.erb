@@ -85,6 +85,27 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item  <%= "active open" if params[:controller] == "tenants" %>">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="icon-users"></i>
+                    <span class="title">Tenants</span>
+                    <%= "<span class='selected'></span>".html_safe if params[:controller] == "tenants" %>
+                    <span class="arrow <%= "open" if params[:controller] == "tenants" %>"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item <%= "active open" if params[:controller] == "tenants" && params[:action] == "index" %>">
+                        <%= link_to tenants_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <span class="title">Tenant List</span>
+                            <%= "<span class='selected'></span>".html_safe if params[:controller] == "tenants" && params[:action] == "index" %>
+                        <% end %>
+                    </li>
+                    <li class="nav-item <%= "active open" if params[:controller] == "tenants" && params[:action] == "new" %>">
+                        <%= link_to new_tenant_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <span class="title">Add Tenant</span>
+                        <% end %>
+                    </li>
+                </ul>
+            </li>
             <li class="nav-item  <%= "active open" if params[:controller] == "sellables" %>">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-mobile"></i>
@@ -289,6 +310,21 @@
                             </li>
                             <li class="nav-item">
                                 <%= link_to "New Payment Type", new_payment_type_path, class: "nav-link", data: { no_turbolink: true } %>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item  ">
+                        <%= link_to root_path, class: "nav-link nav-toggle", data: { no_turbolink: true } do %>
+                            <i class="fa fa-folder"></i>
+                            <span class="title">Sale Types</span>
+                            <span class="arrow"></span>
+                        <% end %>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <%= link_to "List Sale Types", sale_types_path, class: "nav-link", data: { no_turbolink: true } %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to "New Sale Type", new_sale_type_path, class: "nav-link", data: { no_turbolink: true } %>
                             </li>
                         </ul>
                     </li>
