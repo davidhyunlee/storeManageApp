@@ -1,2 +1,51 @@
+<h3 class="page-title sbold"><%= @payment.customer.full_name %></h3>
+
+<div class="portlet light bordered">
+	<div class="form-body">
+      <h3 class="form-section">Payment Details</h3>
+      <div class="row">
+          <div class="col-md-6">
+              <div class="form-group">
+                  <label class="control-label col-md-3">Store:</label>
+                  <div class="col-md-9">
+                      <p class="form-control-static"> <%= @payment.store.alias %> </p>
+                  </div>
+              </div>
+          </div>
+      </div>      
+      <div class="row">
+          <div class="col-md-6">
+              <div class="form-group">
+                  <label class="control-label col-md-3">Carrier:</label>
+                  <div class="col-md-9">
+                      <p class="form-control-static"> <%= @payment.carrier.name %> </p>
+                  </div>
+              </div>
+          </div>
+      </div>     
+      <div class="row">
+          <div class="col-md-6">
+              <div class="form-group">
+                  <label class="control-label col-md-3">Payment Type:</label>
+                  <div class="col-md-9">
+                      <p class="form-control-static"> <%= @payment.payment_type.name %> </p>
+                  </div>
+              </div>
+          </div>
+      </div>     
+      <div class="row">
+          <div class="col-md-6">
+              <div class="form-group">
+                  <label class="control-label col-md-3">Carrier:</label>
+                  <div class="col-md-9">
+                      <p class="form-control-static"> <%= @payment.carrier.name %> </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
 <%= link_to 'Edit', edit_payment_path(@payment) %> |
 <%= link_to 'Back', payments_path %>

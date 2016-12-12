@@ -23,6 +23,7 @@ class PaymentsController < ApplicationController
 
   # GET /payments/1/edit
   def edit
+    authorize @payment
   end
 
   # POST /payments
@@ -57,6 +58,8 @@ class PaymentsController < ApplicationController
   # PATCH/PUT /payments/1
   # PATCH/PUT /payments/1.json
   def update
+    authorize @payment
+
     respond_to do |format|
       if @payment.update(payment_params)
         format.html { redirect_to @payment, notice: 'Payment was successfully updated.' }
@@ -90,6 +93,22 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def verify
+    authorize Payment
+    @payment = Payment.find(params[:id])
+    @index = params[:index]
+
+    if current_user.manager_accessible
+      @payment.verify(current_user)
+    elsif current_user.employee?
+      @payment.employee_verify(current_user)
+    end
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_payment
@@ -98,6 +117,6 @@ class PaymentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_params
-      params.require(:payment).permit(:amount, :invoice_id, :store_id, :customer_id, :carrier_id, :user_id, :number_id, :payment_type_id, :invoiced)
+      params.require(:payment).permit(:amount, :invoice_id, :store_id, :customer_id, :carrier_id, :user_id, :number_id, :payment_type_id, :invoiced, :verifying_user)
     end
 end

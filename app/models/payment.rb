@@ -9,4 +9,16 @@ class Payment < ApplicationRecord
 
   validates :amount, :payment_type_id, :store_id, :customer_id, :carrier_id, :user_id, :presence => true
   validates :amount, :numericality => true
+
+  def verify(user)
+  	self.verified = true
+  	self.verifying_user = user.id
+  	self.save
+  end
+
+  def employee_verify(user)
+  	self.employee_verified = true
+  	self.verifying_user = user.id
+  	self.save
+  end
 end

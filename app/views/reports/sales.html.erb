@@ -80,21 +80,39 @@
                 <th> Number & Carrier </th>
                 <th> Verified? </th>
                 <th> Created By </th>
+                <th> Date </th>
                 <th> Amount </th>
             </tr>
         </thead>
         <tbody>
-          <% @payments.each do |payment| %>
+          <% @payments.order("created_at desc").each.with_index do |payment, index| %>
             <tr>
         <td><%= payment.payment_type.name %></td>
         <td><%= payment.customer.full_name_lmf %></td>
         <td><%= number_to_phone(payment.number.number, area_code: true) if payment.number %> <%= link_to "Invoice ##{payment.invoice.id}", invoice_path(payment.invoice) if payment.invoice %> (<%= payment.carrier.name %>)</td>
-        <td>
-          <%= "Yes" if payment.verified? %>
-          <%= "No" unless payment.verified? %>
-          <%= link_to "(verify)", dashboard_path unless payment.verified? %>
+        <td class="verify_<%= index %>">
+          <% if payment.verified? %>
+            <strong>Yes</strong> <%= "(#{User.find(payment.verifying_user).first_name})" if payment.verifying_user %>
+          <% elsif payment.employee_verified? %>
+            Yes <%= "(#{User.find(payment.verifying_user).first_name})" if payment.verifying_user %>
+            <% if current_user.manager_accessible %>
+              <%= button_to "/payments/verify?id="+payment.id.to_s+"&index="+index.to_s, class: "btn btn-xs green", remote: true do %>
+                <i class="fa fa-check"></i>
+              <% end%>              
+            <% end %>
+          <% else %>
+            <div class="col-md-6" style="padding: 0;">
+              No
+            </div>
+            <div class="col-md-6" style="padding: 0">
+            <%= button_to "/payments/verify?id="+payment.id.to_s+"&index="+index.to_s, class: "btn btn-xs green", remote: true do %>
+              <i class="fa fa-check"></i>
+            <% end%>
+            </div>
+          <% end %>
         </td>
         <td><%= payment.user.first_name %></td>
+        <td><%= payment.created_at.in_time_zone(Setting.time_zone).strftime("%D %r") %></td>
         <td><%= number_to_currency(payment.amount) %></td>
             </tr>
           <% end %>

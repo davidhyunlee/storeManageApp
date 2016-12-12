@@ -1,6 +1,6 @@
 <h3 class="page-title"> Payments for <b><%= current_store.alias %></b></h3>
 
-<table class="table table-condensed table-bordered table-hover">
+<table class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
             <th> Payment Type </th>
@@ -31,7 +31,9 @@
           <td>
               <% if current_user.superuser? %>
               <div class="btn-group btn-group-sm btn-group-solid">
-                  <%= link_to 'Delete', payment, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn red" %>
+                  <%= link_to content_tag(:i, nil, class: "fa fa-file-o"), payment, class: "btn green tooltips", title: "Show" %>
+                  <%= link_to content_tag(:i, nil, class: "fa fa-edit"), edit_payment_path(payment), class: "btn blue", title: "Edit" %>
+                  <%= link_to content_tag(:i, nil, class: "fa fa-times"), payment, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn red" %>
               </div>
               <% end %>
           </td>

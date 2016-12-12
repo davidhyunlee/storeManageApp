@@ -1,0 +1,5 @@
+<% if @payment.verified? %>
+	$(".verify_<%= @index %>").empty().append("<strong>Yes</strong> (<%= User.find(@payment.verifying_user).first_name if @payment.verifying_user %>)")
+<% elsif @payment.employee_verified? %>
+	$(".verify_<%= @index %>").empty().append("Yes (<%= User.find(@payment.verifying_user).first_name if @payment.verifying_user %>)")
+<% end %>

@@ -8,7 +8,7 @@ class PaymentPolicy < ApplicationPolicy
 	end
 
 	def edit?
-		@current_user.employee_accessible
+		@current_user.superuser?
 	end
 
 	def show?
@@ -20,14 +20,18 @@ class PaymentPolicy < ApplicationPolicy
 	end
 
 	def update?
-		@current_user.employee_accessible
+		@current_user.superuser?
 	end
 
 	def destroy?
-		@current_user.employee_accessible
+		@current_user.superuser?
 	end
 
 	def carrier_and_payment_types?
+		@current_user.employee_accessible
+	end
+
+	def verify?
 		@current_user.employee_accessible
 	end
 

@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   get 'reports/payments' => 'reports#payments'
 
   get 'payments/carrier_and_payment_types' => 'payments#carrier_and_payment_types'
-
+  post 'payments/verify'
+  
   resources :payments, :settings, :payment_types, :serialized_items, :products, :inventories, :product_categories, :sellables, :stores, :users, :carriers, :categories, :performance_categories
 
   resources :plans do
