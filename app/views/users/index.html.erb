@@ -1,37 +1,38 @@
-<h3 class="page-title"> Users List
-  <small>(index of all system users)</small>
-</h3>
+<h3 class="page-title sbold">Users List</h3>
 
-<table class="table table-hover table-bordered table-striped">
-    <thead>
-        <tr>
-            <th> E-mail </th>
-            <th> First Name </th>
-            <th> Last Name </th>
-            <th> Middle Name </th>
-            <th> Role </th>
-            <th> Actions </th>
-        </tr>
-    </thead>
-    <tbody>
-    	<% @users.each do |user| %>
-        <tr>
-            <td> <%= user.email %> </td>
-            <td> <%= user.first_name %> </td>
-            <td> <%= user.last_name %> </td>
-            <td> <%= user.middle_name %> </td>
-            <td> <%= user.role %> </td>
-            <td>
-                <div class="btn-group">
-                    <%= link_to "Edit", edit_user_path(user), class: "btn btn-default" %>
-                    <% if policy(user).destroy? %>
-                    <%= link_to 'Delete', user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-                    <% end %>
-                </div>
-            </td>
-        </tr>
-        <% end %>
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th> E-mail </th>
+                <th> First Name </th>
+                <th> Last Name </th>
+                <th> Middle Name </th>
+                <th> Role </th>
+                <th style="width: 120px;"> Actions </th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @users.each do |user| %>
+            <tr>
+                <td> <%= user.email %> </td>
+                <td> <%= user.first_name %> </td>
+                <td> <%= user.last_name %> </td>
+                <td> <%= user.middle_name %> </td>
+                <td> <%= user.role %> </td>
+                <td>
+                    <div class="btn-group">
+                        <%#= link_to content_tag(:i, nil, class: "fa fa-file-o"), user, class: "btn green tooltips", title: "Show" %>
+                        <%= link_to content_tag(:i, nil, class: "fa fa-edit"), edit_user_path(user), class: "btn blue", title: "Edit" %>
+                        <% if policy(user).destroy? %>
+                            <%= link_to content_tag(:i, nil, class: "fa fa-times"), user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn red" %>
+                        <% end %>
+                    </div>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
 
 <%= paginate @users %>

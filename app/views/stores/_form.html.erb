@@ -1,28 +1,41 @@
-<%= form_for(store) do |f| %>
-  <% if store.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(store.errors.count, "error") %> prohibited this store from being saved:</h2>
+<% if store.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(store.errors.count, "error") %> prohibited this store from being saved:</h2>
 
-      <ul>
-      <% store.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="portlet light bordered">
-    <div class="form-group">
-      <%= f.label :name %>
-      <%= f.text_field :name, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :alias %>
-      <%= f.text_field :alias, class: "form-control" %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+    <ul>
+    <% store.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
   </div>
 <% end %>
+
+<div class="portlet form light bordered">
+  <%= form_for store, :html => {:class => 'form-horizontal form-bordered form-row-stripped'} do |f| %>
+    <div class="form-body">
+        <div class="form-group">
+            <%= f.label :name, "Store Name", class: "control-label col-md-3" %>
+            <div class="col-md-9">
+                <%= f.text_field :name, placeholder: "Store Name", class: "form-control" %>
+                <span class="help-block">Official Store Name</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <%= f.label :name, "Alias", class: "control-label col-md-3" %>
+            <div class="col-md-9">
+                <%= f.text_field :name, placeholder: "Alias", class: "form-control" %>
+                <span class="help-block">This is what will be used throughout the application. Create a easily identifiable alias for your store.</span>
+            </div>
+        </div>
+
+        <div class="form-actions actions">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-9">
+                    <%= f.submit "Submit", class: "btn green" %>
+                    <%= f.submit "Reset", type: "reset", class: "btn default" %>
+                </div>
+            </div>
+        </div>
+    </div>
+  <% end %>
+</div>

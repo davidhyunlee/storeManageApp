@@ -1,28 +1,34 @@
-<%= form_for(carrier) do |f| %>
-  <% if carrier.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(carrier.errors.count, "error") %> prohibited this carrier from being saved:</h2>
+<% if carrier.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(carrier.errors.count, "error") %> prohibited this carrier from being saved:</h2>
 
-      <ul>
-      <% carrier.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="portlet light bordered">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <%= f.label :name, "Carrier Name" %>
-            <%= f.text_field :name, class: "form-control" %>          
-          </div>
-        </div>
-      </div>
-    </div>
-
-  <div class="actions">
-    <%= f.submit %>
+    <ul>
+    <% carrier.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
   </div>
 <% end %>
+
+<div class="portlet form light bordered">
+  <%= form_for carrier, :html => {:class => 'form-horizontal form-bordered form-row-stripped'} do |f| %>
+    <div class="form-body">
+        <div class="form-group">
+            <%= f.label :name, "Carrier Name", class: "control-label col-md-3" %>
+            <div class="col-md-9">
+                <%= f.text_field :name, placeholder: "Carrier Name", class: "form-control" %>
+                <span class="help-block">Name of Wireless Carrier.</span>
+            </div>
+        </div>
+
+        <div class="form-actions actions">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-9">
+                    <%= f.submit "Submit", class: "btn green" %>
+                    <%= f.submit "Reset", type: "reset", class: "btn default" %>
+                </div>
+            </div>
+        </div>
+    </div>
+  <% end %>
+</div>

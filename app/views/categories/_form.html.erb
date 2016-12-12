@@ -1,39 +1,41 @@
-<%= form_for(category) do |f| %>
-  <% if category.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+<% if category.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
 
-      <ul>
-      <% category.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="portlet light bordered">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <%= f.label :name, "Category Name" %>
-            <%= f.text_field :name, class: "form-control" %>          
-          </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <%= f.label :description %>
-            <%= f.text_field :description, class: "form-control" %>          
-          </div>          
-        </div>
-      </div>    
-    </div>
-
-
-  <div class="actions">
-    <%= f.submit "Create Category", class: "btn green-meadow" if params[:action] == "new" %>
-    <%= f.submit "Update Category", class: "btn green-meadow" if params[:action] == "edit" %>
-    <%= f.submit "Reset", type: "reset", class: "btn btn-default" %>
+    <ul>
+    <% category.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
   </div>
 <% end %>
+
+<div class="portlet form light bordered">
+  <%= form_for category, :html => {:class => 'form-horizontal form-bordered form-row-stripped'} do |f| %>
+    <div class="form-body">
+        <div class="form-group">
+            <%= f.label :name, "Category Name", class: "control-label col-md-3" %>
+            <div class="col-md-9">
+                <%= f.text_field :name, placeholder: "Category Name", class: "form-control" %>
+                <span class="help-block">Name of category for your products. Ex: Accessory, Phone, SIM Card, etc.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <%= f.label :description, "Category Description", class: "control-label col-md-3" %>
+            <div class="col-md-9">
+                <%= f.text_field :description, placeholder: "Description", class: "form-control" %>
+                <span class="help-block">Optional: Description of your category. Used for tooltips for new users.</span>
+            </div>
+        </div>
+
+        <div class="form-actions actions">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-9">
+                    <%= f.submit "Submit", class: "btn green" %>
+                    <%= f.submit "Reset", type: "reset", class: "btn default" %>
+                </div>
+            </div>
+        </div>
+    </div>
+  <% end %>
+</div>

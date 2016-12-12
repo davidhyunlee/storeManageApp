@@ -1,35 +1,30 @@
-<h3 class="page-title"> Carrier List
-  <small></small>
-</h3>
+<h3 class="page-title sbold"> Carrier List</h3>
 
-<p id="notice"><%= notice %></p>
-
-<div class="portlet-body">
-    <div class="table-scrollable">
-        <table class="table table-hover table-striped">
-            <thead>
-                <tr>
-                    <th> ID </th>
-                    <th> Carrier Name </th>
-                    <th> Actions </th>
-                </tr>
-            </thead>
-            <tbody>
-              <% @carriers.each do |carrier| %>
-                <tr>
-                    <td> <%= link_to carrier.id, carrier %> </td>
-                    <td> <%= link_to carrier.name, carrier %> </td>
-                    <td>
-                        <div class="btn-group">
-                            <%= link_to "Edit", edit_carrier_path(carrier), class: "btn btn-default" %>
-                            <% if policy(carrier).destroy? %>
-                            <%= link_to 'Delete', carrier_path(carrier), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-                            <% end %>
-                        </div>
-                    </td>
-                </tr>
-                <% end %>
-            </tbody>
-        </table>
-    </div>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th> Carrier Name </th>
+                <th style="width: 120px;"> Actions </th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @carriers.each do |carrier| %>
+            <tr>
+                <td><%= carrier.name %></td>
+                <td>
+                    <% if current_user.superuser? %>
+                    <div class="btn-group btn-group-sm btn-group-solid">
+                        <%#= link_to content_tag(:i, nil, class: "fa fa-file-o"), carrier, class: "btn green tooltips", title: "Show #{carrier.name}" %>
+                        <%= link_to content_tag(:i, nil, class: "fa fa-edit"), edit_carrier_path(carrier), class: "btn blue", title: "Edit #{carrier.name}" %>
+                        <%= link_to content_tag(:i, nil, class: "fa fa-times"), carrier, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn red" %>
+                    </div>
+                    <% end %>
+                </td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
 </div>
+
+<%= paginate @carriers %>

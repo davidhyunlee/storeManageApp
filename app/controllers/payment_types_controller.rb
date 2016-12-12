@@ -4,7 +4,7 @@ class PaymentTypesController < ApplicationController
   # GET /payment_types
   # GET /payment_types.json
   def index
-    @payment_types = PaymentType.all
+    @payment_types = PaymentType.all.page(params[:page])
     authorize @payment_types
   end
 

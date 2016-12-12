@@ -4,7 +4,7 @@ class CarriersController < ApplicationController
   # GET /carriers
   # GET /carriers.json
   def index
-    @carriers = Carrier.all
+    @carriers = Carrier.all.page(params[:page])
     authorize Carrier
   end
 
@@ -33,7 +33,7 @@ class CarriersController < ApplicationController
 
     respond_to do |format|
       if @carrier.save
-        format.html { redirect_to @carrier, notice: 'Carrier was successfully created.' }
+        format.html { redirect_to carriers_path, notice: 'Carrier was successfully created.' }
         format.json { render :show, status: :created, location: @carrier }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class CarriersController < ApplicationController
     authorize @carrier
     respond_to do |format|
       if @carrier.update(carrier_params)
-        format.html { redirect_to @carrier, notice: 'Carrier was successfully updated.' }
+        format.html { redirect_to carriers_path, notice: 'Carrier was successfully updated.' }
         format.json { render :show, status: :ok, location: @carrier }
       else
         format.html { render :edit }
