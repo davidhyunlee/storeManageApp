@@ -1,145 +1,116 @@
+<% if sellable.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(sellable.errors.count, "error") %> prohibited this sellable from being saved:</h2>
 
-<div class="row">
-    <div class="col-md-12">
-        <!-- BEGIN FORM-->
-        <%= form_for(sellable, :html => { :class => "form-horizontal form-row-separated" }) do |f| %>
-          <% if sellable.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(sellable.errors.count, "error") %> prohibited this sellable from being saved:</h2>
+    <ul>
+    <% sellable.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 
-              <ul>
-              <% sellable.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-              </ul>
+<div class="portlet form light bordered">
+  <%= form_for sellable, :html => {:class => 'form-horizontal form-bordered form-row-stripped'} do |f| %>
+    <div class="form-body">
+        <div class="form-group">
+            <%= f.label :description, "Description", class: "control-label col-md-3" %>
+            <div class="col-md-9">
+                <%= f.text_field :description, placeholder: "Description of Product", class: "form-control" %>
+                <span class="help-block">Required: This is the description of your product that will appear in searches, invoices, and inventory lists.</span>
             </div>
-          <% end %>
-            <div class="portlet">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <i class="fa fa-shopping-cart"></i><b class="new-sellable-title">New Item</b></div>
+        </div>
+        <div class="form-group">
+            <%= f.label :category_id, "Category", class: "control-label col-md-3" %>
+            <div class="col-md-9">
+                <%= f.collection_select :category_id, Category.all, :id, :name, {prompt: "Select a Category"}, {class: "form-control"} %>
+                <span class="help-block">Required: Add product to a category.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <%= f.label :carrier_id, "Carrier", class: "control-label col-md-3" %>
+            <div class="col-md-9">
+                <%= f.collection_select :carrier_id, Carrier.all, :id, :name, {prompt: ""}, {class: "form-control"} %>
+                <span class="help-block">Optional: Leave blank if your product doesn't belong to a carrier.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <%= f.label :sku, "SKU", class: "control-label col-md-3" %>
+            <div class="col-md-9">
+                <%= f.text_field :sku, placeholder: "Enter a unique SKU", class: "form-control" %>
+                <span class="help-block">Required: Stock Keeping Unit. Must be unique.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3">Product Options</label>
+            <div class="col-md-9">
+                <div class="mt-checkbox-list">
+                    <label class="mt-checkbox mt-checkbox-outline">
+                        <%= f.check_box :taxable %> Taxable?
+                        <span></span>
+                    </label>
+                    <label class="mt-checkbox mt-checkbox-outline">
+                        <%= f.check_box :serialized %> Serial Numbered Product?
+                        <span></span>
+                    </label>
                 </div>
-                <div class="portlet-body">
-                    <div class="tabbable-bordered">
-                        <ul class="nav nav-tabs">
-                            <li class="active">
-                                <a href="#tab_general" data-toggle="tab" aria-expanded="true"> General </a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tab_general">
-                                <div class="form-body">
-                                    <div class="form-group">
-                                        <%= f.label :description, "Description:", class: "col-md-2 control-label" do %>
-                                            Description: <span class="required"> * </span>
-                                        <% end %>
-                                        <div class="col-md-10">
-                                            <%= f.text_field :description, class: "form-control sellable-title" %>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.label :category_id, "Category:", class: "col-md-2 control-label" do %>
-                                            Category: <span class="required"> * </span>
-                                        <% end %>
-                                        <div class="col-md-10">
-                                            <%= f.collection_select :category_id, Category.all, :id, :name, {prompt: "Select a category"}, {class: "form-control"} %>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.label :carrier_id, "Carrier:", class: "col-md-2 control-label" do %>
-                                            Carrier: <span class="required"> * </span>
-                                        <% end %>
-                                        <div class="col-md-10">
-                                            <%= f.collection_select :carrier_id, Carrier.all, :id, :name, {prompt: "Select a carrier"}, {class: "form-control"} %>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.label :sku, "SKU:", class: "col-md-2 control-label" do %>
-                                            SKU: <span class="required"> * </span>
-                                        <% end %>
-                                        <div class="col-md-10">
-                                            <%= f.text_field :sku, class: "form-control" %>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.label :taxable, "Taxable:", class: "col-md-2 control-label" do %>
-                                            Taxable: <span class="required"> * </span>
-                                        <% end %>
-                                        <div class="col-md-10">
-                                            <%= f.check_box :taxable, class: "form-control" %>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.label :serialized, "Serialized:", class: "col-md-2 control-label" do %>
-                                            Serialized: <span class="required"> * </span>
-                                        <% end %>
-                                        <div class="col-md-10">
-                                            <%= f.check_box :serialized, class: "form-control" %>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.label :msrp, "MSRP:", class: "col-md-2 control-label" do %>
-                                            MSRP: <span class="required"> * </span>
-                                        <% end %>
-                                        <div class="col-md-10">
-                                            <%= f.text_field :msrp, class: "form-control" %>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.label :taxable_price, "Taxable Price:", class: "col-md-2 control-label" do %>
-                                            Taxable Price: <span class="required"> * </span>
-                                        <% end %>
-                                        <div class="col-md-10">
-                                            <%= f.text_field :taxable_price, class: "form-control" %>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.label :retail_price, "Retail Price:", class: "col-md-2 control-label" do %>
-                                            Retail Price: <span class="required"> * </span>
-                                        <% end %>
-                                        <div class="col-md-10">
-                                            <%= f.text_field :retail_price, class: "form-control" %>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.label :promo_price, "Promo Price:", class: "col-md-2 control-label" do %>
-                                            Promo Price: <span class="required"> * </span>
-                                        <% end %>
-                                        <div class="col-md-10">
-                                            <%= f.text_field :promo_price, class: "form-control" %>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.label :port_price, "Port-in Price:", class: "col-md-2 control-label" do %>
-                                            Port-In Price: <span class="required"> * </span>
-                                        <% end %>
-                                        <div class="col-md-10">
-                                            <%= f.text_field :port_price, class: "form-control" %>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.label :upgrade_aal_price, "Upgrade Add-A-Line Price:", class: "col-md-2 control-label" do %>
-                                            Upgrade Add-A-Line Price: <span class="required"> * </span>
-                                        <% end %>
-                                        <div class="col-md-10">
-                                            <%= f.text_field :upgrade_aal_price, class: "form-control" %>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label">Product Pricing</label>
+            <div class="col-md-9">
+                <div class="form-group">
+                    <%= f.label :msrp, "MSRP", class: "control-label col-md-2" %>
+                    <div class="col-md-10">
+                        <%= f.text_field :msrp, placeholder: "MSRP", class: "form-control" %>
+                        <span class="help-block">Optional: Manufacturers Suggest Retail Price. If this is included, the customer will be able to see the amount they saved when charged a price below MSRP.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <%= f.label :taxable_price, "Taxable Price", class: "control-label col-md-2" %>
+                    <div class="col-md-10">
+                        <%= f.text_field :taxable_price, placeholder: "Taxable Price", class: "form-control" %>
+                        <span class="help-block">Required: This is the price that will be used to calculate sales tax. Set sales tax rate in settings.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <%= f.label :retail_price, "Retail Price", class: "control-label col-md-2" %>
+                    <div class="col-md-10">
+                        <%= f.text_field :retail_price, placeholder: "Retail / Regular Price", class: "form-control" %>
+                        <span class="help-block">Required: This is the retail / regular price you will charge your customers.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <%= f.label :promo_price, "Promotional Price", class: "control-label col-md-2" %>
+                    <div class="col-md-10">
+                        <%= f.text_field :promo_price, placeholder: "Promotional Price", class: "form-control" %>
+                        <span class="help-block">Optional: Enter a promotional price if there is a promo available for this item. Leave blank to disable.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <%= f.label :port_price, "Port-in Price", class: "control-label col-md-2" %>
+                    <div class="col-md-10">
+                        <%= f.text_field :port_price, placeholder: "Port-in Price", class: "form-control" %>
+                        <span class="help-block">Optional: Enter the price you charge for port-in sales. Leave blank to disable.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <%= f.label :upgrade_aal_price, "Add-A-Line Price", class: "control-label col-md-2" %>
+                    <div class="col-md-10">
+                        <%= f.text_field :upgrade_aal_price, placeholder: "Upgrade Add-A-Line Price", class: "form-control" %>
+                        <span class="help-block">Optional: Enter the price you charge for upgrade add-a-line sales. Leave blank to disable.</span>
                     </div>
                 </div>
             </div>
-                    <%= f.submit "Create New Item", class: "btn green" if params[:action] == "new" %>
-                    <%= f.submit "Update Item", class: "btn green" if params[:action] == "edit" %>
-        <% end %>
+        </div>
+        <div class="form-actions actions">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-9">
+                    <%= f.submit "Submit", class: "btn green" %>
+                    <%= f.submit "Reset", type: "reset", class: "btn default" %>
+                </div>
+            </div>
+        </div>
     </div>
+  <% end %>
 </div>
-
-<script type="text/javascript">
-  $(".sellable-title").keyup(function(event) {
-  var stt = $(this).val();
-  $(".new-sellable-title").text(stt);
-});
-</script>

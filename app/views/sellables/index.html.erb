@@ -1,78 +1,83 @@
-<h3 class="page-title"><b>Global Product List</b></h3>
-
-<div class="row">
-    <form action="/sellables" method="get">
-        <div class="col-md-3">
-            <div class="form-group">
-                <label>Category</label>
-                <%= select_tag "by_category", options_from_collection_for_select(Category.all, "id", "name"), include_blank: true, class: "form-control" %>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label>Carrier</label>
-                <%= select_tag "by_carrier", options_from_collection_for_select(Carrier.all, "id", "name"), include_blank: true, class: "form-control" %>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label>SKU</label>
-                <%= text_field_tag "by_sku", nil, class: "form-control" %>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label>Description</label>
-                <%= text_field_tag "by_description", nil, class: "form-control" %>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <button type="submit" class="btn blue">Filter</button>
-        </div>
-    </form>
+<h3 class="page-title sbold">Global Product List</h3>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th> SKU </th>
+                <th> Description </th>
+                <th> Category </th>
+                <th> Carrier </th>
+                <th> Retail Price </th>
+                <th> Promo Price </th>
+                <th> Port Price </th>
+                <th> AAL Price </th>
+                <th style="width: 120px;"> Actions </th>
+            </tr>
+            <tr>
+                <%= form_tag('/sellables', method: :get) do %>
+                <td><%= text_field_tag "by_sku", nil, class: "form-control input-sm" %></td>
+                <td><%= text_field_tag "description", nil, class: "form-control input-sm" %></td>
+                <td><%= select_tag "by_category", options_from_collection_for_select(Category.all, "id", "name"), include_blank: true, class: "form-control input-sm" %></td>
+                <td><%= select_tag "by_carrier", options_from_collection_for_select(Carrier.all, "id", "name"), include_blank: true, class: "form-control input-sm" %></td>
+                <td>
+                    <div class="margin-bottom-5">
+                            <%= text_field_tag "by_price[price_from]", nil, placeholder: "From", class: "form-control input-sm" %>
+                    </div>
+                    <%= text_field_tag "by_price[price_to]", nil, placeholder: "To", class: "form-control input-sm" %>
+                </td>
+                <td>
+                    <div class="margin-bottom-5">
+                            <%= text_field_tag "by_promo_price[price_from]", nil, placeholder: "From", class: "form-control input-sm" %>
+                    </div>
+                    <%= text_field_tag "by_promo_price[price_to]", nil, placeholder: "To", class: "form-control input-sm" %>
+                </td>
+                <td>
+                    <div class="margin-bottom-5">
+                            <%= text_field_tag "by_port_price[price_from]", nil, placeholder: "From", class: "form-control input-sm" %>
+                    </div>
+                    <%= text_field_tag "by_port_price[price_to]", nil, placeholder: "To", class: "form-control input-sm" %>
+                </td>
+                <td>
+                    <div class="margin-bottom-5">
+                            <%= text_field_tag "by_aal_price[price_from]", nil, placeholder: "From", class: "form-control input-sm" %>
+                    </div>
+                    <%= text_field_tag "by_aal_price[price_to]", nil, placeholder: "To", class: "form-control input-sm" %>
+                </td>
+                <td>
+                    <%= button_tag(type: "submit", title: "Search", class: "btn btn-default btn-sm") do %>
+                        <i class="fa fa-search"></i>
+                    <% end %>
+                    <%= button_tag(type: "reset", title: "Reset", class: "btn btn-default btn-sm") do %>
+                        <i class="fa fa-undo"></i>
+                    <% end %>
+                </td>
+                <% end %>
+            </tr>
+        </thead>
+        <tbody>
+          <% @sellables.each do |sellable| %>
+            <tr>
+                <td> <%= link_to sellable.sku, sellable_path(sellable) %> </td>
+                <td> <%= link_to sellable.description, sellable_path(sellable) %> </td>
+                <td> <%= link_to sellable.category.name, sellable_path(sellable) if sellable.category %> </td>
+                <td> <%= link_to sellable.carrier.name, sellable_path(sellable) if sellable.carrier %> </td>
+                <td> <%= link_to number_to_currency(sellable.retail_price), sellable_path(sellable) %> </td>
+                <td> <%= number_to_currency(sellable.promo_price) %> </td>
+                <td> <%= number_to_currency(sellable.port_price) %> </td>
+                <td> <%= number_to_currency(sellable.upgrade_aal_price) %> </td>
+                <td>
+                    <% if current_user.superuser? %>
+                    <div class="btn-group btn-group-sm btn-group-solid">
+                        <%= link_to content_tag(:i, nil, class: "fa fa-file-o"), sellable, class: "btn green tooltips", title: "Show #{sellable.name}" %>
+                        <%= link_to content_tag(:i, nil, class: "fa fa-edit"), edit_sellable_path(sellable), class: "btn blue", title: "Edit #{sellable.name}" %>
+                        <%= link_to content_tag(:i, nil, class: "fa fa-times"), sellable, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn red" %>
+                    </div>
+                    <% end %>
+                </td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
 </div>
-
-<br />
-
-<table class="table table-condensed table-bordered table-hover">
-    <thead>
-        <tr>
-            <th> SKU </th>
-            <th> Description </th>
-            <th> Category </th>
-            <th> Carrier </th>
-            <th> Retail Price </th>
-            <th> Promo Price </th>
-            <th> Port Price </th>
-            <th> AAL Price </th>
-            <% if current_user.superuser? %>
-            <th> Actions </th>
-            <% end %>
-        </tr>
-    </thead>
-    <tbody>
-      <% @sellables.each do |sellable| %>
-        <tr>
-            <td> <%= link_to sellable.sku, sellable_path(sellable) %> </td>
-            <td> <%= link_to sellable.description, sellable_path(sellable) %> </td>
-            <td> <%= link_to sellable.category.name, sellable_path(sellable) if sellable.category %> </td>
-            <td> <%= link_to sellable.carrier.name, sellable_path(sellable) if sellable.carrier %> </td>
-            <td> <%= link_to number_to_currency(sellable.retail_price), sellable_path(sellable) %> </td>
-            <td> <%= number_to_currency(sellable.promo_price) %> </td>
-            <td> <%= number_to_currency(sellable.port_price) %> </td>
-            <td> <%= number_to_currency(sellable.upgrade_aal_price) %> </td>
-            <% if current_user.superuser? %>
-            <td>
-                <div class="btn-group btn-group-sm btn-group-solid">
-                    <%= link_to 'Show', sellable, class: "btn green" %>
-                    <%= link_to 'Edit', edit_sellable_path(sellable), class: "btn blue" %>
-                    <%= link_to 'Destroy', sellable, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn red" %>
-                </div>
-            </td>
-            <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-</table>
 
 <%= paginate @sellables %>

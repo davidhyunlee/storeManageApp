@@ -1,15 +1,19 @@
 class SellablesController < ApplicationController
   before_action :set_sellable, only: [:show, :edit, :update, :destroy]
+  
   has_scope :by_category
   has_scope :by_carrier
   has_scope :by_sku
   has_scope :by_description
+  has_scope :by_price
+  has_scope :by_promo_price
+  has_scope :by_port_price
+  has_scope :by_aal_price
 
   # GET /sellables
   # GET /sellables.json
   def index
-    # @sellables = Sellable.order(params[:sort]).page(params[:page])
-    @sellables = apply_scopes(Sellable.order(params[:sort]).page(params[:page]))
+    @sellables = apply_scopes(Sellable).all.page(params[:page])
     authorize @sellables
   end
 

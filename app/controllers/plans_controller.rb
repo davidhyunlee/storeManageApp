@@ -9,7 +9,7 @@ class PlansController < ApplicationController
   # GET /plans
   # GET /plans.json
   def index
-    @plans = Plan.all
+    @plans = apply_scopes(Plan).all.page(params[:page])
     authorize @plans
   end
 
