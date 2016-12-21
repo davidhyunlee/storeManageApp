@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       get 'search_simple'
       get 'add_item'
       get 'add_number'
+      get 'number_details'
     end
   end
 

@@ -110,10 +110,11 @@ class InvoicesController < ApplicationController
   end
 
   def add_payment_line_item
-    @carrier = Carrier.find(params[:payment][:carrier_id])
-    @payment_type = PaymentType.find(params[:payment][:payment_type_id])
+    @carrier = Carrier.find(params[:carrier_id])
+    @payment_type = PaymentType.find(params[:payment_type_id])
     @customer = Customer.find(params[:customer_id])
     @amount = params[:amount]
+    @number = Number.find(params[:number_id])
 
     authorize Invoice
 
@@ -198,7 +199,21 @@ class InvoicesController < ApplicationController
         format.js
       end
     else
+      respond_to do |format|
+        format.js { render :file => "invoices/number_error.js.erb" }
+      end
+    end
+  end
 
+  def number_details
+    @customer = Customer.find(params[:customer_id])
+    @number = Number.find(params[:number_id])
+    @payment_types = PaymentType.where(carrier_id: @number.carrier.id).or(PaymentType.where(carrier_id: nil))
+
+    authorize Invoice
+
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -210,6 +225,6 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:customer_id, :user_id, :store_id, :total, :sales_tax, :subtotal, :note, line_items_attributes: [ :invoice_id, :sellable_id, :simple_item_id, :serialized_item_id, :quantity, :tax_amount, :item_price, :sold_price, :plan_id, :sale_type, :payment_id], payments_attributes: [:carrier_id, :number_id, :payment_type_id, :amount, :customer_id, :invoice_id, :user_id, :store_id, :invoiced])
+      params.require(:invoice).permit(:customer_id, :user_id, :store_id, :total, :sales_tax, :subtotal, :note, line_items_attributes: [ :invoice_id, :number_id, :sellable_id, :simple_item_id, :serialized_item_id, :quantity, :tax_amount, :item_price, :sold_price, :plan_id, :sale_type, :payment_id], payments_attributes: [:carrier_id, :number_id, :payment_type_id, :amount, :customer_id, :invoice_id, :user_id, :store_id, :invoiced])
     end
 end

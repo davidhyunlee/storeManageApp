@@ -1,13 +1,4 @@
 $(".line_item_area").append("<%= j render partial: 'invoices/add_payment_line_item' %>");
 $("#payment").modal("hide");
-
-	// var subtotal = parseFloat($("#subtotal").text()) + <%= @amount.to_f %>
-	// var total = parseFloat($("#total").text()) + <%= @amount.to_f %>
-	
-	// $("#subtotal").text(subtotal.toFixed(2))
-	// // $("#salestax").text(salestax.toFixed(2))
-	// $("#total").text(total.toFixed(2))
-	
-	// $("#hidden_subtotal").attr("value", $("#subtotal").text())
-	// // $("#hidden_salestax").attr("value", $("#salestax").text())
-	// $("#hidden_total").attr("value", $("#total").text())
+$('.payment_field').remove()
+document.getElementById("invoicepaymentform").reset();

@@ -27,10 +27,7 @@ $(".number").change(function(){
   $.ajax({
     url: "/payments/carrier_and_payment_types",
     type: 'GET',
-    data: value,
-    success: function(data) {
-      $("#products_list").html(data.products)
-    }
+    data: value
   })
 
 })	

@@ -1,0 +1,22 @@
+<div class="form-group payment_field">
+    <%= label :carrier_id, "Carrier", class: "col-md-2 control-label" %>
+    <div class="col-md-10">
+    	<%= text_field_tag '', @number.carrier.name, disabled: true, class: 'form-control' %>
+		<%= hidden_field_tag :carrier_id, @number.carrier.id %>
+    </div>
+</div>
+<div class="form-group payment_field">
+    <%= label :payment_type_id, "Payment Type", class: "col-md-2 control-label" %>
+    <div class="col-md-10">
+		<%= select_tag "payment_type_id", options_from_collection_for_select(@payment_types.all, "id", "name"), class: "form-control" %>
+    </div>
+</div>
+<div class="form-group payment_field">
+    <%= label :amount, "Payment Amount", class: "col-md-2 control-label" %>
+    <div class="col-md-10">
+		<%= text_field_tag :amount, "", {class: "form-control"} %>
+    </div>
+    <%= hidden_field_tag :customer_id, params[:customer_id] %>
+	<%= hidden_field_tag :number_id, @number.id %>
+</div>
+

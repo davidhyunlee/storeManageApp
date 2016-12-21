@@ -292,40 +292,21 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title">Invoice a Payment</h4>
             </div>
-            <%= form_tag('/invoices/add_payment_line_item', method: :get, remote: true) do %>
+            <form action="/invoices/add_payment_line_item" data-remote="true" method="get" accept-charset="UTF-8" id="invoicepaymentform">
             <div class="modal-body">
-					<div class="form-horizontal">
-			            <div class="form-group">
-			                <%= label :number_id, "Number", class: "col-md-2 control-label" %>
-			                <div class="col-md-10">
-			                	<%= collection_select :payment, :number_id, @customer.numbers.all, :id, :number, {prompt: "Select a Number"}, {class: "form-control"} %>
-			                </div>
-			            </div>
-			            <div class="form-group">
-			                <%= label :carrier_id, "Carrier", class: "col-md-2 control-label" %>
-			                <div class="col-md-10">
-			                	<%= collection_select :payment, :carrier_id, Carrier.all, :id, :name, {prompt: "Select a Carrier"}, {class: "form-control"} %>
-			                </div>
-			            </div>
-			            <div class="form-group">
-			                <%= label :payment_type_id, "Payment Type", class: "col-md-2 control-label" %>
-			                <div class="col-md-10">
-												<%= collection_select :payment, :payment_type_id, PaymentType.all, :id, :name, {prompt: "Select Payment Type"}, {class: "form-control"} %>
-			                </div>
-			            </div>
-			            <div class="form-group">
-			                <%= label :amount, "Payment Amount", class: "col-md-2 control-label" %>
-			                <div class="col-md-10">
-												<%= text_field_tag :amount, "", {class: "form-control"} %>
-			                </div>
-			            </div>
-			            		<%= hidden_field_tag :customer_id, params[:customer_id] %>
-		        	</div>
+				<div class="form-horizontal">
+		            <div class="form-group number_select">
+		                <%= label :number_id, "Number", class: "col-md-2 control-label" %>
+		                <div class="col-md-10">
+		                	<%= select_tag "number_id", options_from_collection_for_select(@customer.numbers.all, "id", "number"), prompt: "Select a Number", class: "form-control number" %>
+		                </div>
+		            </div>
+	        	</div>
             </div>
             <div class="modal-footer">
-            	<%= submit_tag "Add Payment", {class: "btn btn-success green"} %>
+            	<button type="submit" class="btn btn-success green">Add Payment to Invoice</button>
             </div>
-            <% end %>
+            </form>
         </div>
     </div>
 </div>
@@ -342,37 +323,37 @@
             <div class="modal-body">
 					<div class="form-horizontal">
 			            <div class="form-group">
-			                <%= label :carrier_id, "Carrier", class: "col-md-2 control-label" %>
+			                <%= label_tag :carrier_id, "Carrier", class: "col-md-2 control-label" %>
 			                <div class="col-md-10">
 			                	<%= select_tag "carrier_id", options_from_collection_for_select(Carrier.all, "id", "name"), class: "form-control" %>
 			                </div>
 			            </div>
 			            <div class="form-group">
-			                <%= label :number, "Number to Add", class: "col-md-2 control-label" %>
+			                <%= label_tag :number, "Number to Add", class: "col-md-2 control-label" %>
 			                <div class="col-md-10">
 								<%= text_field_tag :number, nil, class: "form-control" %>
 			                </div>
 			            </div>
 			            <div class="form-group">
-			                <%= label :phone_model, "Phone Model", class: "col-md-2 control-label" %>
+			                <%= label_tag :phone_model, "Phone Model", class: "col-md-2 control-label" %>
 			                <div class="col-md-10">
 								<%= text_field_tag :phone_model, "", {class: "form-control"} %>
 			                </div>
 			            </div>
 			            <div class="form-group">
-			                <%= label :imei, "IMEI", class: "col-md-2 control-label" %>
+			                <%= label_tag :imei, "IMEI", class: "col-md-2 control-label" %>
 			                <div class="col-md-10">
 								<%= text_field_tag :imei, "", {class: "form-control"} %>
 			                </div>
 			            </div>
 			            <div class="form-group">
-			                <%= label :iccid, "ICCID", class: "col-md-2 control-label" %>
+			                <%= label_tag :iccid, "ICCID", class: "col-md-2 control-label" %>
 			                <div class="col-md-10">
 								<%= text_field_tag :iccid, "", {class: "form-control"} %>
 			                </div>
 			            </div>
 			            <div class="form-group">
-			                <%= label :act_date, "Activation Date", class: "col-md-2 control-label" %>
+			                <%= label_tag :act_date, "Activation Date", class: "col-md-2 control-label" %>
 			                <div class="col-md-10">
 								<%= date_field_tag :act_date, Date.today, {class: "form-control"} %>
 			                </div>
@@ -487,6 +468,23 @@
 	    url: "/invoices/search_simple",
 	    type: 'GET',
 	    data: ""
+	  })
+	});
+
+	$(".number").change(function(){
+
+	  var value = {
+	  	customer_id: "<%= @customer.id %>",
+	  	number_id: $(this).val()
+	  }
+	  
+	  $.ajax({
+	    url: "/invoices/number_details",
+	    type: 'GET',
+	    data: value,
+	    success: function(data) {
+	      $("#products_list").html(data.products)
+	    }
 	  })
 	});
 </script>

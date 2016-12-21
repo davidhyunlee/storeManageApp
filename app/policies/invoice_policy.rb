@@ -67,6 +67,10 @@ class InvoicePolicy < ApplicationPolicy
 		true
 	end
 
+	def number_details?
+		true
+	end
+
   class Scope < Scope
     def resolve
       scope
