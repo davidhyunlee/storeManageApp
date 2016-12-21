@@ -1,0 +1,4 @@
+$(" #payment ").remove();
+$(" #simple_item_inventory" ).after("<%= j render partial: 'invoices/update_payment_modal' %>");
+document.getElementById("addnumberform").reset();
+$(" #payment ").modal("hide");

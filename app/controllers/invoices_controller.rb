@@ -179,7 +179,28 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.js
     end 
-  end  
+  end
+
+  def add_number
+    @number = Number.new
+    @number.customer_id = params[:customer_id]
+    @number.carrier_id = params[:carrier_id]
+    @number.number = params[:number]
+    @number.phone_model = params[:phone_model]
+    @number.imei = params[:imei]
+    @number.iccid = params[:iccid]
+    @customer = Customer.find(params[:customer_id])
+
+    authorize Invoice
+
+    if @number.save
+      respond_to do |format|
+        format.js
+      end
+    else
+
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

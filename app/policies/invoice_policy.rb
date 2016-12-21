@@ -63,6 +63,10 @@ class InvoicePolicy < ApplicationPolicy
 		true
 	end
 
+	def add_number?
+		true
+	end
+
   class Scope < Scope
     def resolve
       scope
