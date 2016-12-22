@@ -26,8 +26,11 @@
             <tr>
                 <td> <%= li.sellable.sku if li.sellable %> <%= li.plan.code if li.plan %> </td>
                 <td> <%= li.sellable.description if li.sellable %> <%= li.plan.name if li.plan %>
-                	<% if li.serialized_item %>
-                	<br /><small><b>Serial Number:</b> <%= li.serialized_item.serial_number %></small>
+                    <% if li.serialized_item %>
+                    <br /><small><b>Serial Number:</b> <%= li.serialized_item.serial_number %></small>
+                    <% end %>
+                	<% if li.sale_type_id %>
+                	<br /><small><b>Type:</b> <%= li.sale_type.name %></small>
                 	<% end %>
                 </td>
                 <td> <%= li.quantity %> </td>

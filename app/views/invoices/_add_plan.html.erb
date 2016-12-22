@@ -14,7 +14,7 @@
 	        <td> <%= @plan.code %> </td>
 	        <td> <%= @plan.name %> </td>
 	        <td> <%= @plan.carrier.name if @plan.carrier %> </td>
-	        <td> <%= select_tag "sale_type", "<option>New Activation</option><option>Reactivation</option><option>Upgrade</option><option>Service Charge</option>".html_safe, class: "form-control" %> </td>
+	        <td> <%= select_tag "sale_type", options_from_collection_for_select(SaleType.all, "id", "name") , class: "form-control" %> </td>
 	        <td> <%= number_to_currency(@plan.price) %> </td>
 	    </tr>
 	</tbody>

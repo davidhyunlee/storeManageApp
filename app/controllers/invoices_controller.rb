@@ -134,7 +134,7 @@ class InvoicesController < ApplicationController
 
   def add_plan_line_item
     @plan = Plan.find_by(code: params[:code])
-    @sale_type = params[:sale_type]
+    @sale_type = SaleType.find(params[:sale_type])
 
     authorize Invoice
 
@@ -225,6 +225,6 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:customer_id, :user_id, :store_id, :total, :sales_tax, :subtotal, :note, line_items_attributes: [ :invoice_id, :number_id, :sellable_id, :simple_item_id, :serialized_item_id, :quantity, :tax_amount, :item_price, :sold_price, :plan_id, :sale_type, :payment_id], payments_attributes: [:carrier_id, :number_id, :payment_type_id, :amount, :customer_id, :invoice_id, :user_id, :store_id, :invoiced])
+      params.require(:invoice).permit(:customer_id, :user_id, :store_id, :total, :sales_tax, :subtotal, :note, line_items_attributes: [ :invoice_id, :sale_type_id, :sellable_id, :simple_item_id, :serialized_item_id, :quantity, :tax_amount, :item_price, :sold_price, :plan_id, :sale_type, :payment_id], payments_attributes: [:carrier_id, :number_id, :payment_type_id, :amount, :customer_id, :invoice_id, :user_id, :store_id, :invoiced])
     end
 end

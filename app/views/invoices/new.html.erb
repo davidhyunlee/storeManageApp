@@ -477,6 +477,8 @@
 	  	customer_id: "<%= @customer.id %>",
 	  	number_id: $(this).val()
 	  }
+
+	  $('.payment_field').remove()
 	  
 	  $.ajax({
 	    url: "/invoices/number_details",

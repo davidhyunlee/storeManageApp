@@ -5,6 +5,7 @@ class LineItem < ApplicationRecord
   belongs_to :simple_item, inverse_of: :line_items
   belongs_to :plan, inverse_of: :line_items
   belongs_to :payment, inverse_of: :line_items
+  belongs_to :sale_type, inverse_of: :line_items
 
   after_create :adjust_quantity
 

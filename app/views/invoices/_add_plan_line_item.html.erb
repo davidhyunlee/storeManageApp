@@ -1,6 +1,6 @@
 <tr>
     <td> <%= @plan.code %> </td>
-    <td> <%= @plan.name %><br /><small><%= @sale_type %></small> </td>
+    <td> <%= @plan.name %><br /><small><%= @sale_type.name %></small> </td>
     <td> 1 </td>
     <td> <%= number_to_currency(@plan.price) %> </td>
     <td> </td>
@@ -13,4 +13,4 @@
 <input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][plan_id]" value="<%= @plan.id %>" />
 <input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][tax_amount]" value="0" />
 <input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][item_price]" value="<%= @plan.price %>" />
-<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sale_type]" value="<%= @sale_type %>" />
+<input type="hidden" name="invoice[line_items_attributes][<%= child_index %>][sale_type_id]" value="<%= @sale_type.id %>" />
