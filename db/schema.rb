@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161221235629) do
+ActiveRecord::Schema.define(version: 20161222105417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
+
+  create_table "card_receipts", force: :cascade do |t|
+    t.integer  "number"
+    t.integer  "drawer_count_id"
+    t.decimal  "charged_amount",  precision: 10, scale: 2
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.index ["drawer_count_id"], name: "index_card_receipts_on_drawer_count_id", using: :btree
+  end
 
   create_table "carriers", force: :cascade do |t|
     t.string   "name",       null: false
@@ -49,6 +59,26 @@ ActiveRecord::Schema.define(version: 20161221235629) do
     t.index ["store_id"], name: "index_customers_on_store_id", using: :btree
   end
 
+  create_table "drawer_counts", force: :cascade do |t|
+    t.integer  "ones"
+    t.integer  "twos"
+    t.integer  "fives"
+    t.integer  "tens"
+    t.integer  "twenties"
+    t.integer  "fifties"
+    t.integer  "hundreds"
+    t.decimal  "total",      precision: 10, scale: 2
+    t.decimal  "cash_total", precision: 10, scale: 2
+    t.decimal  "card_total", precision: 10, scale: 2
+    t.text     "note"
+    t.integer  "user_id"
+    t.integer  "store_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["store_id"], name: "index_drawer_counts_on_store_id", using: :btree
+    t.index ["user_id"], name: "index_drawer_counts_on_user_id", using: :btree
+  end
+
   create_table "invoices", force: :cascade do |t|
     t.integer  "customer_id"
     t.integer  "user_id"
@@ -77,7 +107,6 @@ ActiveRecord::Schema.define(version: 20161221235629) do
     t.decimal  "tax_amount"
     t.integer  "plan_id"
     t.integer  "payment_id"
-    t.string   "sale_type"
     t.integer  "sale_type_id"
     t.index ["invoice_id"], name: "index_line_items_on_invoice_id", using: :btree
     t.index ["payment_id"], name: "index_line_items_on_payment_id", using: :btree
@@ -309,7 +338,10 @@ ActiveRecord::Schema.define(version: 20161221235629) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "card_receipts", "drawer_counts"
   add_foreign_key "customers", "stores"
+  add_foreign_key "drawer_counts", "stores"
+  add_foreign_key "drawer_counts", "users"
   add_foreign_key "invoices", "customers"
   add_foreign_key "invoices", "stores"
   add_foreign_key "invoices", "users"

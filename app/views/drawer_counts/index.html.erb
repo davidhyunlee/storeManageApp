@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Drawer Counts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ones</th>
+      <th>Twos</th>
+      <th>Fives</th>
+      <th>Tens</th>
+      <th>Twenties</th>
+      <th>Fifties</th>
+      <th>Hundreds</th>
+      <th>Total</th>
+      <th>Note</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @drawer_counts.each do |drawer_count| %>
+      <tr>
+        <td><%= drawer_count.ones %></td>
+        <td><%= drawer_count.twos %></td>
+        <td><%= drawer_count.fives %></td>
+        <td><%= drawer_count.tens %></td>
+        <td><%= drawer_count.twenties %></td>
+        <td><%= drawer_count.fifties %></td>
+        <td><%= drawer_count.hundreds %></td>
+        <td><%= drawer_count.total %></td>
+        <td><%= drawer_count.note %></td>
+        <td><%= link_to 'Show', drawer_count %></td>
+        <td><%= link_to 'Edit', edit_drawer_count_path(drawer_count) %></td>
+        <td><%= link_to 'Destroy', drawer_count, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Drawer Count', new_drawer_count_path %>

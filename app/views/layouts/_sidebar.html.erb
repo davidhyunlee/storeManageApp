@@ -209,7 +209,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item  ">
+            <li class="nav-item <%= "active open" if params[:controller] == "reports" %>">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-file-text"></i>
                     <span class="title">Reports</span>
@@ -218,6 +218,27 @@
                 <ul class="sub-menu">
                     <li class="nav-item">
                         <%= link_to "Daily Sales Report", reports_sales_path, class: "nav-link", data: { no_turbolink: true } %>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item  ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-file-text"></i>
+                    <span class="title">Closing</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item">
+                        <%= link_to drawer_counts_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <span class="title">Closing Reports</span>
+                            <%= "<span class='selected'></span>".html_safe if params[:controller] == "drawer_counts" && params[:action] == "index" %>
+                        <% end %>
+                    </li>
+                    <li class="nav-item">
+                        <%= link_to new_drawer_count_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <span class="title">Create Closing Report</span>
+                            <%= "<span class='selected'></span>".html_safe if params[:controller] == "drawer_counts" && params[:action] == "new" %>
+                        <% end %>
                     </li>
                 </ul>
             </li>

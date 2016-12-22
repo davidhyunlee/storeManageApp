@@ -18,6 +18,30 @@ class ReportsController < ApplicationController
 		end
 	end
 
+	def performance
+		authorize :report, :performance?
+		tracked_sale_types = []
+		@counts = Hash.new
+
+		SaleType.where(tracked: true).each do |st|
+			tracked_sale_types << st.name
+		end
+
+		tracked_sale_types.each do |tst|
+			@counts[tst.to_sym] = 0
+		end
+
+		@invoices = Invoice.where(user_id: 2, created_at: Time.now.beginning_of_month..Time.now.end_of_month)
+
+		@invoices.each do |i|
+			i.line_items.each do |li|
+				if li.sale_type
+					@counts[li.sale_type.name.to_sym] += 1 if li.sale_type.tracked
+				end
+			end
+		end
+	end
+
 	def payments
 		authorize :report, :payments?
 		@selected_date = Date.parse(params[:date])

@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ones:</strong>
+  <%= @drawer_count.ones %>
+</p>
+
+<p>
+  <strong>Twos:</strong>
+  <%= @drawer_count.twos %>
+</p>
+
+<p>
+  <strong>Fives:</strong>
+  <%= @drawer_count.fives %>
+</p>
+
+<p>
+  <strong>Tens:</strong>
+  <%= @drawer_count.tens %>
+</p>
+
+<p>
+  <strong>Twenties:</strong>
+  <%= @drawer_count.twenties %>
+</p>
+
+<p>
+  <strong>Fifties:</strong>
+  <%= @drawer_count.fifties %>
+</p>
+
+<p>
+  <strong>Hundreds:</strong>
+  <%= @drawer_count.hundreds %>
+</p>
+
+<p>
+  <strong>Total:</strong>
+  <%= @drawer_count.total %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @drawer_count.note %>
+</p>
+
+<%= link_to 'Edit', edit_drawer_count_path(@drawer_count) %> |
+<%= link_to 'Back', drawer_counts_path %>

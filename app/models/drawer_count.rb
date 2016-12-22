@@ -1,0 +1,2 @@
+class DrawerCount < ApplicationRecord
+end

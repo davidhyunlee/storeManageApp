@@ -7,6 +7,10 @@ class ReportPolicy < ApplicationPolicy
 		@current_user.employee_accessible
 	end
 
+	def performance?
+		@current_user.employee_accessible
+	end
+
   class Scope < Scope
     def resolve
       scope
