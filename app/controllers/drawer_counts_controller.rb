@@ -28,7 +28,14 @@ class DrawerCountsController < ApplicationController
   # POST /drawer_counts.json
   def create
     @drawer_count = DrawerCount.new(drawer_count_params)
+    card_digits = params[:card_digits]
+    charged_amount = params[:charged_amount]
+    
     authorize @drawer_count
+
+    card_digits.each_with_index do |digits, index|
+      @drawer_count.card_receipts.build(number: digits, charged_amount: charged_amount[index])
+    end
 
     respond_to do |format|
       if @drawer_count.save
@@ -75,6 +82,6 @@ class DrawerCountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def drawer_count_params
-      params.require(:drawer_count).permit(:ones, :twos, :fives, :tens, :twenties, :fifties, :hundreds, :total, :note)
+      params.require(:drawer_count).permit(:ones, :twos, :fives, :tens, :twenties, :fifties, :hundreds, :total, :cash_total, :card_total, :note)
     end
 end

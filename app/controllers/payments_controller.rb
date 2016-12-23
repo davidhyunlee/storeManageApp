@@ -100,7 +100,7 @@ class PaymentsController < ApplicationController
 
     if current_user.manager_accessible
       @payment.verify(current_user)
-    elsif current_user.employee?
+    elsif current_user.employee_accessible
       @payment.employee_verify(current_user)
     end
 
