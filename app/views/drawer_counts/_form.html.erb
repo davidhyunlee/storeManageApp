@@ -24,38 +24,38 @@
     <tbody>
       <tr>
         <td>$1 Dollar Bill</td>
-        <td><%= f.number_field :ones, class: "form-control" %></td>
-        <td>$10</td>
+        <td><%= f.number_field :ones, class: "form-control ones" %></td>
+        <td class="ones_total"></td>
       </tr>
       <tr>
         <td>$2 Dollar Bill</td>
-        <td><%= f.number_field :twos, class: "form-control" %></td>
-        <td>$10</td>
+        <td><%= f.number_field :twos, class: "form-control twos" %></td>
+        <td class="twos_total"></td>
       </tr>
       <tr>
         <td>$5 Dollar Bill</td>
-        <td><%= f.number_field :fives, class: "form-control" %></td>
-        <td>$10</td>
+        <td><%= f.number_field :fives, class: "form-control fives" %></td>
+        <td class="fives_total"></td>
       </tr>
       <tr>
         <td>$10 Dollar Bill</td>
-        <td><%= f.number_field :tens, class: "form-control" %></td>
-        <td>$10</td>
+        <td><%= f.number_field :tens, class: "form-control tens" %></td>
+        <td class="tens_total"></td>
       </tr>
       <tr>
         <td>$20 Dollar Bill</td>
-        <td><%= f.number_field :twenties, class: "form-control" %></td>
-        <td>$10</td>
+        <td><%= f.number_field :twenties, class: "form-control twenties" %></td>
+        <td class="twenties_total"></td>
       </tr>
       <tr>
         <td>$50 Dollar Bill</td>
-        <td><%= f.number_field :fifties, class: "form-control" %></td>
-        <td>$10</td>
+        <td><%= f.number_field :fifties, class: "form-control fifties" %></td>
+        <td class="fifties_total"></td>
       </tr>
       <tr>
         <td>$100 Dollar Bill</td>
-        <td><%= f.number_field :hundreds, class: "form-control" %></td>
-        <td>$10</td>
+        <td><%= f.number_field :hundreds, class: "form-control hundreds" %></td>
+        <td class="hundreds_total"></td>
       </tr>
     </tbody>
   </table>
@@ -67,16 +67,155 @@
       <tr>
         <th>Card Number</th>
         <th>Amount Charged</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody class="card_data">
+    </tbody>
+  </table>
+  <%= link_to "Add More Card Receipts", '/drawer_counts/add_additional_card_data', class: "form-control", remote: true %>
+</div>
+
+<div class="table-scrollable">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Total Cash</th>
+        <th>Total Card</th>
+        <th>Total</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><%= number_field_tag "card_number[]" %></td>
-        <td><%= text_field_tag "charged_amount[]" %></td>
+        <td class="total_cash"></td>
+        <td class="total_card"></td>
+        <td class="total_amount"></td>
       </tr>
     </tbody>
   </table>
 </div>
 
+<div class="totals_area">
+  <%= f.text_field :total, value: 0, class: "form-control"  %>
+  <%= f.text_field :cash_total, value: 0, class: "form-control "  %>
+  <%= f.text_field :card_total, value: 0, class: "form-control"  %>
+</div>
+
+<div class="portlet light bordered">
+  <div class="form-group">
+    <%= f.label :note, class: "control-label sbold" %>
+    <%= f.cktext_area :note, rows: 5, class: "form-control" %>
+  </div>
+</div>
+
 <%= f.submit %>
 <% end %>
+
+
+<script>
+  $(" .ones ").on("change", function() {
+    var total = 1 * parseInt($(" .ones ").val());
+    $(" .ones_total ").text("$" + total);
+    cashTotal();
+  });
+  $(" .twos ").on("change", function() {
+    var total = 2 * parseInt($(" .twos ").val());
+    $(" .twos_total ").text("$" + total);
+    cashTotal();
+  });
+  $(" .fives ").on("change", function() {
+    var total = 5 * parseInt($(" .fives ").val());
+    $(" .fives_total ").text("$" + total);
+    cashTotal();
+  });
+  $(" .tens ").on("change", function() {
+    var total = 10 * parseInt($(" .tens ").val());
+    $(" .tens_total ").text("$" + total);
+    cashTotal();
+  });
+  $(" .twenties ").on("change", function() {
+    var total = 20 * parseInt($(" .twenties ").val());
+    $(" .twenties_total ").text("$" + total);
+    cashTotal();
+  });
+  $(" .fifties ").on("change", function() {
+    var total = 50 * parseInt($(" .fifties ").val());
+    $(" .fifties_total ").text("$" + total);
+    cashTotal();
+  });
+  $(" .hundreds ").on("change", function() {
+    var total = 100 * parseInt($(" .hundreds ").val());
+    $(" .hundreds_total ").text("$" + total);
+    cashTotal();
+  });
+
+  function getVal(value) {
+    if (value == "") {
+      return 0
+    } else {
+      return parseInt(value)
+    }
+  }
+
+  function cashTotal() {
+    var ones = getVal($(" .ones ").val()) * 1
+    var twos = getVal($(" .twos ").val()) * 2
+    var fives = getVal($(" .fives ").val()) * 5
+    var tens = getVal($(" .tens ").val()) * 10
+    var twenties = getVal($(" .twenties ").val()) * 20
+    var fifties = getVal($(" .fifties ").val()) * 50
+    var hundreds = getVal($(" .hundreds ").val()) * 100
+
+    var total = ones + twos + fives + tens + twenties + fifties + hundreds
+
+    $(" .total_cash ").text(total.toFixed(2));
+    $(" #drawer_count_cash_total ").val(total.toFixed(2));
+    calculateTotal()
+  }
+
+  function calculateTotal() {
+    $(".total_amount").text(parseFloat($("#drawer_count_card_total").val()) + parseFloat($("#drawer_count_cash_total").val()))
+    $("#drawer_count_total").val(parseFloat($("#drawer_count_card_total").val()) + parseFloat($("#drawer_count_cash_total").val()));
+  }
+
+  $(" body ").on("click", ".what", function() {
+    $(this).parents("tr").remove();
+
+    var total = 0
+    
+    $(".charged-amount").each(function(index, value) {
+      if ($(this).val() != "") {
+        total += parseFloat($(this).val())
+      } else {
+        $(this).val(0);
+      }
+    })
+
+    $(".total_card").text(total.toFixed(2));
+    $("#drawer_count_card_total").val(total.toFixed(2));
+    calculateTotal()
+  });
+
+  $(" .card_data ").on("change", ".charged-amount", function() {
+    var total = 0
+
+    $(".charged-amount").each(function(index, value) {
+      if ($(this).val() != "") {
+        total += parseFloat($(this).val())
+      } else {
+        $(this).val(0);
+      }
+    })
+
+    $(".total_card").text(total.toFixed(2));
+    $("#drawer_count_card_total").val(total.toFixed(2));
+    calculateTotal()
+  });
+
+  $(" totals_area ").on("change", ".total_fields", function() {
+    console.log("hi");
+    var total = parseFloat($("#drawer_count_card_total").val()) + parseFloat($("#drawer_count_cash_total").val())
+
+    $("#drawer_count_total").val(total.toFixed(2));
+  });
+</script>

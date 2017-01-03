@@ -42,6 +42,7 @@ GEM
     arel (7.1.4)
     awesome_print (1.7.0)
     bcrypt (3.1.11)
+    bcrypt (3.1.11-x64-mingw32)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -69,10 +70,13 @@ GEM
     concurrent-ruby (1.0.2)
     concurrent-ruby-ext (1.0.2)
       concurrent-ruby (~> 1.0.2)
+    concurrent-ruby-ext (1.0.2-x64-mingw32)
+      concurrent-ruby (~> 1.0.2)
     debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.14)
+    ffi (1.9.14-x64-mingw32)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     has_scope (0.7.0)
@@ -110,6 +114,8 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
+    nokogiri (1.6.8.1-x64-mingw32)
+      mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
     peek (0.2.0)
       coffee-rails
@@ -117,6 +123,7 @@ GEM
       concurrent-ruby-ext (>= 0.9.0)
       railties (>= 3.0.0)
     pg (0.19.0)
+    pg (0.19.0-x64-mingw32)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -192,6 +199,8 @@ GEM
     tilt (2.0.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2016.10)
+      tzinfo (>= 1.0.0)
     uglifier (3.0.2)
       execjs (>= 0.3.0, < 3)
     web-console (3.3.1)
@@ -205,6 +214,7 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
 
 DEPENDENCIES
   aasm
@@ -241,4 +251,4 @@ RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.13.6
+   1.13.7

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :drawer_counts
   resources :tenants
   resources :sale_types
   mount Ckeditor::Engine => '/ckeditor'
@@ -26,8 +25,8 @@ Rails.application.routes.draw do
 
   get 'payments/carrier_and_payment_types' => 'payments#carrier_and_payment_types'
   post 'payments/verify'
-  
-  resources :payments, :settings, :payment_types, :serialized_items, :products, :inventories, :product_categories, :sellables, :stores, :users, :carriers, :categories, :performance_categories, :drawer_counts
+
+  resources :payments, :settings, :payment_types, :serialized_items, :products, :inventories, :product_categories, :sellables, :stores, :users, :carriers, :categories, :performance_categories
 
   resources :plans do
     collection do
@@ -45,6 +44,12 @@ Rails.application.routes.draw do
       get 'add_item'
       get 'add_number'
       get 'number_details'
+    end
+  end
+
+  resources :drawer_counts do
+    collection do
+      get 'add_additional_card_data'
     end
   end
 

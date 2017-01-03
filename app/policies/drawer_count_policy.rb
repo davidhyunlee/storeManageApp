@@ -27,6 +27,10 @@ class DrawerCountPolicy < ApplicationPolicy
 		@current_user.superuser?
 	end
 
+	def add_additional_card_data?
+		true
+	end
+
   class Scope < Scope
     def resolve
       scope

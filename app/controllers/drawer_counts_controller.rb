@@ -16,7 +16,7 @@ class DrawerCountsController < ApplicationController
 
   # GET /drawer_counts/new
   def new
-    @drawer_count = DrawerCount.new
+    @drawer_count = DrawerCount.where(store_id: current_store.id, created_at: Time.now.beginning_of_day.utc..Time.now.end_of_day.utc).first_or_initialize
     authorize @drawer_count
   end
 
@@ -33,8 +33,10 @@ class DrawerCountsController < ApplicationController
     
     authorize @drawer_count
 
-    card_digits.each_with_index do |digits, index|
-      @drawer_count.card_receipts.build(number: digits, charged_amount: charged_amount[index])
+    if params[:card_digits]
+      card_digits.each_with_index do |digits, index|
+        @drawer_count.card_receipts.build(number: digits, charged_amount: charged_amount[index])
+      end
     end
 
     respond_to do |format|
@@ -71,6 +73,14 @@ class DrawerCountsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to drawer_counts_url, notice: 'Drawer count was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def add_additional_card_data
+    authorize DrawerCount
+
+    respond_to do |format|
+      format.js
     end
   end
 
