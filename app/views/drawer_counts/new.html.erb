@@ -1,5 +1,6 @@
 <h3 class="page-title sbold">Creating End of Day Report</h3>
-
+<% if @drawer_count.new_record? %>
 <%= render 'form', drawer_count: @drawer_count %>
-
-<%= link_to 'Back', drawer_counts_path %>
+<% else %>
+<p>You have already submitted a closing report today.</p>
+<% end %>

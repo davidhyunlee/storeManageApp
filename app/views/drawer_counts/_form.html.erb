@@ -1,6 +1,6 @@
 <% if drawer_count.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(drawer_count.errors.count, "error") %> prohibited this drawer_count from being saved:</h2>
+    <h2><%= pluralize(drawer_count.errors.count, "error") %> prohibited this drawer count from being saved:</h2>
 
     <ul>
     <% drawer_count.errors.full_messages.each do |message| %>
@@ -96,9 +96,9 @@
 </div>
 
 <div class="totals_area">
-  <%= f.text_field :total, value: 0, class: "form-control"  %>
-  <%= f.text_field :cash_total, value: 0, class: "form-control "  %>
-  <%= f.text_field :card_total, value: 0, class: "form-control"  %>
+  <%= f.hidden_field :total, value: 0, class: "form-control"  %>
+  <%= f.hidden_field :cash_total, value: 0, class: "form-control "  %>
+  <%= f.hidden_field :card_total, value: 0, class: "form-control"  %>
 </div>
 
 <div class="portlet light bordered">
@@ -108,7 +108,7 @@
   </div>
 </div>
 
-<%= f.submit %>
+<%= f.submit "Submit", class: "btn btn-success" %>
 <% end %>
 
 
@@ -174,11 +174,11 @@
   }
 
   function calculateTotal() {
-    $(".total_amount").text(parseFloat($("#drawer_count_card_total").val()) + parseFloat($("#drawer_count_cash_total").val()))
+    $(".total_amount").text(parseFloat(($("#drawer_count_card_total").val()) + parseFloat($("#drawer_count_cash_total").val())).toFixed(2));
     $("#drawer_count_total").val(parseFloat($("#drawer_count_card_total").val()) + parseFloat($("#drawer_count_cash_total").val()));
   }
 
-  $(" body ").on("click", ".what", function() {
+  $(" body ").on("click", ".remove_card", function() {
     $(this).parents("tr").remove();
 
     var total = 0

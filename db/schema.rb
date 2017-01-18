@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 20161222105417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "card_receipts", force: :cascade do |t|
     t.integer  "number"

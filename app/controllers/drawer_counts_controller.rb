@@ -4,7 +4,7 @@ class DrawerCountsController < ApplicationController
   # GET /drawer_counts
   # GET /drawer_counts.json
   def index
-    @drawer_counts = DrawerCount.all
+    @drawer_counts = DrawerCount.where(store_id: current_store.id)
     authorize @drawer_counts
   end
 
@@ -30,6 +30,8 @@ class DrawerCountsController < ApplicationController
     @drawer_count = DrawerCount.new(drawer_count_params)
     card_digits = params[:card_digits]
     charged_amount = params[:charged_amount]
+    @drawer_count.user_id = current_user.id
+    @drawer_count.store_id = current_store.id
     
     authorize @drawer_count
 

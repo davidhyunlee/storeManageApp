@@ -5,6 +5,7 @@ class User < ApplicationRecord
 	has_secure_password
 
 	has_many :serialized_items
+	has_many :drawer_counts
 
 	def set_default_role
 		# if it already exists it's self.role, if it doesn't exist, it's user.

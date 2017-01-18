@@ -1,19 +1,13 @@
-<p id="notice"><%= notice %></p>
+<h3 class="page-title sbold">Closing Reports</h3>
 
-<h1>Drawer Counts</h1>
-
-<table>
+<table class="table table-condensed table-bordered table-hover"> 
   <thead>
     <tr>
-      <th>Ones</th>
-      <th>Twos</th>
-      <th>Fives</th>
-      <th>Tens</th>
-      <th>Twenties</th>
-      <th>Fifties</th>
-      <th>Hundreds</th>
+      <th>Date</th>
+      <th>Cash Total</th>
+      <th>Card Total</th>
       <th>Total</th>
-      <th>Note</th>
+      <th>Created By</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,15 +15,11 @@
   <tbody>
     <% @drawer_counts.each do |drawer_count| %>
       <tr>
-        <td><%= drawer_count.ones %></td>
-        <td><%= drawer_count.twos %></td>
-        <td><%= drawer_count.fives %></td>
-        <td><%= drawer_count.tens %></td>
-        <td><%= drawer_count.twenties %></td>
-        <td><%= drawer_count.fifties %></td>
-        <td><%= drawer_count.hundreds %></td>
-        <td><%= drawer_count.total %></td>
-        <td><%= drawer_count.note %></td>
+        <td><%= link_to drawer_count.created_at.in_time_zone(Setting.time_zone).strftime("%B %e, %Y @ %I:%M %p"), drawer_count %></td>
+        <td><%= number_to_currency(drawer_count.cash_total) %></td>
+        <td><%= number_to_currency(drawer_count.card_total) %></td>
+        <td><%= number_to_currency(drawer_count.total) %></td>
+        <td><%= drawer_count.user.full_name %></td>
         <td><%= link_to 'Show', drawer_count %></td>
         <td><%= link_to 'Edit', edit_drawer_count_path(drawer_count) %></td>
         <td><%= link_to 'Destroy', drawer_count, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -37,7 +27,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Drawer Count', new_drawer_count_path %>

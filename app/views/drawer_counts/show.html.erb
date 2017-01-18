@@ -1,49 +1,95 @@
-<p id="notice"><%= notice %></p>
+<h3 class="page-title sbold">Closing Report
+  <br />
+  <small><%= @drawer_count.created_at.in_time_zone(Setting.time_zone).strftime("%B %e, %Y @ %I:%M %p") %></small>
+</h3>
 
-<p>
-  <strong>Ones:</strong>
-  <%= @drawer_count.ones %>
-</p>
+<div class="table-scrollable">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Denomination</th>
+        <th>Count</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>$1</td>
+        <td><%= @drawer_count.ones %></td>
+        <td><%= number_to_currency(@drawer_count.ones * 1) %></td>
+      </tr>
+      <tr>
+        <td>$2</td>
+        <td><%= @drawer_count.twos %></td>
+        <td><%= number_to_currency(@drawer_count.twos * 2) %></td>
+      </tr>
+      <tr>
+        <td>$5</td>
+        <td><%= @drawer_count.fives %></td>
+        <td><%= number_to_currency(@drawer_count.fives * 5) %></td>
+      </tr>
+      <tr>
+        <td>$10</td>
+        <td><%= @drawer_count.tens %></td>
+        <td><%= number_to_currency(@drawer_count.tens * 10) %></td>
+      </tr>
+      <tr>
+        <td>$20</td>
+        <td><%= @drawer_count.twenties %></td>
+        <td><%= number_to_currency(@drawer_count.twenties * 20) %></td>
+      </tr>
+      <tr>
+        <td>$50</td>
+        <td><%= @drawer_count.fifties %></td>
+        <td><%= number_to_currency(@drawer_count.fifties * 50) %></td>
+      </tr>
+      <tr>
+        <td>$100</td>
+        <td><%= @drawer_count.hundreds %></td>
+        <td><%= number_to_currency(@drawer_count.hundreds * 100) %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-<p>
-  <strong>Twos:</strong>
-  <%= @drawer_count.twos %>
-</p>
+<div class="table-scrollable">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Card Digits</th>
+        <th>Charged Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @drawer_count.card_receipts.each do |cr| %>
+      <tr>
+        <td><%= cr.number %></td>
+        <td><%= number_to_currency(cr.charged_amount) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<p>
-  <strong>Fives:</strong>
-  <%= @drawer_count.fives %>
-</p>
+<div class="table-scrollable">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Cash Total</th>
+        <th>Card Total</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= number_to_currency(@drawer_count.cash_total) %></td>
+        <td><%= number_to_currency(@drawer_count.card_total) %></td>
+        <td><%= number_to_currency(@drawer_count.total) %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-<p>
-  <strong>Tens:</strong>
-  <%= @drawer_count.tens %>
-</p>
-
-<p>
-  <strong>Twenties:</strong>
-  <%= @drawer_count.twenties %>
-</p>
-
-<p>
-  <strong>Fifties:</strong>
-  <%= @drawer_count.fifties %>
-</p>
-
-<p>
-  <strong>Hundreds:</strong>
-  <%= @drawer_count.hundreds %>
-</p>
-
-<p>
-  <strong>Total:</strong>
-  <%= @drawer_count.total %>
-</p>
-
-<p>
-  <strong>Note:</strong>
-  <%= @drawer_count.note %>
-</p>
-
-<%= link_to 'Edit', edit_drawer_count_path(@drawer_count) %> |
-<%= link_to 'Back', drawer_counts_path %>
+<div class="portlet light bordered">
+  <%= @drawer_count.note.html_safe %>
+</div>
