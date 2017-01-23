@@ -23,6 +23,11 @@ class SerializedItemsController < ApplicationController
   end
 
   def show
+    @serialized_item = SerializedItem.find(params[:id])
+    @line_item = LineItem.find_by(serialized_item_id: params[:id])
+    @invoice = @line_item.invoice
+    
+    authorize @serialized_item
   end
 
   def destroy
@@ -34,6 +39,11 @@ class SerializedItemsController < ApplicationController
       format.html { redirect_to inventory_path, notice: 'Serialized Item was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def sold
+    @serialized_items = SerializedItem.where(quantity: 0)
+    authorize @serialized_items
   end
 
   private

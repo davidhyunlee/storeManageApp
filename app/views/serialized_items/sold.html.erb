@@ -1,0 +1,21 @@
+<h3 class="page-title sbold">Sold IMEIs</h3>
+
+<table class="table table-condensed table-bordered table-hover"> 
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Serial Number</th>
+      <th>Store</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @serialized_items.each do |item| %>
+      <tr>
+        <td><%= item.sellable.description %></td>
+        <td><%= link_to item.serial_number, item %></td>
+        <td><%= item.store.alias %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

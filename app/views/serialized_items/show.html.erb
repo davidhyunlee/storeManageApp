@@ -1,2 +1,30 @@
-<h1>SerializedItems#show</h1>
-<p>Find me in app/views/serialized_items/show.html.erb</p>
+<div class="portlet form light bordered">
+	<div class="row">
+		<div class="col-md-3">Description:</div>
+		<div class="col-md-9"><%= @serialized_item.sellable.description %></div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">Sold To:</div>
+		<div class="col-md-9"><%= @invoice.customer.full_name %></div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">Serial Number / IMEI:</div>
+		<div class="col-md-9"><%= @serialized_item.serial_number %></div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">Invoice #:</div>
+		<div class="col-md-9"><%= @invoice.id %></div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">Store:</div>
+		<div class="col-md-9"><%= @invoice.store.alias %></div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">Sold Date:</div>
+		<div class="col-md-9"><%= @line_item.created_at.in_time_zone(Setting.time_zone).strftime("%D %r %Z") %></div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">Sold Price:</div>
+		<div class="col-md-9"><%= number_to_currency(@line_item.sold_price) %></div>
+	</div>
+</div>

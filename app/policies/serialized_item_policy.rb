@@ -11,6 +11,10 @@ class SerializedItemPolicy < ApplicationPolicy
 		@current_user.superuser?
 	end
 
+	def sold?
+		@current_user.employee_accessible
+	end
+
   class Scope < Scope
     def resolve
       scope

@@ -146,6 +146,12 @@
                             <%= "<span class='selected'></span>".html_safe if params[:controller] == "inventory" && params[:action] == "serialized_inventory" %>
                         <% end %>
                     </li>
+                    <li class="nav-item <%= "active open" if params[:controller] == "inventory" && params[:action] == "sold" %>">
+                        <%= link_to sold_serialized_items_path, class: "nav-link", data: { no_turbolink: true } do %>
+                            <span class="title">Sold IMEIs</span>
+                            <%= "<span class='selected'></span>".html_safe if params[:controller] == "inventory" && params[:action] == "serialized_inventory" %>
+                        <% end %>
+                    </li>
                     <% if policy(:inventory).receive? %>
                     <li class="nav-item <%= "active open" if params[:controller] == "inventory" && params[:action] == "receive" %>">
                         <%= link_to inventory_receive_path, class: "nav-link", data: { no_turbolink: true } do %>

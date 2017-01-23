@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   get 'payments/carrier_and_payment_types' => 'payments#carrier_and_payment_types'
   post 'payments/verify'
 
-  resources :payments, :settings, :payment_types, :serialized_items, :products, :inventories, :product_categories, :sellables, :stores, :users, :carriers, :categories, :performance_categories
+  resources :payments, :settings, :payment_types, :products, :inventories, :product_categories, :sellables, :stores, :users, :carriers, :categories, :performance_categories
 
   resources :plans do
     collection do
@@ -50,6 +50,12 @@ Rails.application.routes.draw do
   resources :drawer_counts do
     collection do
       get 'add_additional_card_data'
+    end
+  end
+
+  resources :serialized_items do
+    collection do
+      get 'sold'
     end
   end
 
