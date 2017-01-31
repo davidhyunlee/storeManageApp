@@ -1,0 +1,14 @@
+<h3>Sales Counts for Current Month</h3>
+
+<% @user_counts.each do |user_count| %>
+<table class="table table-condensed table-bordered table-hover">
+    <tbody>
+      <% user_count.each do |type, value| %>
+        <tr>
+          <td style="width: 200px;"><b><%= type %></b></td>
+          <td><%= value %></td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>
+<% end %>
