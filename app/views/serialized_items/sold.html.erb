@@ -1,5 +1,11 @@
 <h3 class="page-title sbold">Sold IMEIs</h3>
 
+<%= form_tag('/serialized_items/sold', method: :get) do %>
+Search Sold IMEI:
+  <%= text_field_tag :query, nil, class: "form-control" %>
+  <%= submit_tag "Search" %>
+<% end %>
+
 <table class="table table-condensed table-bordered table-hover"> 
   <thead>
     <tr>

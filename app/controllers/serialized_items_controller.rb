@@ -42,7 +42,14 @@ class SerializedItemsController < ApplicationController
   end
 
   def sold
-    @serialized_items = SerializedItem.where(quantity: 0, store_id: current_store.id).order(updated_at: :desc).page(params[:page])
+    if params[:query] == ""
+      @serialized_items = SerializedItem.basic_search(serial_number: params[:query]).order(updated_at: :desc).page(params[:page])
+    elsif params[:query]
+      @serialized_items = SerializedItem.where(quantity: 0, store_id: current_store.id).order(updated_at: :desc).page(params[:page])
+    else
+      @serialized_items = SerializedItem.where(quantity: 0, store_id: current_store.id).order(updated_at: :desc).page(params[:page])
+    end
+      
     authorize @serialized_items
   end
 

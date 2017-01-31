@@ -1,3 +1,21 @@
 <h1 class="page-title"> Dashboard
     <small></small>
 </h1>
+
+<h3>Monthly Sales Count</h3>
+<table class="table table-condensed table-bordered table-hover">
+    <thead>
+        <tr>
+            <th> Type </th>
+            <th> Count </th>
+        </tr>
+    </thead>
+    <tbody>
+      <% @sale_type_counts.each do |type, count| %>
+        <tr>
+          <td><%= type %></td>
+          <td><%= count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>
