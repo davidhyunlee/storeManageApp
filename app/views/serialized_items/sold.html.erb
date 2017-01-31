@@ -5,6 +5,10 @@
     <tr>
       <th>Item</th>
       <th>Serial Number</th>
+      <th>Invoice #</th>
+      <th>Customer</th>
+      <th>Sold Date</th>
+      <th>Sold Price</th>
       <th>Store</th>
     </tr>
   </thead>
@@ -14,8 +18,14 @@
       <tr>
         <td><%= item.sellable.description %></td>
         <td><%= link_to item.serial_number, item %></td>
+        <td><%= link_to LineItem.find_by(serialized_item_id: item.id).invoice.id, invoice_path(LineItem.find_by(serialized_item_id: item.id).invoice.id) %></td>
+        <td><%= link_to LineItem.find_by(serialized_item_id: item.id).invoice.customer.full_name, customer_path(LineItem.find_by(serialized_item_id: item.id).invoice.customer) %></td>
+        <td><%= LineItem.find_by(serialized_item_id: item.id).created_at.in_time_zone(Setting.time_zone).strftime("%D %r %Z") %></td>
+        <td><%= number_to_currency(LineItem.find_by(serialized_item_id: item.id).sold_price) %></td>
         <td><%= item.store.alias %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= paginate @serialized_items %>

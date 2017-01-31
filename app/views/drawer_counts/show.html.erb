@@ -16,37 +16,37 @@
       <tr>
         <td>$1</td>
         <td><%= @drawer_count.ones %></td>
-        <td><%= number_to_currency(@drawer_count.ones * 1) %></td>
+        <td><%= number_to_currency(@drawer_count.ones * 1) if @drawer_count.ones %></td>
       </tr>
       <tr>
         <td>$2</td>
         <td><%= @drawer_count.twos %></td>
-        <td><%= number_to_currency(@drawer_count.twos * 2) %></td>
+        <td><%= number_to_currency(@drawer_count.twos * 2) if @drawer_count.twos %></td>
       </tr>
       <tr>
         <td>$5</td>
         <td><%= @drawer_count.fives %></td>
-        <td><%= number_to_currency(@drawer_count.fives * 5) %></td>
+        <td><%= number_to_currency(@drawer_count.fives * 5) if @drawer_count.fives %></td>
       </tr>
       <tr>
         <td>$10</td>
         <td><%= @drawer_count.tens %></td>
-        <td><%= number_to_currency(@drawer_count.tens * 10) %></td>
+        <td><%= number_to_currency(@drawer_count.tens * 10) if @drawer_count.tens %></td>
       </tr>
       <tr>
         <td>$20</td>
         <td><%= @drawer_count.twenties %></td>
-        <td><%= number_to_currency(@drawer_count.twenties * 20) %></td>
+        <td><%= number_to_currency(@drawer_count.twenties * 20) if @drawer_count.twenties %></td>
       </tr>
       <tr>
         <td>$50</td>
         <td><%= @drawer_count.fifties %></td>
-        <td><%= number_to_currency(@drawer_count.fifties * 50) %></td>
+        <td><%= number_to_currency(@drawer_count.fifties * 50) if @drawer_count.fifties %></td>
       </tr>
       <tr>
         <td>$100</td>
         <td><%= @drawer_count.hundreds %></td>
-        <td><%= number_to_currency(@drawer_count.hundreds * 100) %></td>
+        <td><%= number_to_currency(@drawer_count.hundreds * 100) if @drawer_count.hundreds %></td>
       </tr>
     </tbody>
   </table>

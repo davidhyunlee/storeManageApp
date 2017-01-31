@@ -21,8 +21,7 @@
         <td><%= number_to_currency(drawer_count.total) %></td>
         <td><%= drawer_count.user.full_name %></td>
         <td><%= link_to 'Show', drawer_count %></td>
-        <td><%= link_to 'Edit', edit_drawer_count_path(drawer_count) %></td>
-        <td><%= link_to 'Destroy', drawer_count, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', drawer_count, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

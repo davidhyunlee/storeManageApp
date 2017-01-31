@@ -42,7 +42,7 @@ class SerializedItemsController < ApplicationController
   end
 
   def sold
-    @serialized_items = SerializedItem.where(quantity: 0)
+    @serialized_items = SerializedItem.where(quantity: 0, store_id: current_store.id).order(updated_at: :desc).page(params[:page])
     authorize @serialized_items
   end
 
