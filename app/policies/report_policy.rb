@@ -8,7 +8,7 @@ class ReportPolicy < ApplicationPolicy
 	end
 
 	def performance?
-		@current_user.employee_accessible
+		@current_user.superuser?
 	end
 
   class Scope < Scope
